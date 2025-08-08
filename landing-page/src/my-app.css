@@ -14,38 +14,63 @@ header {
 
 main {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
 }
 
-.repo-card {
+.about-me-card, .key-skills-card, .other-stuff-card, .repo-section {
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 5px;
   margin: 10px;
   padding: 20px;
-  width: 300px;
+  width: 80%;
+  max-width: 800px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: all 0.2s ease-in-out;
 }
 
-.repo-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+.about-me-card {
+  display: flex;
+  align-items: center;
 }
 
-.repo-card h2 {
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-right: 20px;
+  object-fit: cover;
+  background-color: #ccc; /* Placeholder color */
+}
+
+.bio h2, .key-skills-card h2, .other-stuff-card h2, .repo-section h2 {
   margin-top: 0;
 }
 
-.repo-card a {
-  text-decoration: none;
-  color: #0366d6;
+.skill-category {
+  margin-bottom: 15px;
 }
 
-.repo-card a:hover {
-  text-decoration: underline;
+.skill-list {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.skill-list li {
+  background-color: #eee;
+  border-radius: 3px;
+  padding: 5px 10px;
+  margin: 5px;
+}
+
+.repo-section .repo-card {
+  width: calc(50% - 40px);
+  margin: 10px;
+  display: inline-block;
+  vertical-align: top;
 }
 
 footer {
@@ -56,9 +81,27 @@ footer {
   margin-top: 20px;
 }
 
+.social-media a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #0366d6;
+}
+
+.social-media a:hover {
+  text-decoration: underline;
+}
+
 @media (max-width: 600px) {
-  main {
+  .about-me-card {
     flex-direction: column;
-    align-items: center;
+  }
+
+  .profile-picture {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .repo-section .repo-card {
+    width: calc(100% - 40px);
   }
 }
