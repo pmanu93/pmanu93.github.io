@@ -1,0 +1,11 @@
+<template>
+  <div class="key-skills-card">
+    <h2>Key Skills</h2>
+    <div class="skill-category" repeat.for="category of skills | keys">
+      <h3>${category}</h3>
+      <ul class="skill-list">
+        <li repeat.for="skill of skills[category]">${skill}</li>
+      </ul>
+    </div>
+  </div>
+</template>
