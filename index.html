@@ -1,4 +1,899 @@
-<html>
-<head></head>
-<body>funcemina</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOLVO RACING HERITAGE | 70s • 80s • 90s</title>
+    <style>
+        :root {
+            --volvo-blue: #003057;
+            --racing-red: #D32F2F;
+            --racing-yellow: #FFC107;
+            --vintage-green: #2E7D32;
+            --turquoise: #00BCD4;
+            --gold: #FFD700;
+            --silver: #C0C0C0;
+            --black: #0a0a0a;
+            --white: #FAFAFA;
+            --neon-green: #39FF14;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            cursor: crosshair;
+        }
+
+        /* Scroll snap for smooth section navigation */
+        html {
+            scroll-snap-type: y mandatory;
+            scroll-padding-top: 0;
+        }
+
+        section {
+            min-height: 100vh;
+            scroll-snap-align: start;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Parallax layers */
+        .parallax-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            will-change: transform;
+        }
+
+        .parallax-layer {
+            position: absolute;
+            will-change: transform;
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(135deg, var(--volvo-blue) 0%, var(--black) 100%);
+            position: relative;
+        }
+
+        #hero .parallax-bg {
+            background:
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 50px,
+                    rgba(255, 255, 255, 0.03) 50px,
+                    rgba(255, 255, 255, 0.03) 51px
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 50px,
+                    rgba(255, 255, 255, 0.03) 50px,
+                    rgba(255, 255, 255, 0.03) 51px
+                );
+        }
+
+        .hero-content {
+            z-index: 10;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, var(--white), var(--racing-yellow), var(--white));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s infinite linear;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -100% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 3vw, 2rem);
+            margin-top: 1rem;
+            letter-spacing: 0.3em;
+            color: var(--turquoise);
+            text-shadow: 0 0 20px var(--turquoise);
+        }
+
+        .hero-tagline {
+            margin-top: 2rem;
+            font-size: clamp(0.8rem, 2vw, 1.2rem);
+            opacity: 0.8;
+            letter-spacing: 0.2em;
+        }
+
+        /* Car SVG styles */
+        .car-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .car {
+            position: absolute;
+            width: 300px;
+            height: 150px;
+            transition: transform 0.1s ease-out;
+        }
+
+        .car-body {
+            fill: var(--racing-red);
+            filter: drop-shadow(0 10px 20px rgba(211, 47, 47, 0.5));
+        }
+
+        .car-stripe {
+            fill: var(--white);
+        }
+
+        .car-window {
+            fill: rgba(0, 48, 87, 0.8);
+        }
+
+        /* Section 70s */
+        #era-70s {
+            background: linear-gradient(to bottom, var(--black), #1a1a1a);
+        }
+
+        #era-70s .parallax-bg {
+            background:
+                radial-gradient(circle at 20% 50%, var(--vintage-green) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, var(--racing-yellow) 0%, transparent 50%);
+            opacity: 0.1;
+        }
+
+        /* Section 80s */
+        #era-80s {
+            background: linear-gradient(to bottom, #1a1a1a, #0a0a0a);
+        }
+
+        #era-80s .parallax-bg {
+            background:
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 10px,
+                    var(--turquoise) 10px,
+                    var(--turquoise) 11px
+                ),
+                repeating-linear-gradient(
+                    -45deg,
+                    transparent,
+                    transparent 10px,
+                    var(--racing-red) 10px,
+                    var(--racing-red) 11px
+                );
+            opacity: 0.05;
+        }
+
+        /* Section 90s */
+        #era-90s {
+            background: linear-gradient(to bottom, #0a0a0a, var(--black));
+        }
+
+        #era-90s .parallax-bg {
+            background:
+                radial-gradient(circle at 30% 40%, var(--neon-green) 0%, transparent 40%),
+                radial-gradient(circle at 70% 60%, var(--gold) 0%, transparent 40%);
+            opacity: 0.08;
+        }
+
+        /* Content styling */
+        .content {
+            z-index: 10;
+            max-width: 1200px;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .content-text h2 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+            line-height: 1.2;
+        }
+
+        .era-70s-title {
+            color: var(--vintage-green);
+            text-shadow: 0 0 20px var(--vintage-green);
+        }
+
+        .era-80s-title {
+            color: var(--turquoise);
+            text-shadow: 0 0 20px var(--turquoise);
+        }
+
+        .era-90s-title {
+            color: var(--neon-green);
+            text-shadow: 0 0 20px var(--neon-green);
+        }
+
+        .content-text p {
+            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+            line-height: 1.8;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .car-visual {
+            position: relative;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .car-silhouette {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        /* Racing stats */
+        .racing-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .stat:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--racing-yellow);
+            transform: translateY(-5px);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--racing-yellow);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Navigation UI */
+        .nav-ui {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+            flex-direction: column;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border: 2px solid var(--white);
+            border-radius: 50%;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-dot.active {
+            background: var(--racing-yellow);
+            border-color: var(--racing-yellow);
+            box-shadow: 0 0 20px var(--racing-yellow);
+        }
+
+        .nav-dot:hover {
+            transform: scale(1.5);
+        }
+
+        .nav-dot::after {
+            content: attr(data-label);
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-dot:hover::after {
+            opacity: 1;
+        }
+
+        /* Controls hint */
+        .controls-hint {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 2rem;
+            border: 1px solid var(--racing-yellow);
+            backdrop-filter: blur(10px);
+            animation: pulse 2s ease-in-out infinite;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        /* Speed lines effect */
+        .speed-lines {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .speed-lines.active {
+            opacity: 1;
+        }
+
+        .speed-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--racing-yellow), transparent);
+            width: 100%;
+            animation: speedLine 0.5s linear infinite;
+        }
+
+        @keyframes speedLine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Racing number badges */
+        .racing-number {
+            position: absolute;
+            font-size: 10rem;
+            font-weight: 900;
+            opacity: 0.05;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .racing-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-ui {
+                top: auto;
+                bottom: 2rem;
+                right: 50%;
+                transform: translateX(50%);
+                flex-direction: row;
+            }
+
+            .controls-hint {
+                bottom: 5rem;
+                font-size: 0.7rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+
+        /* Fade-in animation for content */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Grid overlay effect */
+        .grid-overlay {
+            position: fixed;
+            inset: 0;
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 100px,
+                    rgba(0, 188, 212, 0.03) 100px,
+                    rgba(0, 188, 212, 0.03) 101px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 100px,
+                    rgba(0, 188, 212, 0.03) 100px,
+                    rgba(0, 188, 212, 0.03) 101px
+                );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Scanlines effect */
+        .scanlines {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 0, 0, 0.1) 2px,
+                rgba(0, 0, 0, 0.1) 4px
+            );
+            z-index: 1;
+            animation: scanline 8s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Grid overlay -->
+    <div class="grid-overlay"></div>
+    <div class="scanlines"></div>
+
+    <!-- Navigation UI -->
+    <div class="nav-ui">
+        <div class="nav-dot active" data-section="0" data-label="HOME"></div>
+        <div class="nav-dot" data-section="1" data-label="70s"></div>
+        <div class="nav-dot" data-section="2" data-label="80s"></div>
+        <div class="nav-dot" data-section="3" data-label="90s"></div>
+    </div>
+
+    <!-- Controls hint -->
+    <div class="controls-hint">
+        ↑↓ ARROWS • W/S • SCROLL • CLICK DOTS TO NAVIGATE
+    </div>
+
+    <!-- Speed lines effect -->
+    <div class="speed-lines">
+        <div class="speed-line" style="top: 20%;"></div>
+        <div class="speed-line" style="top: 40%; animation-delay: 0.1s;"></div>
+        <div class="speed-line" style="top: 60%; animation-delay: 0.2s;"></div>
+        <div class="speed-line" style="top: 80%; animation-delay: 0.3s;"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="parallax-bg"></div>
+        <div class="car-container">
+            <svg class="car" id="hero-car" viewBox="0 0 300 150">
+                <g>
+                    <!-- Car body -->
+                    <rect class="car-body" x="50" y="60" width="200" height="50" rx="5"/>
+                    <polygon class="car-body" points="80,60 120,30 200,30 230,60"/>
+                    <!-- Windows -->
+                    <polygon class="car-window" points="90,55 115,35 185,35 210,55"/>
+                    <!-- Racing stripe -->
+                    <rect class="car-stripe" x="50" y="80" width="200" height="10"/>
+                    <!-- Wheels -->
+                    <circle cx="100" cy="110" r="15" fill="#1a1a1a" stroke="var(--silver)" stroke-width="3"/>
+                    <circle cx="200" cy="110" r="15" fill="#1a1a1a" stroke="var(--silver)" stroke-width="3"/>
+                </g>
+            </svg>
+        </div>
+        <div class="hero-content fade-in">
+            <h1 class="hero-title">VOLVO RACING</h1>
+            <p class="hero-subtitle">HERITAGE • 1970—1999</p>
+            <p class="hero-tagline">BOXY BUT FAST</p>
+        </div>
+    </section>
+
+    <!-- 1970s Era -->
+    <section id="era-70s">
+        <div class="parallax-bg"></div>
+        <div class="racing-number" style="top: 10%; left: 5%;">70</div>
+        <div class="content fade-in">
+            <div class="content-text">
+                <h2 class="era-70s-title">THE 70s</h2>
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--racing-yellow);">242 TURBO ERA</h3>
+                <p>The decade that defined Volvo's racing DNA. The iconic 240 series dominated touring car racing with its turbocharged inline-5 engine and indestructible Swedish engineering.</p>
+                <p>Flying bricks that conquered circuits across Europe, proving that safety and speed weren't mutually exclusive.</p>
+                <div class="racing-stats">
+                    <div class="stat">
+                        <span class="stat-value">240HP</span>
+                        <span class="stat-label">Turbo Power</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">5CYL</span>
+                        <span class="stat-label">Engine</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">RWD</span>
+                        <span class="stat-label">Layout</span>
+                    </div>
+                </div>
+            </div>
+            <div class="car-visual">
+                <svg class="car-silhouette" viewBox="0 0 400 200">
+                    <g transform="translate(50, 50)">
+                        <!-- 240 silhouette -->
+                        <rect fill="var(--vintage-green)" x="0" y="40" width="300" height="70" rx="3"/>
+                        <polygon fill="var(--vintage-green)" points="30,40 80,10 240,10 280,40"/>
+                        <polygon fill="rgba(0,0,0,0.3)" points="45,35 75,15 235,15 265,35"/>
+                        <rect fill="var(--racing-yellow)" x="0" y="70" width="300" height="15"/>
+                        <circle cx="70" cy="110" r="20" fill="var(--black)" stroke="var(--racing-yellow)" stroke-width="4"/>
+                        <circle cx="230" cy="110" r="20" fill="var(--black)" stroke="var(--racing-yellow)" stroke-width="4"/>
+                        <text x="150" y="80" text-anchor="middle" fill="var(--white)" font-size="30" font-weight="900">242</text>
+                    </g>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- 1980s Era -->
+    <section id="era-80s">
+        <div class="parallax-bg"></div>
+        <div class="racing-number" style="top: 15%; right: 5%;">80</div>
+        <div class="content fade-in">
+            <div class="car-visual">
+                <svg class="car-silhouette" viewBox="0 0 400 200">
+                    <g transform="translate(50, 50)">
+                        <!-- 740/850 silhouette -->
+                        <rect fill="var(--turquoise)" x="0" y="40" width="300" height="70" rx="5"/>
+                        <polygon fill="var(--turquoise)" points="30,40 90,15 240,15 280,40"/>
+                        <polygon fill="rgba(0,0,0,0.4)" points="45,35 85,20 235,20 265,35"/>
+                        <rect fill="var(--racing-red)" x="10" y="50" width="280" height="8"/>
+                        <rect fill="var(--white)" x="10" y="60" width="280" height="8"/>
+                        <circle cx="70" cy="110" r="20" fill="var(--black)" stroke="var(--racing-red)" stroke-width="4"/>
+                        <circle cx="230" cy="110" r="20" fill="var(--black)" stroke="var(--racing-red)" stroke-width="4"/>
+                        <text x="150" y="80" text-anchor="middle" fill="var(--white)" font-size="30" font-weight="900">740</text>
+                    </g>
+                </svg>
+            </div>
+            <div class="content-text">
+                <h2 class="era-80s-title">THE 80s</h2>
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--racing-yellow);">TURBO EVOLUTION</h3>
+                <p>The 740 Turbo took everything learned from the 240 and amplified it. More boost, more aero, more attitude. The Swedish missile that embarrassed supercars on the straights.</p>
+                <p>With intercoolers the size of radiators and turbos that whistled like sirens, the 80s Volvos were rolling statements of intent.</p>
+                <div class="racing-stats">
+                    <div class="stat">
+                        <span class="stat-value">300HP</span>
+                        <span class="stat-label">Boosted</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">1.9S</span>
+                        <span class="stat-label">0-60 MPH</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">AWD</span>
+                        <span class="stat-label">Grip</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 1990s Era -->
+    <section id="era-90s">
+        <div class="parallax-bg"></div>
+        <div class="racing-number" style="bottom: 10%; left: 50%; transform: translateX(-50%);">90</div>
+        <div class="content fade-in">
+            <div class="content-text">
+                <h2 class="era-90s-title">THE 90s</h2>
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--racing-yellow);">850 BTCC LEGEND</h3>
+                <p>The 850 Estate that raced in BTCC. A wagon. On racing slicks. In British touring cars. Absolute madness. Absolute genius.</p>
+                <p>Front-wheel drive, transverse 5-cylinder turbo, and the audacity to race a family hauler against purpose-built machines. Peak Volvo.</p>
+                <div class="racing-stats">
+                    <div class="stat">
+                        <span class="stat-value">295HP</span>
+                        <span class="stat-label">Race Spec</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">FWD</span>
+                        <span class="stat-label">Layout</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">BTCC</span>
+                        <span class="stat-label">Champion</span>
+                    </div>
+                </div>
+            </div>
+            <div class="car-visual">
+                <svg class="car-silhouette" viewBox="0 0 400 200">
+                    <g transform="translate(30, 50)">
+                        <!-- 850 Estate silhouette -->
+                        <rect fill="var(--neon-green)" x="0" y="40" width="340" height="70" rx="5"/>
+                        <polygon fill="var(--neon-green)" points="30,40 90,15 260,15 300,40"/>
+                        <polygon fill="rgba(0,0,0,0.4)" points="45,35 85,20 255,20 285,35"/>
+                        <rect fill="var(--racing-yellow)" x="10" y="55" width="320" height="10"/>
+                        <rect fill="var(--racing-red)" x="10" y="75" width="320" height="10"/>
+                        <circle cx="80" cy="110" r="20" fill="var(--black)" stroke="var(--neon-green)" stroke-width="4"/>
+                        <circle cx="270" cy="110" r="20" fill="var(--black)" stroke="var(--neon-green)" stroke-width="4"/>
+                        <text x="175" y="80" text-anchor="middle" fill="var(--black)" font-size="30" font-weight="900">850</text>
+                    </g>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <script type="module">
+        // Game-like navigation system
+        class RacingNavigator {
+            constructor() {
+                this.currentSection = 0;
+                this.sections = document.querySelectorAll('section');
+                this.navDots = document.querySelectorAll('.nav-dot');
+                this.isNavigating = false;
+                this.speedLines = document.querySelector('.speed-lines');
+                this.heroCar = document.getElementById('hero-car');
+
+                this.init();
+            }
+
+            init() {
+                this.setupKeyboardControls();
+                this.setupNavDots();
+                this.setupIntersectionObserver();
+                this.setupMouseParallax();
+                this.setupScrollParallax();
+
+                // Initial fade-in
+                setTimeout(() => {
+                    document.querySelectorAll('.fade-in').forEach(el => {
+                        el.classList.add('visible');
+                    });
+                }, 100);
+            }
+
+            setupKeyboardControls() {
+                document.addEventListener('keydown', (e) => {
+                    if (this.isNavigating) return;
+
+                    switch(e.key) {
+                        case 'ArrowDown':
+                        case 's':
+                        case 'S':
+                            e.preventDefault();
+                            this.navigateToSection(this.currentSection + 1);
+                            break;
+                        case 'ArrowUp':
+                        case 'w':
+                        case 'W':
+                            e.preventDefault();
+                            this.navigateToSection(this.currentSection - 1);
+                            break;
+                    }
+                });
+            }
+
+            setupNavDots() {
+                this.navDots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => {
+                        this.navigateToSection(index);
+                    });
+                });
+            }
+
+            navigateToSection(index) {
+                if (index < 0 || index >= this.sections.length || this.isNavigating) return;
+
+                this.isNavigating = true;
+                this.currentSection = index;
+
+                // Show speed lines during navigation
+                this.speedLines.classList.add('active');
+
+                // Update nav dots
+                this.navDots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+
+                // Smooth scroll to section
+                this.sections[index].scrollIntoView({ behavior: 'smooth' });
+
+                // Reset navigation lock
+                setTimeout(() => {
+                    this.isNavigating = false;
+                    this.speedLines.classList.remove('active');
+                }, 1000);
+            }
+
+            setupIntersectionObserver() {
+                const options = {
+                    threshold: 0.5,
+                    rootMargin: '0px'
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const index = Array.from(this.sections).indexOf(entry.target);
+                            this.currentSection = index;
+
+                            // Update nav dots
+                            this.navDots.forEach((dot, i) => {
+                                dot.classList.toggle('active', i === index);
+                            });
+
+                            // Fade in content
+                            const fadeElements = entry.target.querySelectorAll('.fade-in');
+                            fadeElements.forEach(el => {
+                                el.classList.add('visible');
+                            });
+                        }
+                    });
+                }, options);
+
+                this.sections.forEach(section => observer.observe(section));
+            }
+
+            setupMouseParallax() {
+                let mouseX = 0;
+                let mouseY = 0;
+                let carX = window.innerWidth / 2;
+                let carY = window.innerHeight / 2;
+
+                document.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                });
+
+                // Animate car following mouse
+                const animateCar = () => {
+                    const dx = mouseX - carX;
+                    const dy = mouseY - carY;
+
+                    carX += dx * 0.05;
+                    carY += dy * 0.05;
+
+                    if (this.heroCar) {
+                        this.heroCar.style.left = `${carX - 150}px`;
+                        this.heroCar.style.top = `${carY - 75}px`;
+
+                        // Rotate car based on movement direction
+                        const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+                        this.heroCar.style.transform = `rotate(${angle * 0.1}deg)`;
+                    }
+
+                    requestAnimationFrame(animateCar);
+                };
+
+                animateCar();
+
+                // Parallax for background layers
+                document.addEventListener('mousemove', (e) => {
+                    const xPos = (e.clientX / window.innerWidth - 0.5) * 50;
+                    const yPos = (e.clientY / window.innerHeight - 0.5) * 50;
+
+                    document.querySelectorAll('.parallax-bg').forEach(bg => {
+                        bg.style.transform = `translate(${xPos}px, ${yPos}px)`;
+                    });
+                });
+            }
+
+            setupScrollParallax() {
+                let ticking = false;
+
+                window.addEventListener('scroll', () => {
+                    if (!ticking) {
+                        window.requestAnimationFrame(() => {
+                            const scrolled = window.scrollY;
+
+                            // Parallax effect for backgrounds
+                            document.querySelectorAll('.parallax-bg').forEach((bg, index) => {
+                                const speed = 0.5;
+                                const yPos = -(scrolled * speed);
+                                bg.style.transform = `translate3d(0, ${yPos}px, 0)`;
+                            });
+
+                            // Parallax for car visuals
+                            document.querySelectorAll('.car-silhouette').forEach((car) => {
+                                const rect = car.getBoundingClientRect();
+                                const scrollPercent = (window.innerHeight - rect.top) / window.innerHeight;
+                                const rotation = (scrollPercent - 0.5) * 10;
+                                car.style.transform = `translateY(${-scrollPercent * 20}px) rotate(${rotation}deg)`;
+                            });
+
+                            // Parallax for racing numbers
+                            document.querySelectorAll('.racing-number').forEach((number) => {
+                                const rect = number.getBoundingClientRect();
+                                const scrollPercent = (window.innerHeight - rect.top) / window.innerHeight;
+                                number.style.transform = `translateY(${scrollPercent * 100}px)`;
+                            });
+
+                            ticking = false;
+                        });
+
+                        ticking = true;
+                    }
+                });
+            }
+        }
+
+        // Initialize the racing navigator
+        const navigator = new RacingNavigator();
+
+        // Easter egg: Konami code for extra boost
+        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let konamiIndex = 0;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    document.body.style.animation = 'rainbow 2s linear infinite';
+                    console.log('🏁 TURBO BOOST ACTIVATED! 🏁');
+                    konamiIndex = 0;
+                }
+            } else {
+                konamiIndex = 0;
+            }
+        });
+
+        // Add rainbow animation for easter egg
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes rainbow {
+                0% { filter: hue-rotate(0deg); }
+                100% { filter: hue-rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Performance optimization: Use passive listeners
+        window.addEventListener('scroll', () => {}, { passive: true });
+        window.addEventListener('touchmove', () => {}, { passive: true });
+    </script>
+</body>
 </html>
