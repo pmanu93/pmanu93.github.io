@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Arrefecimento - Métodos de teste e diagnóstico</title>
+    <meta name="description"
+        content="Apresentação técnica sobre Sistema de Arrefecimento: Diagnóstico Avançado - Motores de Combustão Interna">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@latest/dist/reveal.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@latest/dist/theme/white.min.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Dynamic SVG Background (Material You adaptive - more vivid) -->
+    <svg id="dynamic-bg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+        <defs>
+            <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+                <path id="grid-path" d="M 50 0 L 0 0 0 50" fill="none" stroke="hsl(195, 80%, 45%)" stroke-width="0.8"
+                    class="grid-pattern" />
+            </pattern>
+            <linearGradient id="fadeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop id="gradient-stop-1" offset="0%" style="stop-color:hsl(195, 85%, 55%);stop-opacity:0.18" />
+                <stop id="gradient-stop-2" offset="100%" style="stop-color:hsl(195, 80%, 40%);stop-opacity:0.10" />
+            </linearGradient>
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                </feMerge>
+            </filter>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)" class="grid-pattern" />
+        <circle cx="120" cy="120" r="100" fill="url(#fadeGradient)" class="geo-element geo-1" filter="url(#glow)" />
+        <circle cx="1800" cy="960" r="150" fill="url(#fadeGradient)" class="geo-element geo-2" filter="url(#glow)" />
+        <line id="center-line" x1="0" y1="540" x2="1920" y2="540" stroke="hsl(195, 75%, 50%)" stroke-width="0.5"
+            opacity="0.3" class="geo-element geo-3" />
+        <polygon points="960,30 1020,150 900,150" fill="url(#fadeGradient)" class="geo-element geo-4"
+            filter="url(#glow)" />
+        <rect id="corner-rect" x="1680" y="180" width="120" height="120" fill="none" stroke="hsl(195, 80%, 55%)"
+            stroke-width="1" opacity="0.3" transform="rotate(15 1740 240)" class="geo-element geo-5" />
+        <path id="curve-path" d="M 80 850 Q 400 750 750 880 T 1350 780" fill="none" stroke="hsl(195, 75%, 50%)"
+            stroke-width="1.2" opacity="0.25" class="geo-element geo-6" />
+        <circle cx="300" cy="900" r="60" fill="none" stroke="hsl(195, 70%, 55%)" stroke-width="0.8" opacity="0.2"
+            class="geo-element geo-7" />
+        <circle cx="1650" cy="150" r="40" fill="url(#fadeGradient)" class="geo-element geo-8" />
+    </svg>
+
+    <!-- GLOBAL Header (Modern Design) -->
+    <header id="global-header" class="global-header">
+        <div class="header-left">
+            <span class="header-title">Gestão Térmica do Motor</span>
+            <span class="header-separator">|</span>
+            <span class="header-discipline"><i class="fas fa-fire-flame-curved"></i> Motores de Combustão Interna</span>
+        </div>
+        <div class="header-right">
+            <span class="header-professor"><i class="fas fa-user-tie"></i> Prof. Pedro Correia</span>
+        </div>
+    </header>
+
+    <!-- GLOBAL Footer (Modern Design) -->
+    <footer id="global-footer" class="global-footer">
+        <div class="footer-left">
+            <span class="footer-year"><i class="fas fa-calendar"></i> 2025</span>
+        </div>
+        <div class="footer-center">
+            <span class="footer-course"><i class="fas fa-car"></i> Mecânica Automóvel</span>
+        </div>
+        <div class="footer-right">
+            <span class="footer-hint"><i class="fas fa-arrow-down"></i> Ver imagem ampliada</span>
+        </div>
+    </footer>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Slide 0: Cover -->
+            <section data-hide-header-footer data-background-image="./images/1.jpg" data-background-opacity="0.1">
+                <div class="slide-cover">
+                    <div class="cover-text">
+                        <h1>Sistema de Arrefecimento</h1>
+                        <h3>Métodos de teste e diagnóstico</h3>
+                        <div class="meta-info">
+                            <span><i class="fas fa-cogs"></i> Motores de Combustão Interna</span>
+                            <span><i class="fas fa-flask"></i> Análise de Sistemas Críticos</span>
+                            <span><i class="fas fa-user-tie"></i> Prof. Pedro Correia</span>
+                            <span><i class="fas fa-calendar"></i> 2025</span>
+                        </div>
+                        <div class="student-list">
+                            <h4>Trabalho realizado por:</h4>
+                            <ul>
+                                <li>29458 José Santos</li>
+                                <li>32801 Pedro Silva</li>
+                                <li>32805 Rui Rodrigues</li>
+                                <li>32813 Jonathan Ramirez</li>
+                                <li>33695 Francisco Gonçalves</li>
+                                <li>33790 João Silva</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cover-image-wrapper">
+                        <figure class="cover-image">
+                            <img src="./images/1.jpg" data-accent-hue="200" data-accent-saturation="85"
+                                data-accent-lightness="45" alt="Engine block">
+                        </figure>
+                    </div>
+                </div>
+                <aside class="notes">
+                    <h3>🎤 José Santos</h3>
+                    <p>Bom dia a todos. O que separa um motor funcional de um bloco de metal fundido inútil? [PAUSA]
+                        Exatamente, a gestão térmica. Hoje não vamos apenas falar de água e radiadores; vamos dissecar o
+                        sistema de arrefecimento e, acima de tudo, aprender a diagnosticar o invisível antes que se
+                        torne catastrófico.</p>
+                </aside>
+            </section>
+
+            <!-- Slide 1: A Missão Crítica -->
+            <section>
+                <section data-background-image="./images/2.jpg" data-background-opacity="0.08">
+                    <div class="slide-content">
+                        <h2 class="slide-title">A Missão Crítica</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <p class="slide-subtitle">Porquê Arrefecer?</p>
+                                <ul>
+                                    <li><i class="fas fa-temperature-half"></i> Estabilidade Térmica</li>
+                                    <li><i class="fas fa-bolt"></i> Eficiência de Combustão</li>
+                                    <li><i class="fas fa-shield-halved"></i> Prevenção de 'Gripagem'</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/2.jpg" data-accent-hue="185" data-accent-saturation="100"
+                                        data-accent-lightness="50" alt="Thermal gradient">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 José Santos</h3>
+                        <p>A função primária parece óbvia: não deixar o motor derreter. Mas é mais subtil que isso. O
+                            sistema tem de atingir a temperatura operacional o mais rápido possível e mantê-la estável,
+                            independentemente se estamos na Sibéria ou no deserto.</p>
+                        <hr>
+                        <h3>🎤 Pedro Silva</h3>
+                        <p>Exato. E quando este equilíbrio falha, as consequências são exponenciais. Uma variação
+                            térmica descontrolada altera as tolerâncias dos metais, leva à gripagem dos pistões e, em
+                            última análise, à destruição total do bloco.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/2.jpg" data-background-size="cover"></section>
+            </section>
+
+            <!-- Slide 2: Anatomia do Sistema -->
+            <section>
+                <section data-background-image="./images/3.jpg" data-background-opacity="0.08">
+                    <div class="slide-content image-left">
+                        <h2 class="slide-title">Anatomia do Sistema</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <ul>
+                                    <li><i class="fas fa-fan"></i> Radiador (Dissipação)</li>
+                                    <li><i class="fas fa-gauge"></i> Termostato (Controlo)</li>
+                                    <li><i class="fas fa-pump-soap"></i> Bomba (Circulação)</li>
+                                    <li><i class="fas fa-compress"></i> Circuito Pressurizado</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/3.jpg" data-accent-hue="200" data-accent-saturation="90"
+                                        data-accent-lightness="40" alt="Cooling system">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 Rui Rodrigues</h3>
+                        <p>Vamos olhar para o 'hardware'. Temos o radiador como permutador de calor, a bomba de água que
+                            é o coração do fluxo, e as mangueiras que são as artérias. Parece simples, certo?</p>
+                        <hr>
+                        <h3>🎤 Jonathan Ramirez</h3>
+                        <p>Mas o maestro desta orquestra é o termostato e o depósito de expansão. Sem eles, não há
+                            controlo de pressão nem de caudal. No próximo slide, vamos perceber onde é que estes
+                            componentes costumam trair o mecânico.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/3.jpg" data-background-size="cover"></section>
+            </section>
+
+            <!-- Slide 3: Sintomas de Colapso -->
+            <section>
+                <section data-background-image="./images/4.jpg" data-background-opacity="0.08">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Sintomas de Colapso</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <ul>
+                                    <li><i class="fas fa-burst"></i> Sobrepressão</li>
+                                    <li><i class="fas fa-temperature-arrow-up"></i> Ponteiro no 'Vermelho'</li>
+                                    <li><i class="fas fa-smog"></i> Odores: Adocicado / Queimado</li>
+                                    <li><i class="fas fa-droplet"></i> Perda de Fluido</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/4.jpg" data-accent-hue="15" data-accent-saturation="95"
+                                        data-accent-lightness="55" alt="Dashboard warning">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 Francisco Gonçalves</h3>
+                        <p>O cliente chega e diz 'o carro aquece'. Mas nós temos de ser detetives. O ponteiro sobe em
+                            trânsito ou em autoestrada? Há cheiro a anticongelante – aquele cheiro adocicado
+                            característico?</p>
+                        <hr>
+                        <h3>🎤 João Silva</h3>
+                        <p>Muitas vezes o sistema fala antes de gritar. Uma ligeira perda de nível ou uma mangueira
+                            demasiado rígida devido à pressão excessiva são avisos de que algo grave está para
+                            acontecer.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/4.jpg" data-background-size="cover"></section>
+            </section>
+
+            <!-- Slide 4: Diagnóstico Nível 1 -->
+            <section>
+                <section data-background-image="./images/5.jpg" data-background-opacity="0.08">
+                    <div class="slide-content image-left">
+                        <h2 class="slide-title">Diagnóstico: Nível 1 (Visual)</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <ul>
+                                    <li><i class="fas fa-snowflake"></i> Motor Frio (Obrigatório)</li>
+                                    <li><i class="fas fa-droplet"></i> Estado das Tubagens</li>
+                                    <li><i class="fas fa-palette"></i> Cor do Fluido</li>
+                                    <li><i class="fas fa-magnifying-glass"></i> Vestígios de Fugas Secas</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/5.jpg" data-accent-hue="145" data-accent-saturation="65"
+                                        data-accent-lightness="40" alt="Visual inspection">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 José Santos</h3>
+                        <p>Regra de ouro: nunca abrir um sistema a quente, a menos que queiram uma visita ao hospital.
+                            Com o motor frio, a inspeção visual resolve 40% dos casos. Procurem crostas coloridas nas
+                            junções.</p>
+                        <hr>
+                        <h3>🎤 Pedro Silva</h3>
+                        <p>Apertar as mangueiras é crucial. Se estiverem moles como pastilha elástica, estão
+                            contaminadas por óleo. Se estalarem ao apertar, estão ressequidas. Ambas requerem
+                            substituição imediata.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/5.jpg" data-background-size="cover"></section>
+            </section>
+
+            <!-- Slide 5: Teste de Pressão -->
+            <section>
+                <section data-background-image="./images/6.jpg" data-background-opacity="0.08">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Teste de Pressão</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <ul>
+                                    <li><i class="fas fa-gauge-high"></i> Simulação (1.0 - 1.5 Bar)</li>
+                                    <li><i class="fas fa-eye"></i> Revelação de Micro-fugas</li>
+                                    <li><i class="fas fa-clock"></i> Teste Estático</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/6.jpg" data-accent-hue="210" data-accent-saturation="80"
+                                        data-accent-lightness="45" alt="Pressure test">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 Rui Rodrigues</h3>
+                        <p>Quando os olhos não veem, a pressão revela. Ao injetarmos 1 bar ou 1.5 bar no sistema
+                            fechado, forçamos o líquido a sair pelo ponto mais fraco.</p>
+                        <hr>
+                        <h3>🎤 Jonathan Ramirez</h3>
+                        <p>Se o manómetro baixar e não virem água no chão, temos más notícias. A água está a entrar no
+                            motor. Preparem-se para diagnosticar a junta da cabeça ou o bloco.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/6.jpg" data-background-size="cover"></section>
+            </section>
+
+            <!-- Slide 6: O Termostato -->
+            <section>
+                <section data-background-image="./images/7.jpg" data-background-opacity="0.08">
+                    <div class="slide-content image-left">
+                        <h2 class="slide-title">O Termostato</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <ul>
+                                    <li><i class="fas fa-toggle-on"></i> Válvula Térmica</li>
+                                    <li><i class="fas fa-door-open"></i> Falha Aberto: Motor Frio</li>
+                                    <li><i class="fas fa-door-closed"></i> Falha Fechado: Sobreaquecimento</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/7.jpg" data-accent-hue="25" data-accent-saturation="90"
+                                        data-accent-lightness="50" alt="Thermostat test">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 Francisco Gonçalves</h3>
+                        <p>É uma peça barata que causa danos de milhares de euros. Se bloquear fechado, o motor ferve em
+                            minutos. Se bloquear aberto, o motor nunca atinge a eficiência térmica, gastando mais
+                            combustível.</p>
+                        <hr>
+                        <h3>🎤 João Silva</h3>
+                        <p>O teste é 'velha guarda': panela com água, fogão e termómetro. Temos de ver a válvula a abrir
+                            exatamente à temperatura estampada no componente. Nem antes, nem depois.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/7.jpg" data-background-size="cover"></section>
+            </section>
+
+            <!-- Slide 7: Bomba de Água -->
+            <section>
+                <section data-background-image="./images/8.jpg" data-background-opacity="0.08">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Bomba de Água</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <ul>
+                                    <li><i class="fas fa-circle-xmark"></i> Impulsor Danificado</li>
+                                    <li><i class="fas fa-fan"></i> Corrosão das Pás</li>
+                                    <li><i class="fas fa-gears"></i> Rolamento Gripado</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/8.jpg" data-accent-hue="200" data-accent-saturation="20"
+                                        data-accent-lightness="45" alt="Water pump">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 José Santos</h3>
+                        <p>A bomba é traidora. Por vezes não perde água, mas o impulsor lá dentro soltou-se do veio ou
+                            as pás desapareceram com a corrosão (cavitação). O veio roda, mas a água não mexe.</p>
+                        <hr>
+                        <h3>🎤 Pedro Silva</h3>
+                        <p>Sintoma clássico: o carro aquece em ralenti ou baixa rotação, mas arrefece quando aceleramos
+                            porque a força centrífuga compensa a falha temporariamente.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/8.jpg" data-background-size="cover"></section>
+            </section>
+
+            <!-- Slide 8: Radiador O Permutador -->
+            <section>
+                <section data-background-image="./images/9.jpg" data-background-opacity="0.08">
+                    <div class="slide-content image-left">
+                        <h2 class="slide-title">Radiador: O Permutador</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <ul>
+                                    <li><i class="fas fa-map"></i> Mapeamento Térmico</li>
+                                    <li><i class="fas fa-icicles"></i> Pontos Frios = Obstrução</li>
+                                    <li><i class="fas fa-broom"></i> Limpeza vs Substituição</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/9.jpg" data-accent-hue="355" data-accent-saturation="80"
+                                        data-accent-lightness="55" alt="Thermal camera">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 Rui Rodrigues</h3>
+                        <p>Um radiador não dura para sempre. Os canais internos entopem com calcário e ferrugem. A
+                            melhor ferramenta aqui é um termómetro infravermelho.</p>
+                        <hr>
+                        <h3>🎤 Jonathan Ramirez</h3>
+                        <p>Exato. Passamos o laser pela superfície. Se encontrarmos zonas frias no meio do radiador
+                            quente, sabemos que ali não há circulação. É zona morta.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/9.jpg" data-background-size="cover"></section>
+            </section>
+
+            <!-- Slide 9: Física da Tampa -->
+            <section>
+                <section data-background-image="./images/10.jpg" data-background-opacity="0.08">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Física da Tampa</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <ul>
+                                    <li><i class="fas fa-arrow-up"></i> Pressurização = + Ponto de Ebulição</li>
+                                    <li><i class="fas fa-arrow-right-from-bracket"></i> Válvula de Alívio</li>
+                                    <li><i class="fas fa-arrow-left"></i> Válvula de Retorno</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/10.jpg" data-accent-hue="185" data-accent-saturation="85"
+                                        data-accent-lightness="40" alt="Radiator cap">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 Francisco Gonçalves</h3>
+                        <p>Muitos ignoram a tampa, mas é pura física. Ao manter o sistema sob pressão, elevamos o ponto
+                            de ebulição da água para cerca de 110º ou 120ºC. Sem a tampa, a água ferve aos 100ºC e o
+                            sistema colapsa.</p>
+                        <hr>
+                        <h3>🎤 João Silva</h3>
+                        <p>Se a mola da tampa estiver 'cansada', ela deixa escapar a pressão cedo demais. Resultado: o
+                            líquido desaparece em forma de vapor sem haver fugas visíveis.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/10.jpg" data-background-size="cover"></section>
+            </section>
+
+            <!-- Slide 10: Teste Químico CO2 -->
+            <section>
+                <section data-background-image="./images/11.jpg" data-background-opacity="0.08">
+                    <div class="slide-content image-left">
+                        <h2 class="slide-title">Teste Químico (CO₂)</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <ul>
+                                    <li><i class="fas fa-vial"></i> Detetar Gases de Combustão</li>
+                                    <li><i class="fas fa-flask-vial"></i> Reagente Químico</li>
+                                    <li><i class="fas fa-triangle-exclamation"></i> Azul ➔ Amarelo = Perigo</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/11.jpg" data-accent-hue="50" data-accent-saturation="95"
+                                        data-accent-lightness="55" alt="CO2 test">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 José Santos</h3>
+                        <p>Este é o 'teste da verdade' para a junta da cabeça. Colocamos este reagente no depósito. Ele
+                            procura CO2. Se houver CO2 na água, significa que a combustão está a passar para o
+                            arrefecimento.</p>
+                        <hr>
+                        <h3>🎤 Pedro Silva</h3>
+                        <p>Se o líquido azul ficar amarelo ou verde... preparem o orçamento para abrir o motor. É um
+                            diagnóstico definitivo e visualmente incontestável para o cliente.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/11.jpg" data-background-size="cover"></section>
+            </section>
+
+            <!-- Slide 11: A Importância da Purga -->
+            <section>
+                <section data-background-image="./images/12.jpg" data-background-opacity="0.08">
+                    <div class="slide-content">
+                        <h2 class="slide-title">A Importância da Purga</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <ul>
+                                    <li><i class="fas fa-wind"></i> Bolsas de Ar</li>
+                                    <li><i class="fas fa-fire"></i> Pontos Quentes Localizados</li>
+                                    <li><i class="fas fa-syringe"></i> Procedimento de Vácuo</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/12.jpg" data-accent-hue="230" data-accent-saturation="65"
+                                        data-accent-lightness="50" alt="Vacuum purge">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 Rui Rodrigues</h3>
+                        <p>O ar é o inimigo. O ar não troca calor e engana os sensores. Uma bolha de ar na cabeça do
+                            motor pode causar sobreaquecimento local mesmo que o radiador esteja frio.</p>
+                        <hr>
+                        <h3>🎤 Jonathan Ramirez</h3>
+                        <p>Por isso usamos sistemas de enchimento por vácuo hoje em dia. Removemos todo o ar antes de
+                            meter uma gota de líquido. É a única forma de garantir 100% de eficiência.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/12.jpg" data-background-size="cover"></section>
+            </section>
+
+            <!-- Slide 12: O Sangue do Sistema -->
+            <section>
+                <section data-background-image="./images/13.jpg" data-background-opacity="0.08">
+                    <div class="slide-content image-left">
+                        <h2 class="slide-title">O Sangue do Sistema</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <ul>
+                                    <li><i class="fas fa-droplet-slash"></i> Anticongelante vs Água</li>
+                                    <li><i class="fas fa-shield-virus"></i> Proteção Anticorrosiva</li>
+                                    <li><i class="fas fa-oil-can"></i> Lubrificação da Bomba</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/13.jpg" data-accent-hue="330" data-accent-saturation="75"
+                                        data-accent-lightness="50" alt="Coolant">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 Francisco Gonçalves</h3>
+                        <p>Nunca, mas nunca, usar água da torneira. O líquido de arrefecimento não serve só para o frio;
+                            ele lubrifica a bomba de água e previne a eletrólise e corrosão interna.</p>
+                        <hr>
+                        <h3>🎤 João Silva</h3>
+                        <p>Cada fabricante tem a sua química (os G12, G13, etc). Misturar tipos diferentes pode criar
+                            uma lama química que entope tudo. Respeitem a cor e a norma.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/13.jpg" data-background-size="cover"></section>
+            </section>
+
+            <!-- Slide 13: Workflow de Diagnóstico -->
+            <section>
+                <section data-background-image="./images/14.jpg" data-background-opacity="0.08">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Workflow de Diagnóstico</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <ul>
+                                    <li><i class="fas fa-1"></i> Inspeção Visual</li>
+                                    <li><i class="fas fa-2"></i> Teste de Pressão</li>
+                                    <li><i class="fas fa-3"></i> Teste Químico (CO₂)</li>
+                                    <li><i class="fas fa-4"></i> Verificação de Fluxo</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/14.jpg" data-accent-hue="125" data-accent-saturation="60"
+                                        data-accent-lightness="48" alt="Checklist">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 José Santos</h3>
+                        <p>Para resumir, não adivinhem. Sigam o processo. Comecem pelo simples e visual. Só depois
+                            passem para os testes de pressão e químicos.</p>
+                        <hr>
+                        <h3>🎤 Pedro Silva</h3>
+                        <p>Seguindo esta lógica, evitam trocar peças boas e encontram a raiz do problema, seja ela uma
+                            simples tampa ou uma junta queimada.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/14.jpg" data-background-size="cover"></section>
+            </section>
+
+            <!-- Slide 14: Conclusão -->
+            <section data-hide-header-footer data-background-image="./images/15.jpg" data-background-opacity="0.1">
+                <div class="slide-conclusion">
+                    <div class="conclusion-content">
+                        <h1>Conclusão Técnica</h1>
+                        <div class="conclusion-points">
+                            <div class="conclusion-point">
+                                <i class="fas fa-wrench"></i>
+                                <p>Manutenção Preventiva é Chave</p>
+                            </div>
+                            <div class="conclusion-point">
+                                <i class="fas fa-chart-line"></i>
+                                <p>Diagnóstico Preciso Poupa Custos</p>
+                            </div>
+                            <div class="conclusion-point">
+                                <i class="fas fa-car"></i>
+                                <p>Fiabilidade do Motor</p>
+                            </div>
+                        </div>
+                        <p class="thanks">Obrigado pela vossa atenção!</p>
+                        <div class="student-list">
+                            <h4>Trabalho realizado por:</h4>
+                            <ul>
+                                <li>29458 José Santos</li>
+                                <li>32801 Pedro Silva</li>
+                                <li>32805 Rui Rodrigues</li>
+                                <li>32813 Jonathan Ramirez</li>
+                                <li>33695 Francisco Gonçalves</li>
+                                <li>33790 João Silva</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="conclusion-image-wrapper">
+                        <figure class="conclusion-image">
+                            <img src="./images/15.jpg" data-accent-hue="195" data-accent-saturation="90"
+                                data-accent-lightness="50" alt="Team">
+                        </figure>
+                    </div>
+                </div>
+                <aside class="notes">
+                    <h3>🎤 Todos os Oradores</h3>
+                    <p>O sistema de arrefecimento é vital. Com os métodos de teste que apresentámos – pressão, CO2 e
+                        análise térmica – conseguimos garantir a longevidade de qualquer motor de combustão. Obrigado.
+                    </p>
+                </aside>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@latest/dist/reveal.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@latest/plugin/notes/notes.min.js"></script>
+
+    <script>
+        Reveal.initialize({
+            plugins: [RevealNotes],
+            hash: true,
+            history: true,
+            transition: 'slide',
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade',
+            showNotes: false,
+            center: true,
+            width: 1920,
+            height: 1080
+        });
+
+        // Elements
+        const svg = document.getElementById('dynamic-bg');
+        const geoElements = svg.querySelectorAll('.geo-element');
+        const gridPattern = svg.querySelectorAll('.grid-pattern');
+        const globalHeader = document.getElementById('global-header');
+        const globalFooter = document.getElementById('global-footer');
+
+        const gridPath = document.getElementById('grid-path');
+        const gradientStop1 = document.getElementById('gradient-stop-1');
+        const gradientStop2 = document.getElementById('gradient-stop-2');
+        const centerLine = document.getElementById('center-line');
+        const cornerRect = document.getElementById('corner-rect');
+        const curvePath = document.getElementById('curve-path');
+
+        const defaultAccent = { hue: 195, saturation: 80, lightness: 45 };
+        let currentAccent = { ...defaultAccent };
+        let targetAccent = { ...defaultAccent };
+
+        function lerp(start, end, factor) {
+            return start + (end - start) * factor;
+        }
+
+        function updateSVGColors(accent) {
+            const { hue, saturation, lightness } = accent;
+            const primary = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+            const secondary = `hsl(${hue}, ${saturation}%, ${Math.min(lightness + 12, 65)}%)`;
+
+            if (gridPath) gridPath.setAttribute('stroke', primary);
+            if (gradientStop1) gradientStop1.style.stopColor = secondary;
+            if (gradientStop2) gradientStop2.style.stopColor = primary;
+            if (centerLine) centerLine.setAttribute('stroke', primary);
+            if (cornerRect) cornerRect.setAttribute('stroke', secondary);
+            if (curvePath) curvePath.setAttribute('stroke', primary);
+
+            document.documentElement.style.setProperty('--accent-hue', hue);
+            document.documentElement.style.setProperty('--accent-saturation', `${saturation}%`);
+            document.documentElement.style.setProperty('--accent-lightness', `${lightness}%`);
+        }
+
+        function animateColorTransition() {
+            const factor = 0.06;
+            currentAccent.hue = lerp(currentAccent.hue, targetAccent.hue, factor);
+            currentAccent.saturation = lerp(currentAccent.saturation, targetAccent.saturation, factor);
+            currentAccent.lightness = lerp(currentAccent.lightness, targetAccent.lightness, factor);
+            updateSVGColors(currentAccent);
+
+            const hueDiff = Math.abs(currentAccent.hue - targetAccent.hue);
+            const satDiff = Math.abs(currentAccent.saturation - targetAccent.saturation);
+            const lightDiff = Math.abs(currentAccent.lightness - targetAccent.lightness);
+
+            if (hueDiff > 0.5 || satDiff > 0.5 || lightDiff > 0.5) {
+                requestAnimationFrame(animateColorTransition);
+            }
+        }
+
+        function getSlideAccentColor(slide) {
+            const img = slide.querySelector('img[data-accent-hue]');
+            if (img) {
+                return {
+                    hue: parseFloat(img.dataset.accentHue) || defaultAccent.hue,
+                    saturation: parseFloat(img.dataset.accentSaturation) || defaultAccent.saturation,
+                    lightness: parseFloat(img.dataset.accentLightness) || defaultAccent.lightness
+                };
+            }
+            return defaultAccent;
+        }
+
+        function isFullscreenSlide() {
+            return Reveal.getIndices().v > 0;
+        }
+
+        function updateHeaderFooterVisibility() {
+            const currentSlide = Reveal.getCurrentSlide();
+            const parentSection = currentSlide.parentElement;
+            const hideHeaderFooter = currentSlide.hasAttribute('data-hide-header-footer') ||
+                parentSection.hasAttribute('data-hide-header-footer') ||
+                isFullscreenSlide();
+
+            if (hideHeaderFooter) {
+                globalHeader.classList.add('hidden');
+                globalFooter.classList.add('hidden');
+            } else {
+                globalHeader.classList.remove('hidden');
+                globalFooter.classList.remove('hidden');
+            }
+        }
+
+        Reveal.on('ready', () => {
+            updateHeaderFooterVisibility();
+            const initialAccent = getSlideAccentColor(Reveal.getCurrentSlide());
+            currentAccent = { ...initialAccent };
+            targetAccent = { ...initialAccent };
+            updateSVGColors(currentAccent);
+        });
+
+        Reveal.on('slidechanged', event => {
+            const slideIndex = event.indexh;
+            const currentSlide = event.currentSlide;
+
+            updateHeaderFooterVisibility();
+            targetAccent = getSlideAccentColor(currentSlide);
+            animateColorTransition();
+
+            const baseOpacity = 0.15 + (slideIndex % 5) * 0.03;
+            const rotation = slideIndex * 3;
+            const translateX = Math.sin(slideIndex * 0.5) * 25;
+            const translateY = Math.cos(slideIndex * 0.5) * 20;
+
+            geoElements.forEach((el, i) => {
+                const individualOffset = i * 0.025;
+                el.style.opacity = Math.min(0.35, baseOpacity + individualOffset);
+                el.style.transform = `translate(${translateX + i * 6}px, ${translateY + i * 4}px) rotate(${rotation + i * 6}deg)`;
+            });
+
+            gridPattern.forEach(el => {
+                el.style.opacity = 0.35 + (slideIndex % 3) * 0.1;
+            });
+        });
+    </script>
+
+</body>
+
+</html>

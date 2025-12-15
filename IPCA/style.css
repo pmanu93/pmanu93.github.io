@@ -1,0 +1,123 @@
+:root {
+  --bg-color: #f8f9fa;
+  --text-color: #212529;
+  --primary-color: #0d6efd;
+  --border-color: #dee2e6;
+  --card-bg: #ffffff;
+  --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.5;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+header {
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #343a40;
+}
+
+.subtitle {
+  color: #6c757d;
+  font-size: 1.1rem;
+}
+
+.course-section {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 25px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.course-title {
+  font-size: 1.5rem;
+  color: #495057;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+}
+
+.project-list {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.project-card {
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary-color);
+}
+
+.project-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: var(--primary-color);
+}
+
+.project-desc {
+  font-size: 0.9rem;
+  color: #6c757d;
+  margin-bottom: 15px;
+}
+
+.students-box {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px dashed var(--border-color);
+  font-size: 0.85rem;
+}
+
+.students-label {
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.student-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  columns: 2;
+}
+
+.student-list li {
+  margin-bottom: 2px;
+}
+
+footer {
+  text-align: center;
+  margin-top: 50px;
+  color: #adb5bd;
+  font-size: 0.9rem;
+}
