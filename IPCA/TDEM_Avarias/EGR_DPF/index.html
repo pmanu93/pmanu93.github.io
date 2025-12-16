@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistemas EGR e DPF - Diagnóstico e Avarias</title>
+    <meta name="description"
+        content="Apresentação técnica sobre Sistemas EGR e DPF: Diagnóstico, Avarias e Multiplexagem">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@latest/dist/reveal.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@latest/dist/theme/black.min.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Dynamic SVG Background (Emissions Theme - Smoke/Particles) -->
+    <svg id="dynamic-bg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+        <defs>
+            <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+                <path id="grid-path" d="M 60 0 L 0 0 0 60" fill="none" stroke="hsl(160, 70%, 30%)" stroke-width="0.5"
+                    class="grid-pattern" />
+            </pattern>
+            <linearGradient id="fadeGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop id="gradient-stop-1" offset="0%" style="stop-color:hsl(160, 70%, 40%);stop-opacity:0.15" />
+                <stop id="gradient-stop-2" offset="100%" style="stop-color:hsl(170, 60%, 30%);stop-opacity:0.08" />
+            </linearGradient>
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                </feMerge>
+            </filter>
+            <!-- Smoke/particle filter -->
+            <filter id="smoke-blur">
+                <feGaussianBlur stdDeviation="8" />
+            </filter>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)" class="grid-pattern" />
+        <!-- Exhaust pipe shaped elements -->
+        <ellipse cx="150" cy="900" rx="80" ry="40" fill="url(#fadeGradient)" class="geo-element geo-1 exhaust-glow"
+            filter="url(#glow)" />
+        <ellipse cx="1750" cy="180" rx="100" ry="50" fill="url(#fadeGradient)" class="geo-element geo-2 exhaust-glow"
+            filter="url(#glow)" />
+        <!-- Smoke particles -->
+        <circle cx="200" cy="800" r="30" fill="hsl(160, 50%, 35%)" opacity="0.2"
+            class="geo-element geo-3 smoke-particle" filter="url(#smoke-blur)" />
+        <circle cx="250" cy="750" r="20" fill="hsl(160, 50%, 40%)" opacity="0.15"
+            class="geo-element geo-4 smoke-particle" filter="url(#smoke-blur)" style="animation-delay: 2s" />
+        <circle cx="180" cy="700" r="25" fill="hsl(170, 45%, 35%)" opacity="0.18"
+            class="geo-element geo-5 smoke-particle" filter="url(#smoke-blur)" style="animation-delay: 4s" />
+        <!-- Flow lines representing exhaust flow -->
+        <path id="flow-path-1" d="M 100 950 Q 300 850 500 900 T 900 800" fill="none" stroke="hsl(160, 60%, 40%)"
+            stroke-width="1.5" opacity="0.2" class="geo-element geo-6" />
+        <path id="flow-path-2" d="M 1800 100 Q 1600 200 1400 150 T 1000 250" fill="none" stroke="hsl(170, 55%, 38%)"
+            stroke-width="1.5" opacity="0.2" class="geo-element geo-7" />
+        <!-- DPF honeycomb pattern hint -->
+        <rect x="1600" y="800" width="200" height="150" fill="none" stroke="hsl(160, 60%, 35%)" stroke-width="1"
+            opacity="0.15" class="geo-element geo-8" />
+        <line x1="1620" y1="800" x2="1620" y2="950" stroke="hsl(160, 60%, 35%)" stroke-width="0.5" opacity="0.1" />
+        <line x1="1660" y1="800" x2="1660" y2="950" stroke="hsl(160, 60%, 35%)" stroke-width="0.5" opacity="0.1" />
+        <line x1="1700" y1="800" x2="1700" y2="950" stroke="hsl(160, 60%, 35%)" stroke-width="0.5" opacity="0.1" />
+        <line x1="1740" y1="800" x2="1740" y2="950" stroke="hsl(160, 60%, 35%)" stroke-width="0.5" opacity="0.1" />
+        <line x1="1780" y1="800" x2="1780" y2="950" stroke="hsl(160, 60%, 35%)" stroke-width="0.5" opacity="0.1" />
+    </svg>
+
+    <!-- GLOBAL Header -->
+    <header id="global-header" class="global-header">
+        <div class="header-left">
+            <span class="header-title">Controlo de Emissões</span>
+            <span class="header-separator">|</span>
+            <span class="header-discipline"><i class="fas fa-smog"></i> Técnicas de Diagnóstico e Ensaio e
+                Multiplexagem</span>
+        </div>
+        <div class="header-right">
+            <span class="header-professor"><i class="fas fa-user-tie"></i> Prof. Luís Lopes</span>
+        </div>
+    </header>
+
+    <!-- GLOBAL Footer -->
+    <footer id="global-footer" class="global-footer">
+        <div class="footer-left">
+            <span class="footer-year"><i class="fas fa-calendar"></i> 2025</span>
+        </div>
+        <div class="footer-center">
+            <span class="footer-course"><i class="fas fa-car"></i> Mecânica Automóvel</span>
+        </div>
+        <div class="footer-right">
+            <span class="footer-hint"><i class="fas fa-arrow-down"></i> Ver imagem ampliada</span>
+        </div>
+    </footer>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Slide 0: Capa -->
+            <section data-hide-header-footer data-background-image="./images/0_cover.png"
+                data-background-opacity="0.15">
+                <div class="slide-cover">
+                    <div class="cover-text">
+                        <h1>Sistemas EGR e DPF</h1>
+                        <h3>Diagnóstico de Avarias e Multiplexagem</h3>
+                        <div class="meta-info">
+                            <span><i class="fas fa-smog"></i> Controlo de Emissões</span>
+                            <span><i class="fas fa-microchip"></i> Técnicas de Diagnóstico e Ensaio</span>
+                            <span><i class="fas fa-user-tie"></i> Prof. Luís Lopes</span>
+                            <span><i class="fas fa-calendar"></i> 2025</span>
+                        </div>
+                        <div class="student-list">
+                            <h4>Trabalho realizado por:</h4>
+                            <ul>
+                                <li>29458 José Santos</li>
+                                <li>32801 Pedro Silva</li>
+                                <li>32805 Rui Rodrigues</li>
+                                <li>32813 Jonathan Ramirez</li>
+                                <li>33695 Francisco Gonçalves</li>
+                                <li>33790 João Silva</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cover-image-wrapper">
+                        <figure class="cover-image">
+                            <img src="./images/0_cover.png" data-accent-hue="160" data-accent-saturation="70"
+                                data-accent-lightness="40" alt="Sistemas de Controlo de Emissões">
+                        </figure>
+                    </div>
+                </div>
+                <aside class="notes">
+                    <h3>🎤 José Santos</h3>
+                    <p>Bom dia a todos. Hoje vamos falar de dois sistemas críticos para o controlo de emissões nos
+                        motores diesel modernos: o EGR e o DPF. São componentes que, quando avariados, causam grandes
+                        dores de cabeça aos condutores e mecânicos.</p>
+                </aside>
+            </section>
+
+            <!-- Slide 1: Sistema EGR -->
+            <section>
+                <section data-background-image="./images/4_egr_system.png" data-background-opacity="0.08">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Sistema EGR - Recirculação de Gases</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <p class="slide-subtitle">Função Principal</p>
+                                <ul>
+                                    <li><i class="fas fa-temperature-low"></i> Reduz temperatura de combustão</li>
+                                    <li><i class="fas fa-cloud"></i> Diminui emissões de NOx (óxidos de azoto)</li>
+                                    <li><i class="fas fa-recycle"></i> Recircula gases de escape para admissão</li>
+                                </ul>
+                                <p class="slide-subtitle" style="margin-top: 0.8em;">Tipos de Válvulas</p>
+                                <ul>
+                                    <li><i class="fas fa-wind"></i> Pneumática (acionada por vácuo)</li>
+                                    <li><i class="fas fa-bolt"></i> Elétrica (motor DC ou stepper)</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/4_egr_system.png" data-accent-hue="160"
+                                        data-accent-saturation="65" data-accent-lightness="42"
+                                        alt="Diagrama Sistema EGR">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 Pedro Silva</h3>
+                        <p>O EGR funciona de forma simples: desvia parte dos gases de escape de volta para a admissão.
+                            Porquê? Porque os gases queimados têm menos oxigénio, o que baixa a temperatura de
+                            combustão. É com esta temperatura alta que se formam os NOx, um dos poluentes mais nocivos.
+                        </p>
+                        <hr>
+                        <h3>🎤 Rui Rodrigues</h3>
+                        <p>Quanto aos tipos, as válvulas pneumáticas são mais antigas, usam vácuo do coletor. As
+                            elétricas permitem controlo mais preciso pela ECU e são obrigatórias em motores Euro 5 e 6
+                            com gestão eletrónica avançada.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/4_egr_system.png" data-background-size="contain"></section>
+            </section>
+
+            <!-- Slide 2: Avarias EGR -->
+            <section>
+                <section data-background-image="./images/1_egr_clogged.png" data-background-opacity="0.08">
+                    <div class="slide-content image-left">
+                        <h2 class="slide-title">Avarias Comuns no EGR</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <p class="slide-subtitle">Sintomas Típicos</p>
+                                <ul>
+                                    <li><i class="fas fa-exclamation-triangle"></i> Luz de avaria (Check Engine)</li>
+                                    <li><i class="fas fa-gauge-simple-high"></i> Falta de potência</li>
+                                    <li><i class="fas fa-smog"></i> Fumo negro excessivo</li>
+                                    <li><i class="fas fa-wave-square"></i> Ralenti instável</li>
+                                </ul>
+                                <p class="slide-subtitle" style="margin-top: 0.8em;">Causas Principais</p>
+                                <ul>
+                                    <li><i class="fas fa-oil-can"></i> Acumulação de carbono (o "colesterol" do motor!)
+                                    </li>
+                                    <li><i class="fas fa-plug"></i> Falha no atuador elétrico</li>
+                                    <li><i class="fas fa-microchip"></i> Sensor de posição EGR avariado</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/1_egr_clogged.png" data-accent-hue="30"
+                                        data-accent-saturation="80" data-accent-lightness="45"
+                                        alt="EGR Obstruída com Carbono">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 Jonathan Ramirez</h3>
+                        <p>A imagem fala por si: isto é uma EGR "normal" depois de 150 mil km em cidade. Aquele depósito
+                            preto é carbono misturado com resíduos de óleo. Quando entope, a válvula fica presa - aberta
+                            ou fechada - e o motor perde rendimento.</p>
+                        <hr>
+                        <h3>🎤 Francisco Gonçalves</h3>
+                        <p>Para diagnosticar, usamos o scanner para ler códigos de erro (P0400 a P0409 são os típicos de
+                            EGR). Depois confirmamos fisicamente: testamos vácuo nas pneumáticas, ou comandamos a
+                            elétrica via diagnóstico e verificamos se abre/fecha corretamente.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/1_egr_clogged.png" data-background-size="contain"></section>
+            </section>
+
+            <!-- Slide 3: Sistema DPF -->
+            <section>
+                <section data-background-image="./images/2_dpf_diagram.png" data-background-opacity="0.08">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Sistema DPF - Filtro de Partículas</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <p class="slide-subtitle">Função e Estrutura</p>
+                                <ul>
+                                    <li><i class="fas fa-filter"></i> Retém partículas de fuligem (PM)</li>
+                                    <li><i class="fas fa-table-cells"></i> Estrutura em favo de mel cerâmico</li>
+                                    <li><i class="fas fa-leaf"></i> Obrigatório desde Euro 5 (2009)</li>
+                                </ul>
+                                <p class="slide-subtitle" style="margin-top: 0.8em;">Tipos de Regeneração</p>
+                                <ul>
+                                    <li><i class="fas fa-road"></i> <strong>Passiva:</strong> Autoestrada (>600°C
+                                        natural)</li>
+                                    <li><i class="fas fa-fire"></i> <strong>Ativa:</strong> Pós-injeção de gasóleo pela
+                                        ECU</li>
+                                    <li><i class="fas fa-wrench"></i> <strong>Forçada:</strong> Via diagnóstico oficina
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/2_dpf_diagram.png" data-accent-hue="170"
+                                        data-accent-saturation="60" data-accent-lightness="38"
+                                        alt="Corte Transversal DPF">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 João Silva</h3>
+                        <p>O DPF é basicamente uma esponja cerâmica que apanha a fuligem. O problema é que enche, tal
+                            como um aspirador. Por isso precisa de se "auto-limpar" - é a regeneração. A passiva
+                            acontece naturalmente em viagens longas. A ativa é quando a ECU injeta mais gasóleo para
+                            subir a temperatura.</p>
+                        <hr>
+                        <h3>🎤 José Santos</h3>
+                        <p>A regeneração forçada é o último recurso. Quando o cliente só anda em cidade e nunca deixa o
+                            DPF regenerar, o filtro satura. Aí temos de ligar o carro ao diagnóstico e forçar o processo
+                            manualmente, com o motor ao ralenti durante 20-30 minutos.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/2_dpf_diagram.png" data-background-size="contain"></section>
+            </section>
+
+            <!-- Slide 4: Avarias DPF e Multiplexagem -->
+            <section>
+                <section data-background-image="./images/3_alfa_warning.png" data-background-opacity="0.1">
+                    <div class="slide-content image-left">
+                        <h2 class="slide-title">Avarias DPF e Eletrónica</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <p class="slide-subtitle">Problemas Frequentes</p>
+                                <ul>
+                                    <li><i class="fas fa-ban"></i> Filtro saturado / obstruído</li>
+                                    <li><i class="fas fa-clock-rotate-left"></i> Regenerações interrompidas</li>
+                                    <li><i class="fas fa-oil-can"></i> Diluição de óleo (gasóleo no cárter)</li>
+                                    <li><i class="fas fa-thermometer-empty"></i> Sensor temperatura escape avariado</li>
+                                </ul>
+                                <p class="slide-subtitle" style="margin-top: 0.8em;">Multiplexagem CAN</p>
+                                <ul>
+                                    <li><i class="fas fa-network-wired"></i> Sensor pressão diferencial → ECU</li>
+                                    <li><i class="fas fa-microchip"></i> ECU calcula nível de saturação</li>
+                                    <li><i class="fas fa-satellite-dish"></i> Pedido de regeneração via rede CAN</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/3_alfa_warning.png" data-accent-hue="25"
+                                        data-accent-saturation="90" data-accent-lightness="50"
+                                        alt="Painel com luzes de avaria DPF">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 Pedro Silva</h3>
+                        <p>Este painel é típico de um Alfa Romeo ou Fiat depois de umas semanas a andar só em cidade. A
+                            luz do DPF está acesa porque o filtro nunca conseguiu regenerar. A ECU usa o sensor de
+                            pressão diferencial para "sentir" se o filtro está entupido: mais pressão antes do filtro
+                            que depois significa obstrução.</p>
+                        <hr>
+                        <h3>🎤 Rui Rodrigues</h3>
+                        <p>A comunicação é toda feita via rede CAN. O sensor envia dados para a ECU, que decide quando
+                            iniciar regeneração. Se falhar, envia mensagem para o painel. Com o scanner, conseguimos ver
+                            em tempo real a pressão diferencial e a temperatura - ferramentas essenciais para
+                            diagnóstico.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/3_alfa_warning.png" data-background-size="contain"></section>
+            </section>
+
+            <!-- Slide 5: Conclusão -->
+            <section data-hide-header-footer data-background-image="./images/5_regeneration.png"
+                data-background-opacity="0.1">
+                <div class="slide-conclusion">
+                    <div class="conclusion-content">
+                        <h1>Conclusão Técnica</h1>
+                        <div class="conclusion-points">
+                            <div class="conclusion-point">
+                                <i class="fas fa-leaf"></i>
+                                <p>EGR e DPF são essenciais para as normas Euro</p>
+                            </div>
+                            <div class="conclusion-point">
+                                <i class="fas fa-tools"></i>
+                                <p>Diagnóstico requer scanner e conhecimento CAN</p>
+                            </div>
+                            <div class="conclusion-point">
+                                <i class="fas fa-ban"></i>
+                                <p>Anular = Chumbo na inspeção + Crime ambiental</p>
+                            </div>
+                            <div class="conclusion-point">
+                                <i class="fas fa-road"></i>
+                                <p>Manutenção preventiva: viagens longas regulares!</p>
+                            </div>
+                        </div>
+                        <p class="thanks">Obrigado pela atenção!</p>
+                        <div class="student-list">
+                            <h4>Trabalho realizado por:</h4>
+                            <ul>
+                                <li>29458 José Santos</li>
+                                <li>32801 Pedro Silva</li>
+                                <li>32805 Rui Rodrigues</li>
+                                <li>32813 Jonathan Ramirez</li>
+                                <li>33695 Francisco Gonçalves</li>
+                                <li>33790 João Silva</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="conclusion-image-wrapper">
+                        <figure class="conclusion-image">
+                            <img src="./images/5_regeneration.png" data-accent-hue="160" data-accent-saturation="65"
+                                data-accent-lightness="45" alt="Tipos de Regeneração DPF">
+                        </figure>
+                    </div>
+                </div>
+                <aside class="notes">
+                    <h3>🎤 José Santos</h3>
+                    <p>Para resumir: o EGR e o DPF são sistemas antipoluição obrigatórios e que vão continuar a ser
+                        fiscalizados cada vez mais.</p>
+                    <h3>🎤 Pedro Silva</h3>
+                    <p>Como mecânicos, temos de saber diagnosticá-los corretamente. O scanner é obrigatório, e entender
+                        a comunicação CAN ajuda a perceber porque é que o carro "pensa" que tem um problema.</p>
+                    <h3>🎤 Jonathan Ramirez</h3>
+                    <p>E lembrem-se: anular estes sistemas não é solução. Além de ilegal, destrói o ambiente e chumba na
+                        inspeção.</p>
+                    <h3>🎤 Todos</h3>
+                    <p>Obrigado pela atenção! Estamos disponíveis para perguntas.</p>
+                </aside>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@latest/dist/reveal.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@latest/plugin/notes/notes.min.js"></script>
+
+    <script>
+        Reveal.initialize({
+            plugins: [RevealNotes],
+            hash: true,
+            history: true,
+            transition: 'slide',
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade',
+            showNotes: false,
+            center: true,
+            width: 1920,
+            height: 1080
+        });
+
+        // Elements
+        const svg = document.getElementById('dynamic-bg');
+        const geoElements = svg.querySelectorAll('.geo-element');
+        const gridPattern = svg.querySelectorAll('.grid-pattern');
+        const globalHeader = document.getElementById('global-header');
+        const globalFooter = document.getElementById('global-footer');
+
+        const gridPath = document.getElementById('grid-path');
+        const gradientStop1 = document.getElementById('gradient-stop-1');
+        const gradientStop2 = document.getElementById('gradient-stop-2');
+
+        const defaultAccent = { hue: 160, saturation: 70, lightness: 40 };
+        let currentAccent = { ...defaultAccent };
+        let targetAccent = { ...defaultAccent };
+
+        function lerp(start, end, factor) {
+            return start + (end - start) * factor;
+        }
+
+        function updateSVGColors(accent) {
+            const { hue, saturation, lightness } = accent;
+            const primary = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+            const secondary = `hsl(${hue}, ${saturation}%, ${Math.min(lightness + 12, 60)}%)`;
+
+            if (gridPath) gridPath.setAttribute('stroke', primary);
+            if (gradientStop1) gradientStop1.style.stopColor = secondary;
+            if (gradientStop2) gradientStop2.style.stopColor = primary;
+
+            document.documentElement.style.setProperty('--accent-hue', hue);
+            document.documentElement.style.setProperty('--accent-saturation', `${saturation}%`);
+            document.documentElement.style.setProperty('--accent-lightness', `${lightness}%`);
+        }
+
+        function animateColorTransition() {
+            const factor = 0.06;
+            currentAccent.hue = lerp(currentAccent.hue, targetAccent.hue, factor);
+            currentAccent.saturation = lerp(currentAccent.saturation, targetAccent.saturation, factor);
+            currentAccent.lightness = lerp(currentAccent.lightness, targetAccent.lightness, factor);
+            updateSVGColors(currentAccent);
+
+            const hueDiff = Math.abs(currentAccent.hue - targetAccent.hue);
+            const satDiff = Math.abs(currentAccent.saturation - targetAccent.saturation);
+            const lightDiff = Math.abs(currentAccent.lightness - targetAccent.lightness);
+
+            if (hueDiff > 0.5 || satDiff > 0.5 || lightDiff > 0.5) {
+                requestAnimationFrame(animateColorTransition);
+            }
+        }
+
+        function getSlideAccentColor(slide) {
+            const img = slide.querySelector('img[data-accent-hue]');
+            if (img) {
+                return {
+                    hue: parseFloat(img.dataset.accentHue) || defaultAccent.hue,
+                    saturation: parseFloat(img.dataset.accentSaturation) || defaultAccent.saturation,
+                    lightness: parseFloat(img.dataset.accentLightness) || defaultAccent.lightness
+                };
+            }
+            return defaultAccent;
+        }
+
+        function isFullscreenSlide() {
+            return Reveal.getIndices().v > 0;
+        }
+
+        function updateHeaderFooterVisibility() {
+            const currentSlide = Reveal.getCurrentSlide();
+            const parentSection = currentSlide.parentElement;
+            const hideHeaderFooter = currentSlide.hasAttribute('data-hide-header-footer') ||
+                parentSection.hasAttribute('data-hide-header-footer') ||
+                isFullscreenSlide();
+
+            if (hideHeaderFooter) {
+                globalHeader.classList.add('hidden');
+                globalFooter.classList.add('hidden');
+            } else {
+                globalHeader.classList.remove('hidden');
+                globalFooter.classList.remove('hidden');
+            }
+        }
+
+        Reveal.on('ready', () => {
+            updateHeaderFooterVisibility();
+            const initialAccent = getSlideAccentColor(Reveal.getCurrentSlide());
+            currentAccent = { ...initialAccent };
+            targetAccent = { ...initialAccent };
+            updateSVGColors(currentAccent);
+        });
+
+        Reveal.on('slidechanged', event => {
+            const slideIndex = event.indexh;
+            const currentSlide = event.currentSlide;
+
+            updateHeaderFooterVisibility();
+            targetAccent = getSlideAccentColor(currentSlide);
+            animateColorTransition();
+
+            const baseOpacity = 0.12 + (slideIndex % 5) * 0.02;
+            const rotation = slideIndex * 3;
+            const translateX = Math.sin(slideIndex * 0.5) * 20;
+            const translateY = Math.cos(slideIndex * 0.5) * 15;
+
+            geoElements.forEach((el, i) => {
+                const individualOffset = i * 0.02;
+                el.style.opacity = Math.min(0.3, baseOpacity + individualOffset);
+                el.style.transform = `translate(${translateX + i * 5}px, ${translateY + i * 3}px) rotate(${rotation + i * 5}deg)`;
+            });
+
+            gridPattern.forEach(el => {
+                el.style.opacity = 0.25 + (slideIndex % 3) * 0.08;
+            });
+        });
+    </script>
+
+</body>
+
+</html>

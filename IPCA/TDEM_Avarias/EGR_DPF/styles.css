@@ -1,0 +1,794 @@
+:root {
+    --bg-primary: #0f1419;
+    --bg-secondary: #1a2332;
+    --text-primary: #e8edf4;
+    --text-secondary: #9aa5b8;
+    --accent-green: #22c55e;
+    --accent-teal: #14b8a6;
+    --accent-orange: #f97316;
+    --border-color: #2d3748;
+    --accent-hue: 160;
+    --accent-saturation: 70%;
+    --accent-lightness: 45%;
+}
+
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: var(--bg-primary);
+}
+
+.reveal {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(16px, 1.8vw, 28px);
+    color: var(--text-primary);
+}
+
+.reveal .slides {
+    text-align: left;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4 {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-primary);
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: -0.02em;
+}
+
+.reveal h1 {
+    font-size: clamp(1.8em, 4vw, 2.4em);
+    margin-bottom: 0.2em;
+}
+
+.reveal h2 {
+    font-size: clamp(1.4em, 3vw, 1.8em);
+    margin-bottom: 0.15em;
+}
+
+.reveal h3 {
+    font-size: clamp(1em, 2vw, 1.3em);
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+/* ===========================================
+   GLOBAL Header (Emissions Theme - Dark)
+   =========================================== */
+.global-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: clamp(45px, 5vh, 60px);
+    padding: 0 1.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(15, 20, 25, 0.95) 0%, rgba(26, 35, 50, 0.9) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(34, 197, 94, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.header-title {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+.header-separator {
+    color: var(--accent-teal);
+    opacity: 0.5;
+    font-weight: 300;
+}
+
+.header-discipline {
+    font-size: 0.95em;
+    font-weight: 500;
+    color: var(--accent-green);
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.4em 1em;
+    background: rgba(34, 197, 94, 0.15);
+    border-radius: 20px;
+}
+
+.header-discipline i {
+    font-size: 0.9em;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.header-professor {
+    font-size: 0.95em;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.header-professor i {
+    color: var(--accent-teal);
+}
+
+/* ===========================================
+   GLOBAL Footer (Emissions Theme - Dark)
+   =========================================== */
+.global-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: clamp(35px, 4vh, 45px);
+    padding: 0 1.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(15, 20, 25, 0.95) 0%, rgba(26, 35, 50, 0.9) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(34, 197, 94, 0.2);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.footer-left {
+    flex: 1;
+}
+
+.footer-center {
+    flex: 2;
+    justify-content: center;
+}
+
+.footer-right {
+    flex: 1;
+    justify-content: flex-end;
+}
+
+.footer-year {
+    font-size: 0.9em;
+    font-weight: 600;
+    color: var(--accent-green);
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+}
+
+.footer-year i {
+    font-size: 0.85em;
+    opacity: 0.7;
+}
+
+.footer-course {
+    font-size: 0.95em;
+    font-weight: 500;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.3em 1em;
+    background: rgba(34, 197, 94, 0.1);
+    border-radius: 15px;
+}
+
+.footer-course i {
+    color: var(--accent-teal);
+}
+
+.footer-hint {
+    font-size: 0.8em;
+    color: var(--text-secondary);
+    opacity: 0.6;
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+}
+
+.footer-hint i {
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(3px);
+    }
+
+    60% {
+        transform: translateY(2px);
+    }
+}
+
+.global-header.hidden,
+.global-footer.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.global-header.hidden {
+    transform: translateY(-100%);
+}
+
+.global-footer.hidden {
+    transform: translateY(100%);
+}
+
+/* ===========================================
+   Cover Slide (Emissions Theme)
+   =========================================== */
+.slide-cover {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4em;
+    align-items: center;
+    height: 100%;
+    padding: 3em 5em;
+}
+
+.slide-cover .cover-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.slide-cover .cover-text::before {
+    content: '';
+    position: absolute;
+    inset: -30px;
+    background: linear-gradient(135deg,
+            rgba(34, 197, 94, 0.1) 0%,
+            rgba(20, 184, 166, 0.15) 100%);
+    border-radius: 30px;
+    transform: skew(-2deg, -1deg);
+    z-index: -1;
+}
+
+.slide-cover h1 {
+    font-size: 3em;
+    background: linear-gradient(135deg, var(--accent-green), var(--accent-teal));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.2em;
+    line-height: 1.1;
+}
+
+.slide-cover h3 {
+    font-size: 1.4em;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin-bottom: 2em;
+}
+
+.slide-cover .meta-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8em;
+    font-size: 1em;
+}
+
+.slide-cover .meta-info span {
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+    padding: 0;
+    background: transparent;
+    color: var(--text-secondary);
+    transition: transform 0.3s ease;
+    font-size: 0.9em;
+}
+
+.slide-cover .meta-info span:hover {
+    transform: translateX(5px);
+    color: var(--accent-green);
+}
+
+.slide-cover .meta-info span i {
+    color: var(--accent-teal);
+    font-size: 1.1em;
+}
+
+/* Student List Styling */
+.student-list {
+    margin-top: 2em;
+    font-size: 0.8em;
+    color: var(--text-secondary);
+}
+
+.student-list h4 {
+    font-size: 1.1em;
+    margin-bottom: 0.8em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent-teal);
+}
+
+.student-list ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5em 2em;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.student-list ul li {
+    padding: 0.2em 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Cover image with skewed wrapper */
+.slide-cover .cover-image-wrapper {
+    position: relative;
+    transform: perspective(1200px) rotateY(-4deg) rotateX(2deg);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide-cover .cover-image-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: -15px;
+    background: linear-gradient(135deg,
+            hsl(160, 85%, 40%) 0%,
+            hsl(170, 80%, 35%) 100%);
+    opacity: 0.25;
+    border-radius: 28px;
+    transform: skew(3deg, 2deg);
+    z-index: -1;
+}
+
+.slide-cover .cover-image-wrapper:hover {
+    transform: perspective(1200px) rotateY(0deg) rotateX(0deg) scale(1.02);
+}
+
+.slide-cover .cover-image {
+    margin: 0;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.4),
+        0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.slide-cover .cover-image img {
+    width: 100%;
+    display: block;
+    max-height: 600px;
+    object-fit: cover;
+}
+
+/* ===========================================
+   Content Slides
+   =========================================== */
+.slide-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8em;
+    height: 100%;
+    padding: clamp(60px, 7vh, 80px) clamp(1.5em, 3vw, 3em) clamp(50px, 5vh, 60px);
+    transform: skewY(-0.5deg);
+}
+
+.slide-content>* {
+    transform: skewY(0.5deg);
+}
+
+.main-row {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: clamp(1em, 2vw, 2em);
+    align-items: center;
+    flex: 1;
+    min-height: 0;
+}
+
+.slide-content.image-left .main-row {
+    grid-template-columns: 1.2fr 1fr;
+}
+
+.slide-content.image-left .main-row .visual-area {
+    order: -1;
+}
+
+/* Slide Title */
+.slide-title {
+    font-size: clamp(1.8em, 4vw, 2.5em);
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.05;
+    background: linear-gradient(135deg, var(--accent-green), var(--accent-teal));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    padding-left: 0.1em;
+}
+
+/* Content Area */
+.content-area {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    padding: clamp(0.5em, 1.5vw, 1.2em);
+}
+
+.content-area .slide-subtitle {
+    font-size: 1.2em;
+    color: var(--accent-green);
+    font-weight: 500;
+    margin-bottom: 0.5em;
+    margin-top: 0;
+}
+
+.content-area ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.content-area ul li {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    padding: 0.4em 0.8em;
+    margin-bottom: 0.25em;
+    background: transparent;
+    border-radius: 8px;
+    font-size: clamp(0.85em, 1.5vw, 1.1em);
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.content-area ul li::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(34, 197, 94, 0.1);
+    transform: skewX(-12deg);
+    border-radius: 12px;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.content-area ul li:hover {
+    transform: translateX(10px);
+}
+
+.content-area ul li:hover::before {
+    opacity: 1;
+    transform: skewX(-12deg) scale(1.02);
+}
+
+.content-area ul li i {
+    color: var(--accent-teal);
+    font-size: 1.3em;
+    width: 32px;
+    text-align: center;
+    filter: drop-shadow(0 2px 4px rgba(34, 197, 94, 0.3));
+}
+
+/* Visual Area */
+.visual-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.image-wrapper {
+    position: relative;
+    transform: perspective(1200px) rotateY(-3deg) rotateX(1deg);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.image-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    background: linear-gradient(135deg,
+            hsl(var(--accent-hue), var(--accent-saturation), var(--accent-lightness)) 0%,
+            hsl(calc(var(--accent-hue) + 30), var(--accent-saturation), calc(var(--accent-lightness) + 10%)) 100%);
+    opacity: 0.2;
+    border-radius: 28px;
+    transform: skew(2deg, 1deg);
+    z-index: -1;
+}
+
+.image-wrapper:hover {
+    transform: perspective(1200px) rotateY(0deg) rotateX(0deg) scale(1.02);
+}
+
+.slide-content.image-left .image-wrapper {
+    transform: perspective(1200px) rotateY(3deg) rotateX(1deg);
+}
+
+.slide-content.image-left .image-wrapper::before {
+    transform: skew(-2deg, -1deg);
+}
+
+.slide-content.image-left .image-wrapper:hover {
+    transform: perspective(1200px) rotateY(0deg) rotateX(0deg) scale(1.02);
+}
+
+.visual-area img {
+    width: 100%;
+    max-height: 65vh;
+    object-fit: cover;
+    border-radius: clamp(12px, 2vw, 20px);
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.3),
+        0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* ===========================================
+   Conclusion Slide
+   =========================================== */
+.slide-conclusion {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4em;
+    align-items: center;
+    height: 100%;
+    padding: 3em 5em;
+}
+
+.slide-conclusion .conclusion-content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.slide-conclusion .conclusion-content::before {
+    content: '';
+    position: absolute;
+    inset: -30px;
+    background: linear-gradient(135deg,
+            rgba(34, 197, 94, 0.1) 0%,
+            rgba(20, 184, 166, 0.15) 100%);
+    border-radius: 30px;
+    transform: skew(-2deg, -1deg);
+    z-index: -1;
+}
+
+.slide-conclusion h1 {
+    font-size: 2.6em;
+    margin-bottom: 1em;
+    background: linear-gradient(135deg, var(--accent-green), var(--accent-teal));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.slide-conclusion .conclusion-points {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8em;
+}
+
+.slide-conclusion .conclusion-point {
+    display: flex;
+    align-items: center;
+    gap: 1.2em;
+    padding: 0.8em 1.2em;
+    margin-bottom: 0.5em;
+    background: transparent;
+    border-radius: 12px;
+    font-size: 1.1em;
+    font-weight: 500;
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: default;
+    color: var(--text-primary);
+}
+
+.slide-conclusion .conclusion-point::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(34, 197, 94, 0.15);
+    transform: skewX(-12deg);
+    border-radius: 12px;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.slide-conclusion .conclusion-point:hover {
+    transform: translateX(10px);
+}
+
+.slide-conclusion .conclusion-point:hover::before {
+    opacity: 1;
+    transform: skewX(-12deg) scale(1.02);
+}
+
+.slide-conclusion .conclusion-point i {
+    font-size: 1.6em;
+    color: var(--accent-green);
+    width: 50px;
+    text-align: center;
+}
+
+.slide-conclusion .conclusion-point p {
+    font-size: 1.1em;
+    font-weight: 500;
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.slide-conclusion .thanks {
+    font-size: 1.3em;
+    color: var(--accent-teal);
+    font-weight: 600;
+    margin-top: 1.5em;
+}
+
+/* Conclusion image */
+.slide-conclusion .conclusion-image-wrapper {
+    position: relative;
+    transform: perspective(1200px) rotateY(-4deg) rotateX(2deg);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide-conclusion .conclusion-image-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: -15px;
+    background: linear-gradient(135deg,
+            hsl(160, 80%, 40%) 0%,
+            hsl(170, 75%, 35%) 100%);
+    opacity: 0.25;
+    border-radius: 28px;
+    transform: skew(3deg, 2deg);
+    z-index: -1;
+}
+
+.slide-conclusion .conclusion-image-wrapper:hover {
+    transform: perspective(1200px) rotateY(0deg) rotateX(0deg) scale(1.02);
+}
+
+.slide-conclusion .conclusion-image {
+    margin: 0;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.4),
+        0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.slide-conclusion .conclusion-image img {
+    width: 100%;
+    display: block;
+    max-height: 550px;
+    object-fit: cover;
+}
+
+/* ===========================================
+   Speaker Notes Styling
+   =========================================== */
+.reveal aside.notes {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.reveal aside.notes h3 {
+    color: var(--accent-green);
+    border-bottom: 2px solid var(--accent-teal);
+    padding-bottom: 0.3em;
+    margin-bottom: 0.5em;
+}
+
+.reveal aside.notes p {
+    margin-bottom: 1em;
+}
+
+.reveal aside.notes hr {
+    border: none;
+    border-top: 1px dashed var(--border-color);
+    margin: 1.5em 0;
+}
+
+/* ===========================================
+   Dynamic SVG Background (Emissions Theme)
+   =========================================== */
+#dynamic-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    background: var(--bg-primary);
+}
+
+.geo-element {
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.grid-pattern {
+    transition: opacity 0.5s ease;
+}
+
+/* Smoke particle animations */
+@keyframes float-up {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translateY(-100px) scale(1.5);
+        opacity: 0;
+    }
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        opacity: 0.15;
+        filter: blur(20px);
+    }
+
+    50% {
+        opacity: 0.25;
+        filter: blur(25px);
+    }
+}
+
+.smoke-particle {
+    animation: float-up 8s ease-out infinite;
+}
+
+.exhaust-glow {
+    animation: pulse-glow 4s ease-in-out infinite;
+}

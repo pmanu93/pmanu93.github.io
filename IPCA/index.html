@@ -6,57 +6,220 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Repositório Mecânica Automóvel | IPCA</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 
 <body>
-    <div class="container">
-        <header>
-            <div class="logo-container">
-                <img src="img/logo_ipca.png" alt="IPCA Logo" class="ipca-logo">
+    <div class="layout">
+        <!-- Left Column - Hero/Branding -->
+        <aside class="hero-column">
+            <canvas id="hero-canvas"></canvas>
+            <div class="hero-content">
+                <div class="logo-container">
+                    <img src="img/logo_ipca.png" alt="IPCA Logo" class="ipca-logo">
+                </div>
+                <h1>Mecânica Automóvel</h1>
+                <p class="hero-desc">
+                    Repositório de trabalhos académicos e apresentações desenvolvidos
+                    no âmbito do curso de Mecânica Automóvel do IPCA.
+                </p>
+                <div class="hero-footer">
+                    <button class="group-btn" id="open-group">
+                        <span>👥</span> Ver Grupo
+                    </button>
+                </div>
             </div>
-            <h1>Mecânica Automóvel</h1>
-            <div class="subtitle">Repositório de Trabalhos Académicos e Apresentações</div>
-        </header>
+        </aside>
 
-        <main>
-            <section class="course-section">
-                <h2 class="course-title">Motores de Combustão Interna</h2>
+        <!-- Right Column - Content -->
+        <main class="content-column">
+            <div class="content-scroll">
+                <h2 class="section-title">Disciplinas & Trabalhos</h2>
 
-                <div class="project-list">
-                    <!-- Project 1 -->
-                    <a href="./MotoresDeCombustao/arrefecimento/index.html" class="project-card">
-                        <div class="project-title">Sistema de Arrefecimento</div>
-                        <div class="project-desc">Métodos de teste e diagnóstico</div>
-                    </a>
+                <!-- Motores de Combustão Interna -->
+                <section class="course-card">
+                    <div class="course-header">
+                        <h3 class="course-title">Motores de Combustão Interna</h3>
+                        <span class="professor-tag">Prof. Pedro Correia</span>
+                    </div>
+                    <div class="projects">
+                        <a href="./MotoresDeCombustao/arrefecimento/index.html" class="project-item">
+                            <span class="project-icon">🌡️</span>
+                            <div class="project-info">
+                                <span class="project-name">Sistema de Arrefecimento</span>
+                                <span class="project-desc">Métodos de teste e diagnóstico</span>
+                            </div>
+                            <span class="arrow">→</span>
+                        </a>
+                        <a href="./MotoresDeCombustao/hibridos/index.html" class="project-item">
+                            <span class="project-icon">⚡</span>
+                            <div class="project-info">
+                                <span class="project-name">MCI em Veículos Híbridos</span>
+                                <span class="project-desc">Motor de combustão em arquiteturas híbridas</span>
+                            </div>
+                            <span class="arrow">→</span>
+                        </a>
+                    </div>
+                </section>
 
-                    <!-- Project 2 -->
-                    <a href="./MotoresDeCombustao/hibridos/index.html" class="project-card">
-                        <div class="project-title">MCI em Veículos Híbridos</div>
-                        <div class="project-desc">Análise do papel e adaptações do motor de combustão em arquiteturas
-                            híbridas.</div>
-                    </a>
-                </div>
+                <!-- TDEM - Avarias -->
+                <section class="course-card">
+                    <div class="course-header">
+                        <h3 class="course-title">Técnicas de Diagnóstico e Ensaio e Multiplexagem</h3>
+                        <span class="professor-tag">Prof. Luís Lopes</span>
+                    </div>
+                    <div class="projects">
+                        <a href="./TDEM_Avarias/EGR_DPF/index.html" class="project-item">
+                            <span class="project-icon">💨</span>
+                            <div class="project-info">
+                                <span class="project-name">Avarias - EGR e DPF</span>
+                                <span class="project-desc">Recirculação de gases e filtro de partículas</span>
+                            </div>
+                            <span class="arrow">→</span>
+                        </a>
+                    </div>
+                </section>
 
-                <div class="students-box">
-                    <span class="students-label">Trabalhos realizados por:</span>
-                    <ul class="student-list">
-                        <li>29458 José Santos</li>
-                        <li>32801 Pedro Silva</li>
-                        <li>32805 Rui Rodrigues</li>
-                        <li>32813 Jonathan Ramirez</li>
-                        <li>33695 Francisco Gonçalves</li>
-                        <li>33790 João Silva</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Future courses can be added here -->
+                <footer class="content-footer" style="position: absolute; bottom:10px; width:90%">
+                    <p>&copy; 2025 // 32801 - Pedro Silva</p>
+                </footer>
+            </div>
         </main>
-
-        <footer>
-            <p>&copy; IPCA - Instituto Politécnico do Cávado e do Ave</p>
-        </footer>
     </div>
+
+    <!-- Modal for Group -->
+    <div class="modal-overlay" id="group-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Trabalhos realizados por:</h3>
+                <button class="modal-close" id="close-group">✕</button>
+            </div>
+            <ul class="team-list">
+                <li><span class="student-id">29458</span> José Santos</li>
+                <li><span class="student-id">32801</span> Pedro Silva</li>
+                <li><span class="student-id">32805</span> Rui Rodrigues</li>
+                <li><span class="student-id">32813</span> Jonathan Ramirez</li>
+                <li><span class="student-id">33695</span> Francisco Gonçalves</li>
+                <li><span class="student-id">33790</span> João Silva</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Three.js Particle Animation
+        (function () {
+            const canvas = document.getElementById('hero-canvas');
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+            camera.position.z = 30;
+
+            // Create particles
+            const particleCount = 800;
+            const positions = new Float32Array(particleCount * 3);
+            const velocities = [];
+
+            for (let i = 0; i < particleCount; i++) {
+                positions[i * 3] = (Math.random() - 0.5) * 60;
+                positions[i * 3 + 1] = (Math.random() - 0.5) * 60;
+                positions[i * 3 + 2] = (Math.random() - 0.5) * 40;
+                velocities.push({
+                    x: (Math.random() - 0.5) * 0.02,
+                    y: (Math.random() - 0.5) * 0.02,
+                    z: (Math.random() - 0.5) * 0.02
+                });
+            }
+
+            const geometry = new THREE.BufferGeometry();
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+            const material = new THREE.PointsMaterial({
+                color: 0x667eea,
+                size: 0.15,
+                transparent: true,
+                opacity: 0.8,
+                sizeAttenuation: true
+            });
+
+            const particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+
+            // Add connecting lines
+            const lineMaterial = new THREE.LineBasicMaterial({
+                color: 0x667eea,
+                transparent: true,
+                opacity: 0.15
+            });
+
+            // Mouse interaction
+            let mouseX = 0, mouseY = 0;
+            document.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+                mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+            });
+
+            function resize() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                renderer.setSize(rect.width, rect.height);
+                camera.aspect = rect.width / rect.height;
+                camera.updateProjectionMatrix();
+            }
+
+            function animate() {
+                requestAnimationFrame(animate);
+
+                const pos = geometry.attributes.position.array;
+                for (let i = 0; i < particleCount; i++) {
+                    pos[i * 3] += velocities[i].x;
+                    pos[i * 3 + 1] += velocities[i].y;
+                    pos[i * 3 + 2] += velocities[i].z;
+
+                    // Boundary check
+                    if (Math.abs(pos[i * 3]) > 30) velocities[i].x *= -1;
+                    if (Math.abs(pos[i * 3 + 1]) > 30) velocities[i].y *= -1;
+                    if (Math.abs(pos[i * 3 + 2]) > 20) velocities[i].z *= -1;
+                }
+                geometry.attributes.position.needsUpdate = true;
+
+                // Smooth rotation based on mouse
+                particles.rotation.x += (mouseY * 0.1 - particles.rotation.x) * 0.02;
+                particles.rotation.y += (mouseX * 0.1 - particles.rotation.y) * 0.02;
+
+                renderer.render(scene, camera);
+            }
+
+            resize();
+            animate();
+            window.addEventListener('resize', resize);
+        })();
+
+        // Modal functionality
+        const modal = document.getElementById('group-modal');
+        const openBtn = document.getElementById('open-group');
+        const closeBtn = document.getElementById('close-group');
+
+        openBtn.addEventListener('click', () => {
+            modal.classList.add('active');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                modal.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 
 </html>
