@@ -3,13 +3,13 @@
     --bg-secondary: #f5f7fb;
     --text-primary: #0b1220;
     --text-secondary: #3a4a5e;
-    --accent-blue: #0077b6;
-    --accent-cyan: #00b4d8;
-    --accent-light: #90e0ef;
+    --accent-green: #059669;
+    --accent-emerald: #10b981;
+    --accent-light: #6ee7b7;
     --border-color: #d0d7de;
-    --accent-hue: 195;
+    --accent-hue: 155;
     --accent-saturation: 80%;
-    --accent-lightness: 45%;
+    --accent-lightness: 40%;
 }
 
 * {
@@ -75,7 +75,7 @@ body {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(247, 250, 252, 0.9) 100%);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(0, 119, 182, 0.15);
+    border-bottom: 1px solid rgba(5, 150, 105, 0.15);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -94,7 +94,7 @@ body {
 }
 
 .header-separator {
-    color: var(--accent-cyan);
+    color: var(--accent-emerald);
     opacity: 0.5;
     font-weight: 300;
 }
@@ -102,12 +102,12 @@ body {
 .header-discipline {
     font-size: 0.95em;
     font-weight: 500;
-    color: var(--accent-blue);
+    color: var(--accent-green);
     display: flex;
     align-items: center;
     gap: 0.5em;
     padding: 0.4em 1em;
-    background: rgba(0, 180, 216, 0.1);
+    background: rgba(16, 185, 129, 0.1);
     border-radius: 20px;
 }
 
@@ -129,7 +129,7 @@ body {
 }
 
 .header-professor i {
-    color: var(--accent-blue);
+    color: var(--accent-green);
 }
 
 /* ===========================================
@@ -149,7 +149,7 @@ body {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(247, 250, 252, 0.9) 100%);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-top: 1px solid rgba(0, 119, 182, 0.15);
+    border-top: 1px solid rgba(5, 150, 105, 0.15);
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.03);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -179,7 +179,7 @@ body {
 .footer-year {
     font-size: 0.9em;
     font-weight: 600;
-    color: var(--accent-blue);
+    color: var(--accent-green);
     display: flex;
     align-items: center;
     gap: 0.4em;
@@ -198,12 +198,12 @@ body {
     align-items: center;
     gap: 0.5em;
     padding: 0.3em 1em;
-    background: rgba(0, 119, 182, 0.08);
+    background: rgba(5, 150, 105, 0.08);
     border-radius: 15px;
 }
 
 .footer-course i {
-    color: var(--accent-blue);
+    color: var(--accent-green);
 }
 
 .footer-hint {
@@ -271,14 +271,13 @@ body {
     position: relative;
 }
 
-/* Skewed background for cover text */
 .slide-cover .cover-text::before {
     content: '';
     position: absolute;
     inset: -30px;
     background: linear-gradient(135deg,
-            rgba(0, 180, 216, 0.08) 0%,
-            rgba(0, 119, 182, 0.12) 100%);
+            rgba(16, 185, 129, 0.08) 0%,
+            rgba(5, 150, 105, 0.12) 100%);
     border-radius: 30px;
     transform: skew(-2deg, -1deg);
     z-index: -1;
@@ -286,7 +285,7 @@ body {
 
 .slide-cover h1 {
     font-size: 3.5em;
-    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+    background: linear-gradient(135deg, var(--accent-green), var(--accent-emerald));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -308,32 +307,25 @@ body {
     font-size: 1em;
 }
 
-/* Meta Info - CLEAN Style (No Background) */
 .slide-cover .meta-info span {
     display: flex;
     align-items: center;
     gap: 0.8em;
     padding: 0;
-    /* Removed padding */
     background: transparent;
-    /* Transparent */
     border-radius: 0;
     border-left: none;
-    /* No border */
     box-shadow: none;
-    /* No shadow */
     color: var(--text-secondary);
     transition: transform 0.3s ease;
     font-size: 0.9em;
-    /* Slightly adjusted */
 }
 
 .slide-cover .meta-info span:hover {
     transform: translateX(5px);
-    color: var(--accent-blue);
+    color: var(--accent-green);
 }
 
-/* Student List Styling */
 .student-list {
     margin-top: 2.5em;
     font-size: 0.8em;
@@ -346,7 +338,7 @@ body {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--accent-cyan);
+    color: var(--accent-emerald);
 }
 
 .student-list ul {
@@ -368,11 +360,10 @@ body {
 }
 
 .slide-cover .meta-info span i {
-    color: var(--accent-blue);
+    color: var(--accent-green);
     font-size: 1.1em;
 }
 
-/* Cover image with skewed wrapper */
 .slide-cover .cover-image-wrapper {
     position: relative;
     transform: perspective(1200px) rotateY(-4deg) rotateX(2deg);
@@ -384,8 +375,8 @@ body {
     position: absolute;
     inset: -15px;
     background: linear-gradient(135deg,
-            hsl(200, 85%, 50%) 0%,
-            hsl(185, 100%, 45%) 100%);
+            hsl(155, 85%, 40%) 0%,
+            hsl(165, 100%, 35%) 100%);
     opacity: 0.2;
     border-radius: 28px;
     transform: skew(3deg, 2deg);
@@ -415,9 +406,6 @@ body {
 /* ===========================================
    Content Slides with SKEW Effect
    =========================================== */
-/* ===========================================
-   Content Slides with SKEW Effect
-   =========================================== */
 .slide-content {
     display: flex;
     flex-direction: column;
@@ -431,7 +419,6 @@ body {
     transform: skewY(0.5deg);
 }
 
-/* Main Row Grid Layout */
 .main-row {
     display: grid;
     grid-template-columns: 1fr 1.4fr;
@@ -441,7 +428,6 @@ body {
     min-height: 0;
 }
 
-/* Image Left Modifier applied to main-row logical context */
 .slide-content.image-left .main-row {
     grid-template-columns: 1.2fr 1fr;
 }
@@ -450,20 +436,18 @@ body {
     order: -1;
 }
 
-/* Slide Title (Outside Box) */
 .slide-title {
     font-size: clamp(1.8em, 4vw, 2.5em);
     font-weight: 700;
     margin: 0;
     line-height: 1.05;
-    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+    background: linear-gradient(135deg, var(--accent-green), var(--accent-emerald));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     padding-left: 0.1em;
 }
 
-/* Content Area with Skewed Background (ENHANCED) */
 .content-area {
     position: relative;
     display: flex;
@@ -472,19 +456,17 @@ body {
     padding: clamp(0.5em, 1.5vw, 1.2em);
 }
 
-/* Skewed parallelogram background REMOVED per user request */
 .content-area::before {
     display: none;
 }
 
 .content-area .slide-title {
     display: none;
-    /* Hide old title selector just in case */
 }
 
 .content-area .slide-subtitle {
     font-size: 1.3em;
-    color: var(--accent-blue);
+    color: var(--accent-green);
     font-weight: 500;
     margin-bottom: 0.5em;
     margin-top: 0;
@@ -496,7 +478,6 @@ body {
     margin: 0;
 }
 
-/* Clean List Items */
 .content-area ul li {
     display: flex;
     align-items: center;
@@ -513,7 +494,6 @@ body {
     cursor: default;
 }
 
-/* Skewed Hover Background */
 .content-area ul li::before {
     content: '';
     position: absolute;
@@ -535,18 +515,16 @@ body {
     opacity: 1;
     transform: skewX(-12deg) scale(1.02);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-
 }
 
 .content-area ul li i {
-    color: var(--accent-blue);
+    color: var(--accent-green);
     font-size: 1.3em;
     width: 32px;
     text-align: center;
-    filter: drop-shadow(0 2px 4px rgba(0, 119, 182, 0.2));
+    filter: drop-shadow(0 2px 4px rgba(5, 150, 105, 0.2));
 }
 
-/* Visual Area with Skew Effect */
 .visual-area {
     display: flex;
     align-items: center;
@@ -617,14 +595,13 @@ body {
     position: relative;
 }
 
-/* Skewed background for conclusion */
 .slide-conclusion .conclusion-content::before {
     content: '';
     position: absolute;
     inset: -30px;
     background: linear-gradient(135deg,
-            rgba(0, 180, 216, 0.08) 0%,
-            rgba(0, 119, 182, 0.12) 100%);
+            rgba(16, 185, 129, 0.08) 0%,
+            rgba(5, 150, 105, 0.12) 100%);
     border-radius: 30px;
     transform: skew(-2deg, -1deg);
     z-index: -1;
@@ -633,7 +610,7 @@ body {
 .slide-conclusion h1 {
     font-size: 2.8em;
     margin-bottom: 1.2em;
-    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+    background: linear-gradient(135deg, var(--accent-green), var(--accent-emerald));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -688,7 +665,7 @@ body {
 
 .slide-conclusion .conclusion-point i {
     font-size: 1.8em;
-    color: var(--accent-blue);
+    color: var(--accent-green);
     width: 50px;
     text-align: center;
 }
@@ -702,7 +679,7 @@ body {
 
 .slide-conclusion .thanks {
     font-size: 1.4em;
-    color: var(--accent-blue);
+    color: var(--accent-green);
     font-weight: 600;
     margin-top: 2em;
     display: flex;
@@ -727,7 +704,6 @@ body {
     }
 }
 
-/* Conclusion image with skewed wrapper */
 .slide-conclusion .conclusion-image-wrapper {
     position: relative;
     transform: perspective(1200px) rotateY(-4deg) rotateX(2deg);
@@ -739,8 +715,8 @@ body {
     position: absolute;
     inset: -15px;
     background: linear-gradient(135deg,
-            hsl(195, 90%, 50%) 0%,
-            hsl(210, 85%, 45%) 100%);
+            hsl(155, 90%, 40%) 0%,
+            hsl(170, 85%, 35%) 100%);
     opacity: 0.2;
     border-radius: 28px;
     transform: skew(3deg, 2deg);
@@ -777,8 +753,8 @@ body {
 }
 
 .reveal aside.notes h3 {
-    color: var(--accent-blue);
-    border-bottom: 2px solid var(--accent-cyan);
+    color: var(--accent-green);
+    border-bottom: 2px solid var(--accent-emerald);
     padding-bottom: 0.3em;
     margin-bottom: 0.5em;
 }
@@ -794,15 +770,16 @@ body {
 }
 
 /* ===========================================
-   Dynamic SVG Background (More Vivid)
+   Dynamic Background SVG Styling
    =========================================== */
 #dynamic-bg {
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     z-index: 0;
     pointer-events: none;
-    width: 100%;
-    height: 100%;
     opacity: 0.8;
 }
 
@@ -812,34 +789,10 @@ body {
     z-index: 1;
 }
 
-#dynamic-bg .grid-pattern {
-    opacity: 0.45;
-    transition: all 0.8s ease;
+.geo-element {
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-#dynamic-bg .geo-element {
-    opacity: 0.25;
-    transition: all 0.8s ease;
-}
-
-/* ===========================================
-   Reveal.js Overrides
-   =========================================== */
-.reveal .slides>section>section {
-    padding: 0;
-}
-
-.reveal .slide-number {
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    background: rgba(255, 255, 255, 0.9);
-    color: var(--accent-blue);
-    padding: 8px 12px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.reveal .controls .navigate-down {
-    color: var(--accent-cyan);
+.grid-pattern {
+    transition: opacity 0.5s ease;
 }

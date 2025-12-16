@@ -4,81 +4,910 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MCI em Veículos Híbridos</title>
+    <title>MCI em Veículos Híbridos - Desafios e Adaptações</title>
+    <meta name="description"
+        content="Apresentação técnica sobre Motores de Combustão Interna em Veículos Híbridos - Desafios e Adaptações">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Reveal.js CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@latest/dist/reveal.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@latest/dist/theme/white.min.css">
-    <style>
-        .reveal h1 {
-            font-size: 2.5em;
-            color: #333;
-        }
 
-        .reveal h3 {
-            color: #666;
-        }
-
-        .reveal ul {
-            font-size: 0.8em;
-        }
-    </style>
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+    <!-- Dynamic SVG Background (Hybrid/Circuit Theme - Energy Flow Pattern) -->
+    <svg id="dynamic-bg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+        <defs>
+            <!-- Circuit-like hexagonal pattern -->
+            <pattern id="circuit-grid" width="80" height="69.28" patternUnits="userSpaceOnUse">
+                <path id="hex-path" d="M40 0 L80 23.09 L80 46.19 L40 69.28 L0 46.19 L0 23.09 Z" fill="none"
+                    stroke="hsl(155, 60%, 50%)" stroke-width="0.4" class="grid-pattern" opacity="0.15" />
+                <circle cx="40" cy="34.64" r="2" fill="hsl(155, 80%, 45%)" opacity="0.2" />
+            </pattern>
+            <!-- Energy gradient -->
+            <linearGradient id="energyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop id="gradient-stop-1" offset="0%" style="stop-color:hsl(155, 90%, 50%);stop-opacity:0.25" />
+                <stop id="gradient-stop-2" offset="100%" style="stop-color:hsl(200, 80%, 45%);stop-opacity:0.12" />
+            </linearGradient>
+            <!-- Battery gradient -->
+            <linearGradient id="batteryGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%" style="stop-color:hsl(155, 85%, 35%);stop-opacity:0.3" />
+                <stop offset="100%" style="stop-color:hsl(155, 90%, 55%);stop-opacity:0.1" />
+            </linearGradient>
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                </feMerge>
+            </filter>
+            <filter id="soft-glow" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="2" result="blur" />
+                <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                </feMerge>
+            </filter>
+        </defs>
+
+        <!-- Hexagonal circuit background -->
+        <rect width="100%" height="100%" fill="url(#circuit-grid)" class="grid-pattern" />
+
+        <!-- Energy flow paths (representing hybrid power flow) -->
+        <g class="geo-element geo-1" opacity="0.2">
+            <path id="energy-flow-1" d="M -50 540 Q 200 480 400 540 T 800 500 T 1200 560 T 1600 520 T 2000 540"
+                fill="none" stroke="url(#energyGradient)" stroke-width="3" stroke-linecap="round" />
+            <path d="M -50 560 Q 200 620 400 560 T 800 600 T 1200 540 T 1600 580 T 2000 560" fill="none"
+                stroke="url(#energyGradient)" stroke-width="2" stroke-linecap="round" opacity="0.6" />
+        </g>
+
+        <!-- Battery symbol (top-left) -->
+        <g class="geo-element geo-2" transform="translate(80, 120)" filter="url(#soft-glow)">
+            <rect x="0" y="0" width="60" height="100" rx="8" fill="url(#batteryGradient)" stroke="hsl(155, 70%, 45%)"
+                stroke-width="1.5" />
+            <rect x="18" y="-8" width="24" height="12" rx="3" fill="hsl(155, 70%, 45%)" opacity="0.4" />
+            <rect x="8" y="15" width="44" height="20" rx="4" fill="hsl(155, 85%, 50%)" opacity="0.3" />
+            <rect x="8" y="40" width="44" height="20" rx="4" fill="hsl(155, 85%, 50%)" opacity="0.2" />
+            <rect x="8" y="65" width="44" height="20" rx="4" fill="hsl(155, 85%, 50%)" opacity="0.1" />
+        </g>
+
+        <!-- Electric motor symbol (bottom-right) -->
+        <g class="geo-element geo-3" transform="translate(1720, 850)" filter="url(#glow)">
+            <circle cx="60" cy="60" r="55" fill="none" stroke="hsl(155, 75%, 50%)" stroke-width="2" opacity="0.25" />
+            <circle cx="60" cy="60" r="35" fill="url(#energyGradient)" opacity="0.15" />
+            <path d="M60 25 L60 95 M25 60 L95 60" stroke="hsl(155, 80%, 55%)" stroke-width="2" opacity="0.3" />
+            <circle cx="60" cy="60" r="12" fill="hsl(155, 85%, 50%)" opacity="0.2" />
+        </g>
+
+        <!-- Leaf/eco symbol (top-right) -->
+        <g class="geo-element geo-4" transform="translate(1750, 80)" filter="url(#soft-glow)">
+            <path d="M50 80 Q30 50 50 20 Q90 40 70 80 Q60 90 50 80" fill="url(#energyGradient)"
+                stroke="hsl(155, 75%, 45%)" stroke-width="1" opacity="0.3" />
+            <path d="M50 75 Q55 50 50 30" fill="none" stroke="hsl(155, 80%, 50%)" stroke-width="1" opacity="0.4" />
+        </g>
+
+        <!-- Circuit connection nodes -->
+        <g class="geo-element geo-5" opacity="0.2">
+            <circle cx="400" cy="200" r="8" fill="hsl(155, 85%, 50%)" filter="url(#glow)" />
+            <circle cx="800" cy="150" r="6" fill="hsl(155, 80%, 55%)" filter="url(#glow)" />
+            <circle cx="1200" cy="180" r="7" fill="hsl(155, 85%, 50%)" filter="url(#glow)" />
+            <circle cx="1500" cy="220" r="5" fill="hsl(155, 80%, 55%)" filter="url(#glow)" />
+            <!-- Connection lines -->
+            <path d="M400 200 L800 150 L1200 180 L1500 220" fill="none" stroke="hsl(155, 70%, 50%)" stroke-width="1"
+                stroke-dasharray="8 4" opacity="0.5" />
+        </g>
+
+        <!-- Bottom circuit traces -->
+        <g class="geo-element geo-6" opacity="0.15">
+            <path d="M0 900 L200 900 L250 850 L450 850 L500 900 L700 900" fill="none" stroke="hsl(155, 75%, 50%)"
+                stroke-width="2" />
+            <path d="M750 900 L950 900 L1000 950 L1200 950" fill="none" stroke="hsl(155, 75%, 50%)" stroke-width="2" />
+            <circle cx="200" cy="900" r="4" fill="hsl(155, 85%, 55%)" />
+            <circle cx="500" cy="900" r="4" fill="hsl(155, 85%, 55%)" />
+            <circle cx="950" cy="900" r="4" fill="hsl(155, 85%, 55%)" />
+        </g>
+
+        <!-- Piston/engine symbol (bottom-left) -->
+        <g class="geo-element geo-7" transform="translate(150, 800)" opacity="0.2">
+            <rect x="0" y="0" width="50" height="80" rx="5" fill="none" stroke="hsl(155, 60%, 50%)"
+                stroke-width="1.5" />
+            <rect x="10" y="10" width="30" height="25" rx="3" fill="hsl(155, 70%, 50%)" opacity="0.3" />
+            <path d="M25 35 L25 70" stroke="hsl(155, 70%, 55%)" stroke-width="6" stroke-linecap="round" opacity="0.3" />
+        </g>
+
+        <!-- Electric plug symbol (center-right) -->
+        <g class="geo-element geo-8" transform="translate(1800, 500)" filter="url(#soft-glow)" opacity="0.2">
+            <rect x="0" y="20" width="40" height="50" rx="5" fill="url(#energyGradient)" />
+            <rect x="8" y="0" width="8" height="25" rx="2" fill="hsl(155, 80%, 50%)" />
+            <rect x="24" y="0" width="8" height="25" rx="2" fill="hsl(155, 80%, 50%)" />
+        </g>
+    </svg>
+
+    <!-- GLOBAL Header -->
+    <header id="global-header" class="global-header">
+        <div class="header-left">
+            <span class="header-title">MCI em Veículos Híbridos</span>
+            <span class="header-separator">|</span>
+            <span class="header-discipline"><i class="fas fa-leaf"></i> Motores de Combustão Interna</span>
+        </div>
+        <div class="header-right">
+            <span class="header-professor"><i class="fas fa-user-tie"></i> Prof. Pedro Correia</span>
+        </div>
+    </header>
+
+    <!-- GLOBAL Footer -->
+    <footer id="global-footer" class="global-footer">
+        <div class="footer-left">
+            <span class="footer-year"><i class="fas fa-calendar"></i> 2025</span>
+        </div>
+        <div class="footer-center">
+            <span class="footer-course"><i class="fas fa-car"></i> Mecânica Automóvel</span>
+        </div>
+        <div class="footer-right">
+            <span class="footer-hint"><i class="fas fa-arrow-down"></i> Ver imagem ampliada</span>
+        </div>
+    </footer>
+
     <div class="reveal">
         <div class="slides">
-            <section>
-                <h1>MCI em Veículos Híbridos</h1>
-                <h3>Desafios e Adaptações</h3>
-                <p>
-                    <small>Motores de Combustão Interna</small>
-                </p>
-                <div
-                    style="margin-top: 50px; font-size: 0.6em; text-align: left; background: #f8f9fa; padding: 20px; border-radius: 10px; display: inline-block;">
-                    <strong>Trabalho realizado por:</strong>
-                    <ul style="margin-top: 10px;">
-                        <li>29458 José Santos</li>
-                        <li>32801 Pedro Silva</li>
-                        <li>32805 Rui Rodrigues</li>
-                        <li>32813 Jonathan Ramirez</li>
-                        <li>33695 Francisco Gonçalves</li>
-                        <li>33790 João Silva</li>
-                    </ul>
+
+            <!-- Slide 0: Cover -->
+            <section data-hide-header-footer data-background-color="#f0fdf4">
+                <div class="slide-cover">
+                    <div class="cover-text">
+                        <h1>MCI em Veículos Híbridos</h1>
+                        <h3>Desafios e Adaptações</h3>
+                        <div class="meta-info">
+                            <span><i class="fas fa-cogs"></i> Motores de Combustão Interna</span>
+                            <span><i class="fas fa-leaf"></i> Tecnologias Sustentáveis</span>
+                            <span><i class="fas fa-user-tie"></i> Prof. Pedro Correia</span>
+                            <span><i class="fas fa-calendar"></i> 2025</span>
+                        </div>
+                        <div class="student-list">
+                            <h4>Trabalho realizado por:</h4>
+                            <ul>
+                                <li>29458 José Santos</li>
+                                <li>32801 Pedro Silva</li>
+                                <li>32805 Rui Rodrigues</li>
+                                <li>32813 Jonathan Ramirez</li>
+                                <li>33695 Francisco Gonçalves</li>
+                                <li>33790 João Silva</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cover-image-wrapper">
+                        <figure class="cover-image">
+                            <img src="./images/1.jpg" data-accent-hue="155" data-accent-saturation="80"
+                                data-accent-lightness="40" alt="Hybrid Vehicle Engine">
+                        </figure>
+                    </div>
                 </div>
+                <aside class="notes">
+                    <h3>🎤 José Santos</h3>
+                    <p>Bom dia. Vivemos uma era de transição. Muitas vezes assume-se que o futuro é 100% elétrico, mas a
+                        engenharia diz-nos que a realidade é mais matizada. [PAUSA] Não estamos apenas a mudar de
+                        combustível; estamos a mudar a filosofia de propulsão. O veículo híbrido não é um compromisso
+                        temporário, é uma integração inteligente de dois mundos para maximizar a eficiência térmica e
+                        energética. Hoje vamos explorar como o Motor de Combustão Interna se adaptou para sobreviver e
+                        prosperar nesta nova simbiose.</p>
+                </aside>
             </section>
 
+            <!-- Slide 1: O Conceito Híbrido -->
             <section>
-                <h2>O Novo Papel do MCI</h2>
-                <ul>
-                    <li>Funcionamento em ciclo Atkinson/Miller</li>
-                    <li>Arranque e paragem frequentes (Start/Stop)</li>
-                    <li>Gestão térmica otimizada</li>
-                    <li>Integração com motores elétricos</li>
-                </ul>
+                <section data-background-color="#f0fdf4" data-background-opacity="0.5">
+                    <div class="slide-content">
+                        <h2 class="slide-title">O Conceito Híbrido</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <p class="slide-subtitle">Definição e História</p>
+                                <ul>
+                                    <li><i class="fas fa-car-side"></i> MCI + Motor(es) Elétrico(s)</li>
+                                    <li><i class="fas fa-battery-half"></i> Bateria de Alta Tensão</li>
+                                    <li><i class="fas fa-history"></i> Toyota Prius (1997) - Pioneiro</li>
+                                    <li><i class="fas fa-globe-europe"></i> Resposta às Normas de Emissões</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/2.jpg" data-accent-hue="155" data-accent-saturation="75"
+                                        data-accent-lightness="45" alt="Hybrid concept diagram">
+                                </div>
+                            </div>
+                        </div>
+                        <aside class="notes">
+                            <h3>🎤 José Santos</h3>
+                            <p>Tecnicamente, o conceito híbrido define-se pela coexistência de dois conversores de
+                                energia distintos: o MCI, que converte energia química, e um ou mais motores elétricos
+                                reversíveis. A bateria de alta tensão atua como o buffer energético que permite esta
+                                gestão. Embora o Prius de 97 seja o ícone, a ideia é anterior, mas foi a eletrónica de
+                                potência moderna que a tornou viável.</p>
+                            <hr>
+                            <h3>🎤 Pedro Silva</h3>
+                            <p>É importante sublinhar o *driver* legislativo disto. Não foi apenas inovação por
+                                inovação. As normas Euro 6 e as futuras Euro 7 impõem limites de CO2 que um motor de
+                                combustão puramente mecânico, termodinamicamente, já não consegue cumprir sozinho. O
+                                sistema híbrido permite-nos operar o motor térmico apenas nas suas ilhas de eficiência
+                                máxima, cortando drasticamente as emissões de NOx e CO2 em ciclo urbano, onde o MCI é
+                                tradicionalmente ineficiente. É uma resposta de engenharia a uma restrição ambiental
+                                severa.</p>
+                        </aside>
+                </section>
+                <section data-background-image="./images/2.jpg" data-background-size="cover"></section>
             </section>
 
+            <!-- Slide 2: Arquiteturas Híbridas -->
             <section>
-                <h2>Arquiteturas</h2>
-                <ul>
-                    <li>Híbrido Série</li>
-                    <li>Híbrido Paralelo</li>
-                    <li>Híbrido Misto (Power-split)</li>
-                </ul>
+                <section data-background-color="#f0fdf4" data-background-opacity="0.5">
+                    <div class="slide-content image-left">
+                        <h2 class="slide-title">Arquiteturas Híbridas</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <ul>
+                                    <li><i class="fas fa-arrow-right"></i> Híbrido Série</li>
+                                    <li><i class="fas fa-arrows-left-right"></i> Híbrido Paralelo</li>
+                                    <li><i class="fas fa-code-branch"></i> Híbrido Misto (Power-Split)</li>
+                                    <li><i class="fas fa-plug"></i> Plug-in Hybrid (PHEV)</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/3.jpg" data-accent-hue="165" data-accent-saturation="70"
+                                        data-accent-lightness="42" alt="Hybrid architectures">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 Rui Rodrigues</h3>
+                        <p>Como o Pedro mencionou, a eficiência é a chave, e a arquitetura define como lá chegamos.
+                            Temos o Série, onde o MCI é puramente um gerador desacoplado das rodas; o Paralelo, onde
+                            ambos empurram o veículo; e o Misto, que combina o melhor dos dois mundos. A escolha dita
+                            todo o comportamento dinâmico do carro.</p>
+                        <hr>
+                        <h3>🎤 Jonathan Ramirez</h3>
+                        <p>E adicionando a camada PHEV, ou Plug-in, introduzimos uma bateria de maior capacidade,
+                            tipicamente iões de lítio com caraterísticas de densidade energética superiores. Isto
+                            permite-nos não só recuperar energia, mas armazenar energia da rede elétrica barata. O
+                            desafio aqui passa a ser a gestão térmica desta bateria maior, que sofre ciclos de carga e
+                            descarga muito mais agressivos do que num híbrido convencional.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/3.jpg" data-background-size="cover"></section>
             </section>
 
+            <!-- Slide 3: Híbrido Série -->
             <section>
-                <h2>Conclusão</h2>
-                <p>O motor de combustão não morreu, apenas evoluiu para trabalhar em simbiose com a eletrificação.</p>
+                <section data-background-color="#f0fdf4" data-background-opacity="0.5">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Híbrido Série</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <p class="slide-subtitle">MCI como Gerador</p>
+                                <ul>
+                                    <li><i class="fas fa-bolt"></i> MCI não liga às rodas</li>
+                                    <li><i class="fas fa-car-battery"></i> Gera eletricidade para bateria</li>
+                                    <li><i class="fas fa-circle-play"></i> Motor elétrico é o único propulsor</li>
+                                    <li><i class="fas fa-gauge"></i> MCI opera em RPM ótima constante</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/4.jpg" data-accent-hue="150" data-accent-saturation="80"
+                                        data-accent-lightness="38" alt="Series hybrid diagram">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 Francisco Gonçalves</h3>
+                        <p>Pegando no ponto do Rui sobre o Híbrido Série: aqui o motor de combustão torna-se uma central
+                            elétrica a bordo. Como não tem ligação mecânica às rodas, eliminamos a necessidade de caixa
+                            de velocidades complexa. O motor pode ser desenhado para operar num ponto fixo de rotação e
+                            carga.</p>
+                        <hr>
+                        <h3>🎤 João Silva</h3>
+                        <p>Exato. Isso permite-nos eliminar perdas por bombagem em cargas parciais. Se o condutor pede
+                            potência, é a bateria e o motor elétrico que respondem. O MCI liga-se apenas para repor o
+                            nível de carga, operando sempre no seu ponto de consumo específico mínimo (o "sweet spot" de
+                            gramas por kilowatt-hora).</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/4.jpg" data-background-size="cover"></section>
             </section>
+
+            <!-- Slide 4: Híbrido Paralelo -->
+            <section>
+                <section data-background-color="#f0fdf4" data-background-opacity="0.5">
+                    <div class="slide-content image-left">
+                        <h2 class="slide-title">Híbrido Paralelo</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <p class="slide-subtitle">Propulsão Combinada</p>
+                                <ul>
+                                    <li><i class="fas fa-link"></i> MCI e motor elétrico ligados às rodas</li>
+                                    <li><i class="fas fa-plus"></i> Potências somam-se quando necessário</li>
+                                    <li><i class="fas fa-road"></i> MCI ideal para velocidade constante</li>
+                                    <li><i class="fas fa-city"></i> Elétrico ideal para cidade</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/5.jpg" data-accent-hue="160" data-accent-saturation="75"
+                                        data-accent-lightness="40" alt="Parallel hybrid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 José Santos</h3>
+                        <p>No Híbrido Paralelo, a lógica muda. O MCI e o motor elétrico estão mecanicamente acoplados à
+                            transmissão. É uma abordagem aditiva: Potência Total = MCI + Elétrico. Permite um MCI mais
+                            pequeno (downsizing) porque o elétrico compensa nas acelerações.</p>
+                        <hr>
+                        <h3>🎤 Pedro Silva</h3>
+                        <p>O conceito crítico aqui é o "Load Shifting" ou deslocamento de carga. Imaginem que o MCI está
+                            a operar com pouca carga, onde é ineficiente. A centralina diz "vamos dar mais carga ao
+                            motor para carregar a bateria". Ao aumentarmos a carga do MCI, movemos o ponto de operação
+                            para uma zona de maior eficiência térmica no mapa do motor, e a energia extra não é
+                            desperdiçada, é guardada na bateria. É assim que transformamos um motor ineficiente num
+                            sistema globalmente eficiente.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/5.jpg" data-background-size="cover"></section>
+            </section>
+
+            <!-- Slide 5: Híbrido Misto (Power-Split) -->
+            <section>
+                <section data-background-color="#f0fdf4" data-background-opacity="0.5">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Híbrido Misto (Power-Split)</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <p class="slide-subtitle">Toyota Hybrid Synergy Drive</p>
+                                <ul>
+                                    <li><i class="fas fa-circle-nodes"></i> Engrenagem Planetária</li>
+                                    <li><i class="fas fa-sliders"></i> Divisão inteligente de potência</li>
+                                    <li><i class="fas fa-infinity"></i> CVT eletrónico (sem embraiagem)</li>
+                                    <li><i class="fas fa-microchip"></i> Gestão computorizada contínua</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/6.jpg" data-accent-hue="145" data-accent-saturation="85"
+                                        data-accent-lightness="42" alt="Power-split hybrid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 Rui Rodrigues</h3>
+                        <p>O Power-Split é a engenharia levada ao extremo. Utiliza um trem epicicloidal (ou planetário)
+                            para dividir o binário. Uma parte vai para as rodas, outra para o gerador. Não há
+                            embraiagem, não há correias. É tudo "solid state" mecânico.</p>
+                        <hr>
+                        <h3>🎤 Jonathan Ramirez</h3>
+                        <p>Como o Rui disse, é brilhante na sua simplicidade mecânica, mas complexo no controlo. O
+                            gerador (MG1) controla a rotação da engrenagem solar, o que obriga o MCI a rodar a uma
+                            velocidade específica. Isto cria uma transmissão de variação contínua (e-CVT) puramente
+                            elétrica, sem polias ou correntes a friccionar.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/6.jpg" data-background-size="cover"></section>
+            </section>
+
+            <!-- Slide 6: Ciclo Atkinson -->
+            <section>
+                <section data-background-color="#f0fdf4" data-background-opacity="0.5">
+                    <div class="slide-content image-left">
+                        <h2 class="slide-title">Ciclo Atkinson</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <p class="slide-subtitle">Eficiência sobre Potência</p>
+                                <ul>
+                                    <li><i class="fas fa-expand"></i> Expansão > Compressão</li>
+                                    <li><i class="fas fa-clock"></i> Válvula de admissão fecha tarde</li>
+                                    <li><i class="fas fa-chart-line"></i> Maior eficiência térmica (até 40%)</li>
+                                    <li><i class="fas fa-arrow-down"></i> Menor potência por cilindrada</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/7.jpg" data-accent-hue="140" data-accent-saturation="70"
+                                        data-accent-lightness="45" alt="Atkinson cycle diagram">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 Francisco Gonçalves</h3>
+                        <p>Para maximizar essa eficiência térmica que o Pedro referiu antes, alteramos o ciclo
+                            termodinâmico. No Ciclo Atkinson, mantemos a válvula de admissão aberta durante o início da
+                            compressão. Parte da mistura volta para o coletor.</p>
+                        <hr>
+                        <h3>🎤 João Silva</h3>
+                        <p>Isso parece contra-intuitivo, mas reduz o trabalho de compressão. Ganhamos no trabalho
+                            líquido final porque aproveitamos a expansão completa dos gases. O motor fica "pior" em
+                            potência específica, sim, mas ganha cerca de 10-15% em eficiência térmica pura.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/7.jpg" data-background-size="cover"></section>
+            </section>
+
+            <!-- Slide 7: Ciclo Miller -->
+            <section>
+                <section data-background-color="#f0fdf4" data-background-opacity="0.5">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Ciclo Miller</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <p class="slide-subtitle">Atkinson + Sobrealimentação</p>
+                                <ul>
+                                    <li><i class="fas fa-wind"></i> Compressor ou Turbo</li>
+                                    <li><i class="fas fa-temperature-arrow-down"></i> Intercooler obrigatório</li>
+                                    <li><i class="fas fa-equals"></i> Recupera potência perdida</li>
+                                    <li><i class="fas fa-trophy"></i> Mazda Skyactiv-X, VW 1.5 TSI evo</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/8.jpg" data-accent-hue="150" data-accent-saturation="75"
+                                        data-accent-lightness="40" alt="Miller cycle engine">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 José Santos</h3>
+                        <p>Como o Atkinson perde potência, o Ciclo Miller resolve isso injetando ar com pressão. Usamos
+                            um compressor ou turbo para forçar o ar para dentro, compensando o refluxo da válvula de
+                            admissão.</p>
+                        <hr>
+                        <h3>🎤 Pedro Silva</h3>
+                        <p>A magia do Miller está na densidade do ar. Ao usar um intercooler eficiente, baixamos a
+                            temperatura da carga de admissão. Ar mais frio é mais denso e, crucialmente, afasta o limite
+                            da detonação (o "grilar"). Isto permite-nos usar taxas de compressão geométricas
+                            elevadíssimas, na ordem dos 14:1 ou 16:1, extraindo cada Joule possível da gasolina. É
+                            termodinâmica aplicada para contornar os limites do combustível.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/8.jpg" data-background-size="cover"></section>
+            </section>
+
+            <!-- Slide 8: Gestão Térmica em Híbridos -->
+            <section>
+                <section data-background-color="#f0fdf4" data-background-opacity="0.5">
+                    <div class="slide-content image-left">
+                        <h2 class="slide-title">Gestão Térmica em Híbridos</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <ul>
+                                    <li><i class="fas fa-power-off"></i> Funcionamento intermitente do MCI</li>
+                                    <li><i class="fas fa-temperature-half"></i> Manter temperatura operacional</li>
+                                    <li><i class="fas fa-valve"></i> Termostatos eletrónicos</li>
+                                    <li><i class="fas fa-fire"></i> Aquecedores auxiliares (PTC)</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/9.jpg" data-accent-hue="155" data-accent-saturation="80"
+                                        data-accent-lightness="38" alt="Thermal management">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 Rui Rodrigues</h3>
+                        <p>Toda esta eficiência cria um problema interessante: o motor às vezes não aquece o suficiente!
+                            Com o Start/Stop constante, o óleo e o catalisador podem arrefecer abaixo da temperatura
+                            ideal.</p>
+                        <hr>
+                        <h3>🎤 Jonathan Ramirez</h3>
+                        <p>Por isso vemos bombas de água elétricas e gestão térmica ativa. O computador pode parar a
+                            circulação de água no bloco para aquecer mais depressa, ou usar o calor do escape para
+                            aquecer o líquido de refrigeração. É vital para reduzir o atrito viscoso do óleo a frio.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/9.jpg" data-background-size="cover"></section>
+            </section>
+
+            <!-- Slide 9: Sistema Start/Stop Avançado -->
+            <section>
+                <section data-background-color="#f0fdf4" data-background-opacity="0.5">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Sistema Start/Stop Avançado</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <p class="slide-subtitle">Arranques Frequentes</p>
+                                <ul>
+                                    <li><i class="fas fa-car-battery"></i> Motor de arranque reforçado (2-3kW)</li>
+                                    <li><i class="fas fa-sync"></i> BSG/ISG (Belt/Integrated Starter Generator)</li>
+                                    <li><i class="fas fa-tachometer-alt"></i> Arranque silencioso e rápido</li>
+                                    <li><i class="fas fa-rotate"></i> Até 500.000 ciclos de vida</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/10.jpg" data-accent-hue="160" data-accent-saturation="70"
+                                        data-accent-lightness="42" alt="Start-stop system">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 Francisco Gonçalves</h3>
+                        <p>Um motor de arranque tradicional aguentaria semanas neste regime. Por isso usamos máquinas
+                            elétricas robustas, os ISG (Integrated Starter Generator), acoplados diretamente à cambota
+                            ou por correia reforçada.</p>
+                        <hr>
+                        <h3>🎤 João Silva</h3>
+                        <p>Estes sistemas conseguem colocar o motor em marcha lenta em milissegundos, sincronizando a
+                            rotação e injeção para que a combustão pegue no primeiro ciclo. O condutor mal percebe a
+                            transição. Passamos de 50 mil ciclos de vida para meio milhão.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/10.jpg" data-background-size="cover"></section>
+            </section>
+
+            <!-- Slide 10: Integração MCI + Motor Elétrico -->
+            <section>
+                <section data-background-color="#f0fdf4" data-background-opacity="0.5">
+                    <div class="slide-content image-left">
+                        <h2 class="slide-title">Integração MCI + Motor Elétrico</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <ul>
+                                    <li><i class="fas fa-ring"></i> Motor elétrico integrado na transmissão</li>
+                                    <li><i class="fas fa-gears"></i> Embraiagens de desacoplamento</li>
+                                    <li><i class="fas fa-wave-square"></i> Transmissões CVT dedicadas</li>
+                                    <li><i class="fas fa-diagram-project"></i> Inversores de potência</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/11.jpg" data-accent-hue="145" data-accent-saturation="75"
+                                        data-accent-lightness="40" alt="Powertrain integration">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 José Santos</h3>
+                        <p>A integração física exige soluções compactas. Muitas vezes o motor elétrico está
+                            "sandwichado" entre o motor e a caixa, ou dentro da própria caixa de velocidades.</p>
+                        <hr>
+                        <h3>🎤 Pedro Silva</h3>
+                        <p>E aqui entra a Eletrónica de Potência, o verdadeiro cérebro. O Inversor não só converte DC da
+                            bateria em AC trifásico para o motor. Ele gere a frequência de comutação (na ordem dos kHz)
+                            para controlar o binário com precisão cirúrgica. É esta rapidez de resposta do inversor que
+                            permite amortecer as vibrações torcionais do motor de combustão, tornando o volante bimassa
+                            tradicional, em alguns casos, obsoleto.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/11.jpg" data-background-size="cover"></section>
+            </section>
+
+            <!-- Slide 11: Diagnóstico em Híbridos -->
+            <section>
+                <section data-background-color="#f0fdf4" data-background-opacity="0.5">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Diagnóstico em Híbridos</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <p class="slide-subtitle">Ferramentas Específicas</p>
+                                <ul>
+                                    <li><i class="fas fa-laptop-medical"></i> Scanner com protocolos híbridos</li>
+                                    <li><i class="fas fa-battery-full"></i> Testador de células de bateria</li>
+                                    <li><i class="fas fa-temperature-low"></i> Câmara térmica para inversores</li>
+                                    <li><i class="fas fa-microscope"></i> Osciloscópio para sinais PWM</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/12.jpg" data-accent-hue="150" data-accent-saturation="80"
+                                        data-accent-lightness="45" alt="Hybrid diagnostics">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 Rui Rodrigues</h3>
+                        <p>Para nós na oficina, isto muda tudo. O multímetro básico já não chega. Precisamos de
+                            ferramentas com isolamento CAT III ou CAT IV, e scanners que falem os protocolos
+                            proprietários dos sistemas híbridos.</p>
+                        <hr>
+                        <h3>🎤 Jonathan Ramirez</h3>
+                        <p>E atenção à análise de dados. Ver o equilíbrio das células da bateria (Cell Balancing) ou a
+                            temperatura dos IGBTs no inversor torna-se rotina. Um desequilíbrio de milivolts numa célula
+                            pode condenar a bateria inteira.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/12.jpg" data-background-size="cover"></section>
+            </section>
+
+            <!-- Slide 12: Desafios de Manutenção -->
+            <section>
+                <section data-background-color="#f0fdf4" data-background-opacity="0.5">
+                    <div class="slide-content image-left">
+                        <h2 class="slide-title">Desafios de Manutenção</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <p class="slide-subtitle">Segurança em Alta Tensão</p>
+                                <ul>
+                                    <li><i class="fas fa-skull-crossbones"></i> Tensões de 200V a 800V</li>
+                                    <li><i class="fas fa-hand"></i> Luvas isolantes obrigatórias</li>
+                                    <li><i class="fas fa-plug-circle-xmark"></i> Procedimento de desenergização</li>
+                                    <li><i class="fas fa-graduation-cap"></i> Certificação específica necessária</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/13.jpg" data-accent-hue="35" data-accent-saturation="90"
+                                        data-accent-lightness="50" alt="High voltage safety">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 Francisco Gonçalves</h3>
+                        <p>A segurança é inegociável. Estamos a lidar com 400V ou 800V DC. O arco elétrico em contínua
+                            não se extingue sozinho. Luvas classe 0, fatos ignífugos e ferramentas isoladas são o nosso
+                            EPI básico.</p>
+                        <hr>
+                        <h3>🎤 João Silva</h3>
+                        <p>O procedimento de bloqueio/etiquetagem (Lock-out/Tag-out) é ritualístico. Desligar a ignição,
+                            remover o fusível de serviço, esperar a descarga dos condensadores do inversor e verificar a
+                            ausência de tensão (VAT). Só depois tocamos.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/13.jpg" data-background-size="cover"></section>
+            </section>
+
+            <!-- Slide 13: O Futuro do MCI Híbrido -->
+            <section>
+                <section data-background-color="#f0fdf4" data-background-opacity="0.5">
+                    <div class="slide-content">
+                        <h2 class="slide-title">O Futuro do MCI Híbrido</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <p class="slide-subtitle">Evolução Contínua</p>
+                                <ul>
+                                    <li><i class="fas fa-flask"></i> E-fuels e combustíveis sintéticos</li>
+                                    <li><i class="fas fa-atom"></i> Hidrogénio em combustão (não fuel cell)</li>
+                                    <li><i class="fas fa-seedling"></i> Biocombustíveis avançados</li>
+                                    <li><i class="fas fa-minimize"></i> Motores cada vez mais compactos</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/14.jpg" data-accent-hue="155" data-accent-saturation="85"
+                                        data-accent-lightness="40" alt="Future of hybrid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 Todos (Discussão Aberta)</h3>
+                        <p><strong>José:</strong> O MCI está vivo, mas diferente. E-fuels vêm aí.</p>
+                        <p><strong>Pedro:</strong> A conclusão é que o híbrido não é apenas uma "ponte". É a tecnologia
+                            que vai descarbonizar a frota existente e futura onde a eletrificação total não é viável
+                            logisticamente. A complexidade aumentou, sim, mas a eficiência térmica também atingiu picos
+                            históricos.</p>
+                        <p><strong>Rui:</strong> E o Hidrogénio em combustão também.</p>
+                        <p><strong>Jonathan:</strong> A densidade energética dos combustíveis líquidos ainda é
+                            imbatível.</p>
+                        <p><strong>Francisco:</strong> Motores mais pequenos, mas mais tecnológicos.</p>
+                        <p><strong>João:</strong> E a manutenção vai exigir técnicos de elite.</p>
+                    </aside>
+                </section>
+                <section data-background-image="./images/14.jpg" data-background-size="cover"></section>
+            </section>
+
+            <!-- Slide 14: Conclusão -->
+            <section data-hide-header-footer data-background-color="#f0fdf4">
+                <div class="slide-conclusion">
+                    <div class="conclusion-content">
+                        <h1>Conclusão Técnica</h1>
+                        <div class="conclusion-points">
+                            <div class="conclusion-point">
+                                <i class="fas fa-leaf"></i>
+                                <p>O MCI evoluiu para simbiose com eletrificação</p>
+                            </div>
+                            <div class="conclusion-point">
+                                <i class="fas fa-chart-line"></i>
+                                <p>Eficiência é a nova prioridade máxima</p>
+                            </div>
+                            <div class="conclusion-point">
+                                <i class="fas fa-tools"></i>
+                                <p>Diagnóstico especializado é essencial</p>
+                            </div>
+                        </div>
+                        <p class="thanks">Obrigado pela vossa atenção!</p>
+                        <div class="student-list">
+                            <h4>Trabalho realizado por:</h4>
+                            <ul>
+                                <li>29458 José Santos</li>
+                                <li>32801 Pedro Silva</li>
+                                <li>32805 Rui Rodrigues</li>
+                                <li>32813 Jonathan Ramirez</li>
+                                <li>33695 Francisco Gonçalves</li>
+                                <li>33790 João Silva</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="conclusion-image-wrapper">
+                        <figure class="conclusion-image">
+                            <img src="./images/15.jpg" data-accent-hue="155" data-accent-saturation="85"
+                                data-accent-lightness="42" alt="Team conclusion">
+                        </figure>
+                    </div>
+                </div>
+                <aside class="notes">
+                    <h3>🎤 José Santos</h3>
+                    <p>Para fechar: O MCI evoluiu de solista para um jogador de equipa.</p>
+                    <h3>🎤 Pedro Silva</h3>
+                    <p>Em suma, a hibridização salvou o motor de combustão da obsolescência, obrigando-o a atingir o
+                        auge da sua evolução termodinâmica.</p>
+                    <h3>🎤 Rui Rodrigues</h3>
+                    <p>A eficiência térmica dita as regras do jogo agora.</p>
+                    <h3>🎤 Jonathan Ramirez</h3>
+                    <p>A complexidade exige, mais do que nunca, diagnóstico preciso.</p>
+                    <h3>🎤 Francisco Gonçalves</h3>
+                    <p>Segurança em primeiro lugar, sempre.</p>
+                    <h3>🎤 João Silva</h3>
+                    <p>Estamos prontos para estes novos desafios. Obrigado.</p>
+                </aside>
+            </section>
+
         </div>
     </div>
 
+    <!-- Reveal.js -->
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@latest/dist/reveal.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@latest/plugin/notes/notes.min.js"></script>
+
     <script>
         Reveal.initialize({
+            plugins: [RevealNotes],
             hash: true,
+            history: true,
+            transition: 'slide',
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade',
+            showNotes: false,
             center: true,
+            width: 1920,
+            height: 1080
+        });
+
+        // Elements
+        const svg = document.getElementById('dynamic-bg');
+        const geoElements = svg.querySelectorAll('.geo-element');
+        const gridPattern = svg.querySelectorAll('.grid-pattern');
+        const globalHeader = document.getElementById('global-header');
+        const globalFooter = document.getElementById('global-footer');
+
+        // Updated element references for hybrid circuit theme
+        const hexPath = document.getElementById('hex-path');
+        const gradientStop1 = document.getElementById('gradient-stop-1');
+        const gradientStop2 = document.getElementById('gradient-stop-2');
+        const energyFlow = document.getElementById('energy-flow-1');
+
+        const defaultAccent = { hue: 155, saturation: 80, lightness: 40 };
+        let currentAccent = { ...defaultAccent };
+        let targetAccent = { ...defaultAccent };
+
+        function lerp(start, end, factor) {
+            return start + (end - start) * factor;
+        }
+
+        function updateSVGColors(accent) {
+            const { hue, saturation, lightness } = accent;
+            const primary = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+            const secondary = `hsl(${hue}, ${saturation}%, ${Math.min(lightness + 12, 65)}%)`;
+
+            if (hexPath) hexPath.setAttribute('stroke', primary);
+            if (gradientStop1) gradientStop1.style.stopColor = secondary;
+            if (gradientStop2) gradientStop2.style.stopColor = primary;
+            if (energyFlow) energyFlow.setAttribute('stroke', `url(#energyGradient)`);
+
+            document.documentElement.style.setProperty('--accent-hue', hue);
+            document.documentElement.style.setProperty('--accent-saturation', `${saturation}%`);
+            document.documentElement.style.setProperty('--accent-lightness', `${lightness}%`);
+        }
+
+        function animateColorTransition() {
+            const factor = 0.06;
+            currentAccent.hue = lerp(currentAccent.hue, targetAccent.hue, factor);
+            currentAccent.saturation = lerp(currentAccent.saturation, targetAccent.saturation, factor);
+            currentAccent.lightness = lerp(currentAccent.lightness, targetAccent.lightness, factor);
+            updateSVGColors(currentAccent);
+
+            const hueDiff = Math.abs(currentAccent.hue - targetAccent.hue);
+            const satDiff = Math.abs(currentAccent.saturation - targetAccent.saturation);
+            const lightDiff = Math.abs(currentAccent.lightness - targetAccent.lightness);
+
+            if (hueDiff > 0.5 || satDiff > 0.5 || lightDiff > 0.5) {
+                requestAnimationFrame(animateColorTransition);
+            }
+        }
+
+        function getSlideAccentColor(slide) {
+            const img = slide.querySelector('img[data-accent-hue]');
+            if (img) {
+                return {
+                    hue: parseFloat(img.dataset.accentHue) || defaultAccent.hue,
+                    saturation: parseFloat(img.dataset.accentSaturation) || defaultAccent.saturation,
+                    lightness: parseFloat(img.dataset.accentLightness) || defaultAccent.lightness
+                };
+            }
+            return defaultAccent;
+        }
+
+        function isFullscreenSlide() {
+            return Reveal.getIndices().v > 0;
+        }
+
+        function updateHeaderFooterVisibility() {
+            const currentSlide = Reveal.getCurrentSlide();
+            const parentSection = currentSlide.parentElement;
+            const hideHeaderFooter = currentSlide.hasAttribute('data-hide-header-footer') ||
+                parentSection.hasAttribute('data-hide-header-footer') ||
+                isFullscreenSlide();
+
+            if (hideHeaderFooter) {
+                globalHeader.classList.add('hidden');
+                globalFooter.classList.add('hidden');
+            } else {
+                globalHeader.classList.remove('hidden');
+                globalFooter.classList.remove('hidden');
+            }
+        }
+
+        Reveal.on('ready', () => {
+            updateHeaderFooterVisibility();
+            const initialAccent = getSlideAccentColor(Reveal.getCurrentSlide());
+            currentAccent = { ...initialAccent };
+            targetAccent = { ...initialAccent };
+            updateSVGColors(currentAccent);
+        });
+
+        Reveal.on('slidechanged', event => {
+            const slideIndex = event.indexh;
+            const currentSlide = event.currentSlide;
+
+            updateHeaderFooterVisibility();
+            targetAccent = getSlideAccentColor(currentSlide);
+            animateColorTransition();
+
+            const baseOpacity = 0.15 + (slideIndex % 5) * 0.03;
+            const rotation = slideIndex * 3;
+            const translateX = Math.sin(slideIndex * 0.5) * 25;
+            const translateY = Math.cos(slideIndex * 0.5) * 20;
+
+            geoElements.forEach((el, i) => {
+                const individualOffset = i * 0.025;
+                el.style.opacity = Math.min(0.35, baseOpacity + individualOffset);
+                el.style.transform = `translate(${translateX + i * 6}px, ${translateY + i * 4}px) rotate(${rotation + i * 6}deg)`;
+            });
+
+            gridPattern.forEach(el => {
+                el.style.opacity = 0.35 + (slideIndex % 3) * 0.1;
+            });
         });
     </script>
+
 </body>
 
 </html>
