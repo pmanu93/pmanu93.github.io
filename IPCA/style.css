@@ -1,17 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
 :root {
-  --primary: #667eea;
-  --primary-dark: #5a67d8;
-  --accent: #764ba2;
-  --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --dark-bg: #0a0a0f;
-  --dark-surface: #12121a;
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --text-primary: #ffffff;
-  --text-secondary: #a0a0b0;
-  --text-muted: #6b6b80;
+  --primary: #3b82f6;
+  /* Azul vivo tipo Tailwind blue-500, alegre e moderno */
+  --primary-dark: #2563eb;
+  /* Versão mais escura para hover/focus */
+  --accent: #06b6d4;
+  /* Ciano vibrante para destaque, dá pop sem cansar */
+  --gradient: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+  /* De azul para ciano, fresco que nem mar da Galiza */
+  --dark-bg: #0f172a;
+  /* Azul-escuro quase preto, mais quente que o anterior */
+  --dark-surface: #1e293b;
+  /* Superfícies elevadas, slate-800 mas mais azul */
+  --glass-bg: rgba(59, 130, 246, 0.08);
+  /* Glass com toque do primary, fica mais integrado */
+  --glass-border: rgba(59, 130, 246, 0.2);
+  --text-primary: #f1f5f9;
+  /* Branco suave com leve azul */
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
 }
 
 * {
@@ -37,12 +45,14 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   height: 100vh;
+  position: relative;
+  z-index: 1;
 }
 
 /* Hero Column (Left) */
 .hero-column {
   position: relative;
-  background: linear-gradient(135deg, #0f0f18 0%, #1a1a2e 100%);
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,10 +60,12 @@ body {
 }
 
 #hero-canvas {
-  position: absolute;
+  position: fixed;
   inset: 0;
   width: 100%;
   height: 100%;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .hero-content {
@@ -138,9 +150,13 @@ body {
 
 /* Content Column (Right) */
 .content-column {
-  background: var(--dark-surface);
+  background: rgba(30, 41, 59, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   position: relative;
   overflow: hidden;
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  /* Subtle separation */
 }
 
 .content-column::before {
@@ -226,25 +242,83 @@ body {
 .project-item {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 16px;
+  gap: 8px;
+  padding: 8px 16px;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid transparent;
   border-radius: 12px;
+  transition: all 0.3s ease;
+  transform: skewX(-12deg);
+}
+
+.project-item>* {
+  transform: skewX(12deg);
+}
+
+.project-item:hover {
+  background: rgba(102, 126, 234, 0.05);
+  border-color: rgba(102, 126, 234, 0.2);
+}
+
+.project-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
   text-decoration: none;
   color: inherit;
   transition: all 0.3s ease;
 }
 
-.project-item:hover {
+.project-link:hover {
   background: rgba(102, 126, 234, 0.1);
-  border-color: rgba(102, 126, 234, 0.3);
-  transform: translateX(8px);
 }
 
-.project-item:hover .arrow {
+.project-link:hover .arrow {
   transform: translateX(5px);
   color: var(--primary);
+}
+
+.project-actions {
+  display: flex;
+  gap: 6px;
+  padding-right: 8px;
+}
+
+.action-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+
+.action-btn:hover {
+  background: rgba(102, 126, 234, 0.2);
+  border-color: var(--primary);
+  transform: scale(1.1);
+}
+
+.notes-btn {
+  transition: all 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+.notes-btn.hidden {
+  opacity: 0;
+  transform: scale(0);
+  width: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+  pointer-events: none;
 }
 
 .project-icon {
@@ -392,6 +466,154 @@ body {
   padding: 4px 10px;
   border-radius: 6px;
   font-family: 'JetBrains Mono', monospace;
+}
+
+/* Large Modal */
+.modal-large {
+  max-width: 700px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-body {
+  padding: 20px 24px;
+}
+
+.modal-body p {
+  margin-bottom: 16px;
+  color: var(--text-secondary);
+}
+
+.pdf-instructions {
+  margin: 0 0 20px 20px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.pdf-instructions kbd {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.85em;
+}
+
+.pdf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--gradient);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.pdf-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+}
+
+/* Notes Viewer */
+.notes-filter {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.notes-filter label {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.notes-filter select {
+  flex: 1;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.notes-filter select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.notes-container {
+  padding: 20px 24px;
+  overflow-y: auto;
+  flex: 1;
+  max-height: 50vh;
+}
+
+.notes-container .loading,
+.notes-container .error,
+.notes-container .no-notes {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 30px;
+}
+
+.notes-container .error {
+  color: #e74c3c;
+}
+
+.notes-slide {
+  margin-bottom: 24px;
+}
+
+.slide-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.slide-number {
+  background: var(--gradient);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.slide-name {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.note-item {
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.note-speaker {
+  display: block;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+}
+
+.note-content {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
 }
 
 /* Scrollbar */

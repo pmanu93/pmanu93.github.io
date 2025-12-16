@@ -10,10 +10,11 @@
 </head>
 
 <body>
+    <canvas id="hero-canvas"></canvas>
     <div class="layout">
         <!-- Left Column - Hero/Branding -->
         <aside class="hero-column">
-            <canvas id="hero-canvas"></canvas>
+
             <div class="hero-content">
                 <div class="logo-container">
                     <img src="img/logo_ipca.png" alt="IPCA Logo" class="ipca-logo">
@@ -23,11 +24,6 @@
                     Repositório de trabalhos académicos e apresentações desenvolvidos
                     no âmbito do curso de Mecânica Automóvel do IPCA.
                 </p>
-                <div class="hero-footer">
-                    <button class="group-btn" id="open-group">
-                        <span>👥</span> Ver Grupo
-                    </button>
-                </div>
             </div>
         </aside>
 
@@ -43,22 +39,56 @@
                         <span class="professor-tag">Prof. Pedro Correia</span>
                     </div>
                     <div class="projects">
-                        <a href="./MotoresDeCombustao/arrefecimento/index.html" class="project-item">
-                            <span class="project-icon">🌡️</span>
-                            <div class="project-info">
-                                <span class="project-name">Sistema de Arrefecimento</span>
-                                <span class="project-desc">Métodos de teste e diagnóstico</span>
+                        <div class="project-item">
+                            <a href="./MotoresDeCombustao/arrefecimento/index.html" class="project-link">
+                                <span class="project-icon">🌡️</span>
+                                <div class="project-info">
+                                    <span class="project-name">Sistema de Arrefecimento</span>
+                                    <span class="project-desc">Métodos de teste e diagnóstico</span>
+                                </div>
+                                <span class="arrow">→</span>
+                            </a>
+                            <div class="project-actions">
+                                <button class="action-btn" onclick="openGroupModal()" title="Ver Grupo">
+                                    <span>👥</span>
+                                </button>
+                                <button class="action-btn"
+                                    onclick="openPdfInfo('./MotoresDeCombustao/arrefecimento/index.html')"
+                                    title="Versão PDF">
+                                    <span>📄</span>
+                                </button>
+                                <button class="action-btn notes-btn hidden"
+                                    onclick="openNotesViewer('./MotoresDeCombustao/arrefecimento/index.html', 'Sistema de Arrefecimento')"
+                                    title="Ver Notas (prima 's' para mostrar)">
+                                    <span>📝</span>
+                                </button>
                             </div>
-                            <span class="arrow">→</span>
-                        </a>
-                        <a href="./MotoresDeCombustao/hibridos/index.html" class="project-item">
-                            <span class="project-icon">⚡</span>
-                            <div class="project-info">
-                                <span class="project-name">MCI em Veículos Híbridos</span>
-                                <span class="project-desc">Motor de combustão em arquiteturas híbridas</span>
+                        </div>
+                        <div class="project-item">
+                            <a href="./MotoresDeCombustao/hibridos/index.html" class="project-link">
+                                <span class="project-icon">⚡</span>
+                                <div class="project-info">
+                                    <span class="project-name">MCI em Veículos Híbridos</span>
+                                    <span class="project-desc">Motor de combustão em arquiteturas híbridas</span>
+                                </div>
+                                <span class="arrow">→</span>
+                            </a>
+                            <div class="project-actions">
+                                <button class="action-btn" onclick="openGroupModal()" title="Ver Grupo">
+                                    <span>👥</span>
+                                </button>
+                                <button class="action-btn"
+                                    onclick="openPdfInfo('./MotoresDeCombustao/hibridos/index.html')"
+                                    title="Versão PDF">
+                                    <span>📄</span>
+                                </button>
+                                <button class="action-btn notes-btn hidden"
+                                    onclick="openNotesViewer('./MotoresDeCombustao/hibridos/index.html', 'MCI em Veículos Híbridos')"
+                                    title="Ver Notas (prima 's' para mostrar)">
+                                    <span>📝</span>
+                                </button>
                             </div>
-                            <span class="arrow">→</span>
-                        </a>
+                        </div>
                     </div>
                 </section>
 
@@ -69,14 +99,30 @@
                         <span class="professor-tag">Prof. Luís Lopes</span>
                     </div>
                     <div class="projects">
-                        <a href="./TDEM_Avarias/EGR_DPF/index.html" class="project-item">
-                            <span class="project-icon">💨</span>
-                            <div class="project-info">
-                                <span class="project-name">Avarias - EGR e DPF</span>
-                                <span class="project-desc">Recirculação de gases e filtro de partículas</span>
+                        <div class="project-item">
+                            <a href="./TDEM_Avarias/EGR_DPF/index.html" class="project-link">
+                                <span class="project-icon">💨</span>
+                                <div class="project-info">
+                                    <span class="project-name">Avarias - EGR e DPF</span>
+                                    <span class="project-desc">Recirculação de gases e filtro de partículas</span>
+                                </div>
+                                <span class="arrow">→</span>
+                            </a>
+                            <div class="project-actions">
+                                <button class="action-btn" onclick="openGroupModal()" title="Ver Grupo">
+                                    <span>👥</span>
+                                </button>
+                                <button class="action-btn" onclick="openPdfInfo('./TDEM_Avarias/EGR_DPF/index.html')"
+                                    title="Versão PDF">
+                                    <span>📄</span>
+                                </button>
+                                <button class="action-btn notes-btn hidden"
+                                    onclick="openNotesViewer('./TDEM_Avarias/EGR_DPF/index.html', 'Avarias - EGR e DPF')"
+                                    title="Ver Notas (prima 's' para mostrar)">
+                                    <span>📝</span>
+                                </button>
                             </div>
-                            <span class="arrow">→</span>
-                        </a>
+                        </div>
                     </div>
                 </section>
 
@@ -87,12 +133,12 @@
         </main>
     </div>
 
-    <!-- Modal for Group -->
+    <!-- Modal: Group -->
     <div class="modal-overlay" id="group-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Trabalhos realizados por:</h3>
-                <button class="modal-close" id="close-group">✕</button>
+                <h3>Trabalho realizado por:</h3>
+                <button class="modal-close" onclick="closeModal('group-modal')">✕</button>
             </div>
             <ul class="team-list">
                 <li><span class="student-id">29458</span> José Santos</li>
@@ -102,6 +148,47 @@
                 <li><span class="student-id">33695</span> Francisco Gonçalves</li>
                 <li><span class="student-id">33790</span> João Silva</li>
             </ul>
+        </div>
+    </div>
+
+    <!-- Modal: PDF Info -->
+    <div class="modal-overlay" id="pdf-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📄 Exportar para PDF</h3>
+                <button class="modal-close" onclick="closeModal('pdf-modal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <p>Para exportar a apresentação em PDF:</p>
+                <ol class="pdf-instructions">
+                    <li>Clique no botão abaixo para abrir em modo de impressão</li>
+                    <li>Use <kbd>Ctrl</kbd> + <kbd>P</kbd> (ou <kbd>⌘</kbd> + <kbd>P</kbd> no Mac)</li>
+                    <li>Selecione "Guardar como PDF" na impressora</li>
+                    <li>Configure paisagem e margens mínimas</li>
+                </ol>
+                <a id="pdf-link" href="#" target="_blank" class="pdf-btn">
+                    <span>🖨️</span> Abrir modo de impressão
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Notes Viewer -->
+    <div class="modal-overlay" id="notes-modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3 id="notes-title">📝 Notas do Orador</h3>
+                <button class="modal-close" onclick="closeModal('notes-modal')">✕</button>
+            </div>
+            <div class="notes-filter">
+                <label>Filtrar por orador:</label>
+                <select id="speaker-filter" onchange="filterNotes()">
+                    <option value="all">Todos os oradores</option>
+                </select>
+            </div>
+            <div class="notes-container" id="notes-container">
+                <p class="loading">A carregar notas...</p>
+            </div>
         </div>
     </div>
 
@@ -116,7 +203,6 @@
             const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
             camera.position.z = 30;
 
-            // Create particles
             const particleCount = 800;
             const positions = new Float32Array(particleCount * 3);
             const velocities = [];
@@ -146,14 +232,6 @@
             const particles = new THREE.Points(geometry, material);
             scene.add(particles);
 
-            // Add connecting lines
-            const lineMaterial = new THREE.LineBasicMaterial({
-                color: 0x667eea,
-                transparent: true,
-                opacity: 0.15
-            });
-
-            // Mouse interaction
             let mouseX = 0, mouseY = 0;
             document.addEventListener('mousemove', (e) => {
                 mouseX = (e.clientX / window.innerWidth) * 2 - 1;
@@ -161,9 +239,10 @@
             });
 
             function resize() {
-                const rect = canvas.parentElement.getBoundingClientRect();
-                renderer.setSize(rect.width, rect.height);
-                camera.aspect = rect.width / rect.height;
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+                renderer.setSize(width, height);
+                camera.aspect = width / height;
                 camera.updateProjectionMatrix();
             }
 
@@ -176,14 +255,12 @@
                     pos[i * 3 + 1] += velocities[i].y;
                     pos[i * 3 + 2] += velocities[i].z;
 
-                    // Boundary check
                     if (Math.abs(pos[i * 3]) > 30) velocities[i].x *= -1;
                     if (Math.abs(pos[i * 3 + 1]) > 30) velocities[i].y *= -1;
                     if (Math.abs(pos[i * 3 + 2]) > 20) velocities[i].z *= -1;
                 }
                 geometry.attributes.position.needsUpdate = true;
 
-                // Smooth rotation based on mouse
                 particles.rotation.x += (mouseY * 0.1 - particles.rotation.x) * 0.02;
                 particles.rotation.y += (mouseX * 0.1 - particles.rotation.y) * 0.02;
 
@@ -195,29 +272,150 @@
             window.addEventListener('resize', resize);
         })();
 
-        // Modal functionality
-        const modal = document.getElementById('group-modal');
-        const openBtn = document.getElementById('open-group');
-        const closeBtn = document.getElementById('close-group');
+        // Modal functions
+        function openGroupModal() {
+            document.getElementById('group-modal').classList.add('active');
+        }
 
-        openBtn.addEventListener('click', () => {
-            modal.classList.add('active');
-        });
+        function openPdfInfo(url) {
+            const pdfUrl = url + '?print-pdf';
+            document.getElementById('pdf-link').href = pdfUrl;
+            document.getElementById('pdf-modal').classList.add('active');
+        }
 
-        closeBtn.addEventListener('click', () => {
-            modal.classList.remove('active');
-        });
+        let allNotes = [];
+        let allSpeakers = new Set();
 
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('active');
+        async function openNotesViewer(url, title) {
+            document.getElementById('notes-title').textContent = `📝 ${title} - Notas`;
+            document.getElementById('notes-container').innerHTML = '<p class="loading">A carregar notas...</p>';
+            document.getElementById('speaker-filter').innerHTML = '<option value="all">Todos os oradores</option>';
+            document.getElementById('notes-modal').classList.add('active');
+
+
+            try {
+                const response = await fetch(url);
+                const html = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+
+                const slides = doc.querySelectorAll('section');
+                allNotes = [];
+                allSpeakers = new Set();
+
+                let slideIndex = 0;
+                slides.forEach((section) => {
+                    // Skip nested sections (vertical slides for fullscreen images)
+                    if (section.parentElement.tagName === 'SECTION') return;
+
+                    const notes = section.querySelector('aside.notes');
+                    if (notes) {
+                        slideIndex++;
+                        const slideTitle = section.querySelector('h1, h2')?.textContent?.trim() || `Slide ${slideIndex}`;
+
+                        // Parse speaker notes
+                        const noteHtml = notes.innerHTML;
+                        const speakerBlocks = noteHtml.split(/<h3>|<hr>/gi).filter(b => b.trim());
+
+                        speakerBlocks.forEach(block => {
+                            const match = block.match(/🎤\s*([^<]+)/);
+                            if (match) {
+                                const speaker = match[1].trim();
+                                allSpeakers.add(speaker);
+
+                                // Extract the content after the speaker name
+                                const contentMatch = block.match(/<\/h3>\s*([\s\S]*)/i);
+                                const content = contentMatch ? contentMatch[1].replace(/<\/?p>/gi, '').trim() : '';
+
+                                if (content) {
+                                    allNotes.push({
+                                        slide: slideIndex,
+                                        slideTitle,
+                                        speaker,
+                                        content
+                                    });
+                                }
+                            }
+                        });
+                    }
+                });
+
+                // Populate speaker filter
+                const filter = document.getElementById('speaker-filter');
+                [...allSpeakers].sort().forEach(speaker => {
+                    const option = document.createElement('option');
+                    option.value = speaker;
+                    option.textContent = speaker;
+                    filter.appendChild(option);
+                });
+
+                filterNotes();
+            } catch (error) {
+                document.getElementById('notes-container').innerHTML =
+                    '<p class="error">Erro ao carregar notas. Verifique se a apresentação existe.</p>';
             }
-        });
+        }
 
+        function filterNotes() {
+            const filter = document.getElementById('speaker-filter').value;
+            const container = document.getElementById('notes-container');
+
+            const filtered = filter === 'all'
+                ? allNotes
+                : allNotes.filter(n => n.speaker === filter);
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<p class="no-notes">Nenhuma nota encontrada.</p>';
+                return;
+            }
+
+            let html = '';
+            let currentSlide = null;
+
+            filtered.forEach(note => {
+                if (note.slide !== currentSlide) {
+                    if (currentSlide !== null) html += '</div>';
+                    currentSlide = note.slide;
+                    html += `<div class="notes-slide">
+                        <div class="slide-header">
+                            <span class="slide-number">Slide ${note.slide}</span>
+                            <span class="slide-name">${note.slideTitle}</span>
+                        </div>`;
+                }
+                html += `<div class="note-item">
+                    <span class="note-speaker">🎤 ${note.speaker}</span>
+                    <p class="note-content">${note.content}</p>
+                </div>`;
+            });
+            html += '</div>';
+
+            container.innerHTML = html;
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        // Close modals with Escape or click outside
+        // Toggle notes buttons with 's' key (like Reveal.js)
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
-                modal.classList.remove('active');
+                document.querySelectorAll('.modal-overlay.active').forEach(m => m.classList.remove('active'));
             }
+            if (e.key === 's' || e.key === 'S') {
+                // Don't toggle if typing in an input
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+
+                document.querySelectorAll('.notes-btn').forEach(btn => {
+                    btn.classList.toggle('hidden');
+                });
+            }
+        });
+
+        document.querySelectorAll('.modal-overlay').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) modal.classList.remove('active');
+            });
         });
     </script>
 </body>
