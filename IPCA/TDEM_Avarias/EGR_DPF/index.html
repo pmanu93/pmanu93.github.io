@@ -398,6 +398,10 @@
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@latest/plugin/notes/notes.min.js"></script>
 
     <script>
+        // Check for 'notes' URL parameter to enable speaker notes on mobile
+        const urlParams = new URLSearchParams(window.location.search);
+        const enableNotes = urlParams.has('notes');
+
         Reveal.initialize({
             plugins: [RevealNotes],
             hash: true,
@@ -405,7 +409,7 @@
             transition: 'slide',
             transitionSpeed: 'default',
             backgroundTransition: 'fade',
-            showNotes: false,
+            showNotes: enableNotes,
             center: true,
             width: 1920,
             height: 1080

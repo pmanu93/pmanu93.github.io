@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumo Arrefecimento - Pedro Silva</title>
+    <!-- Reuse presentation logic for colors/fonts -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* Mobile Overrides */
+        body {
+            height: auto;
+            overflow-y: auto;
+            padding: 1rem;
+            background: var(--bg-primary);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding-bottom: 3rem;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--accent-green);
+        }
+
+        .summary-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .summary-card:active {
+            transform: scale(0.98);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 2px solid rgba(var(--accent-hue), 80%, 40%, 0.1);
+            padding-bottom: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .slide-badge {
+            background: var(--accent-green);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 99px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .slide-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-align: right;
+            background: none;
+            -webkit-text-fill-color: initial;
+            margin: 0;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .tech-content {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .script-content {
+            border-left: 4px solid var(--accent-emerald);
+            padding-left: 1rem;
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .persona-tag {
+            display: inline-block;
+            background: #eab308;
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            font-style: normal;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="page-title"><i class="fas fa-snowflake"></i> Sistema Arrefecimento</h1>
+
+        <!-- Slide 0 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 0</span>
+                <h2 class="slide-title">Capa (Muralha)</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                O "Guardião Silencioso" da fiabilidade. Motor sem arrefecimento = falha catastrófica.
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                <div class="persona-tag">Se intervieres</div>
+                "O Sistema de Arrefecimento é como o canalizador lá de casa: ninguém quer saber que existe até ao dia em
+                que rebenta um cano e temos porcaria até aos joelhos. É o sistema mais ingrato do carro."
+            </div>
+        </article>
+
+        <!-- Slide 1 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 1</span>
+                <h2 class="slide-title">Missão Crítica</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                Estabilidade Dimensional. Manter a janela 90ºC-105ºC para folgas e viscosidade ideais.
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                "O motor é uma prima donna. Se estiver muito frio, recusa-se a trabalhar bem. Se estiver muito quente
+                (acima dos 110ºC), ele literalmente derrete-se numa poça de tristeza metálica. A nossa missão não é
+                'arrefecer', é manter o equilíbrio térmico. O alumínio da cabeça expande mais que o ferro do bloco. Se
+                falharmos, o motor empena como uma banana velha."
+            </div>
+        </article>
+
+        <!-- Slide 2 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 2</span>
+                <h2 class="slide-title">Anatomia</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                Radiador, Bomba, Termostato. Pressurização aumenta ponto de ebulição. Vaso expansão = pulmão.
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                <div class="persona-tag">Comentário Mental</div>
+                "É basicamente canalização glorificada. Mas com água a 100 graus a 1 bar de pressão pronta para vos
+                escaldar a cara se abrirem a tampa. Divertido."
+            </div>
+        </article>
+
+        <!-- Slide 3 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 3</span>
+                <h2 class="slide-title">Sintomas de Colapso</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                Sobrepressão, Ponteiro no Vermelho, Cheiro Doce (anticongelante), Perda de Fluido.
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                "O cheiro a anticongelante queimado (aquele cheiro doce, enjoativo) é o perfume da morte mecânica. Se
+                sentirem isso, preparem a carteira. E se o líquido desaparece sem deixar rasto... o motor está a
+                bebê-lo. E motores não gostam de cocktails de água."
+            </div>
+        </article>
+
+        <!-- Slide 4 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 4</span>
+                <h2 class="slide-title">Diagnóstico Visual</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                Motor FRIO sempre. Ver fugas, crostas, estado das mangueiras (duras/moles).
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                "Regra número um do Clube da Luta do Arrefecimento: NUNCA abrir a quente. A sério. A não ser que queiram
+                uma esfoliação facial permanente. O tato é rei aqui. Apertar as mangueiras. Se estiverem moles e
+                pastosas, o óleo está a atacar a borracha. Se estiverem duras e estaladiças como uma tosta mista velha,
+                estão cozidas."
+            </div>
+        </article>
+
+        <!-- Slide 5 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 5</span>
+                <h2 class="slide-title">Teste de Pressão</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                Ferramenta: Bomba Manual. 1.0 - 1.5 Bar. Se ponteiro desce = fuga.
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                "É o detector de mentiras. Metemos pressão. Se o ponteiro descer e não virem água no chão... parabéns,
+                têm uma fuga interna. O vosso motor está a fazer chichi na cama (nos cilindros)."
+            </div>
+        </article>
+
+        <!-- Slide 6 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 6</span>
+                <h2 class="slide-title">O Termostato</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                Portão térmico. Falha Aberto = Frio/Consumo. Falha Fechado = Sobreaquecimento.
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                "Uma pecinha de 20 euros que pode destruir um motor de 5000 euros. Se encravar fechado, game over em 5
+                minutos. Se encravar aberto, o carro gasta mais combustível que um petroleiro a subir o Douro."
+            </div>
+        </article>
+
+        <!-- Slide 7 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 7</span>
+                <h2 class="slide-title">Bomba de Água</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                Impulsor solto, corrosão (cavitação). Veio roda mas água para.
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                "A cavitação é mágica negra da física. Se usarem água da torneira, formam-se bolhas de vácuo que
+                implodem com a força de micro-bombas nucleares, comendo o metal das pás da bomba. Não é corrosão, é
+                erosão por violência sónica. Usem anticongelante decente, pelo amor de Deus."
+            </div>
+        </article>
+
+        <!-- Slide 8 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 8</span>
+                <h2 class="slide-title">Radiador</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                Obstrução: Termografia. Zonas frias (azul) = canais entupidos.
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                "O radiador é o rim do carro. Filtra a porcaria toda. Se tiverem metido 'tapa-fugas' lá para dentro...
+                bem, mataram o rim. A termografia não mente: se metade do radiador está frio, não está a fazer o seu
+                trabalho. Está só lá a fazer peso."
+            </div>
+        </article>
+
+        <!-- Slide 9 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 9</span>
+                <h2 class="slide-title">Física da Tampa</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                Dupla válvula (Alívio e Retorno). Mantém a pressão, água líquida > 100ºC.
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                "A tampa do radiador é a peça mais subestimada da história. É ela que viola as leis da natureza e
+                permite ter água líquida a 110 graus. Se a mola estiver cansada, a física ganha, a água ferve aos 100, e
+                o carro vomita-se todo no asfalto."
+            </div>
+        </article>
+
+        <!-- Slide 10 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 10</span>
+                <h2 class="slide-title">Teste Químico CO2</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                Junta da Cabeça: Reagente Azul -> Amarelo = Gases escape na água. Morte.
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                "O Teste de CO2 é o Juiz, Júri e Executor. Se aquele líquido azul ficar amarelo, acabou. Significa que a
+                junta da cabeça deixou passar o sopro da morte dos cilindros para a água. É química básica a dar-vos a
+                pior notícia da vossa semana."
+            </div>
+        </article>
+
+        <!-- Slide 11 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 11</span>
+                <h2 class="slide-title">Purga</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                Ar no sistema = Isolante térmico. Solução: Purga por vácuo.
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                "O ar é o inimigo. O ar não arrefece nada. Uma bolha de ar na cabeça do motor é um ponto quente que vai
+                derreter metal. Purgar 'à moda antiga' é jogar à roleta russa. Usem vácuo."
+            </div>
+        </article>
+
+        <!-- Slide 12 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 12</span>
+                <h2 class="slide-title">O Sangue Sistema</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                Anticongelante: Lubrificação, Proteção. Não misturar cores (G12 vs G13).
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                "Não é sumo de mirtilo. É química complexa. Misturar cor-de-rosa com verde cria uma pasta castanha
+                nojenta que entope tudo. Não sejam alquimistas de vão de escada. Leiam o rótulo."
+            </div>
+        </article>
+
+        <!-- Slide 13 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 13</span>
+                <h2 class="slide-title">Workflow</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                1. Visual -> 2. Pressão -> 3. Químico -> 4. Fluxo. Lógica, não adivinhação.
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                "Parem de adivinhar. 'Ah, deve ser o termostato'. Não. Sigam o processo. Visual, Pressão, Química. O
+                diagnóstico é ciência forense, não é ler as folhas de chá."
+            </div>
+        </article>
+
+        <!-- Slide 14 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 14</span>
+                <h2 class="slide-title">Conclusão</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                Manutenção evita desastres. Diagnóstico é ciência. Motor fresco = Motor feliz.
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                "Resumindo: O calor é o assassino nº 1 dos motores. E nós somos os guarda-costas. Se perceberem como a
+                pressão afeta a ebulição e como a química deteta fugas, são deuses na oficina. Se não perceberem... bem,
+                vão trocar muitas juntas da cabeça à toa. Obrigado."
+            </div>
+        </article>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumo MCI Híbridos - Pedro Silva</title>
+    <!-- Reuse presentation logic for colors/fonts -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* Mobile Overrides */
+        body {
+            height: auto;
+            overflow-y: auto;
+            padding: 1rem;
+            background: var(--bg-primary);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding-bottom: 3rem;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--accent-green);
+        }
+
+        .summary-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .summary-card:active {
+            transform: scale(0.98);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 2px solid rgba(var(--accent-hue), 80%, 40%, 0.1);
+            padding-bottom: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .slide-badge {
+            background: var(--accent-green);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 99px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .slide-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-align: right;
+            background: none;
+            -webkit-text-fill-color: initial;
+            margin: 0;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .tech-content {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .script-content {
+            border-left: 4px solid var(--accent-emerald);
+            padding-left: 1rem;
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .persona-tag {
+            display: inline-block;
+            background: #eab308;
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            font-style: normal;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="page-title"><i class="fas fa-leaf"></i> MCI Híbridos</h1>
+
+        <!-- Slide 0 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 0</span>
+                <h2 class="slide-title">Capa / Intro</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                O futuro não é só elétrico; é uma simbiose complexa. O MCI adaptou-se para sobreviver.
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                <div class="persona-tag">Se precisares intervir</div>
+                "Basicamente, o que o José quer dizer é que o motor de combustão recusou-se a morrer em silêncio. Como
+                um dinossauro que aprendeu a usar um iPad, adaptou-se. Não é um compromisso, é a engenharia a dizer à
+                física: 'Eu faço o que eu quiser'."
+            </div>
+        </article>
+
+        <!-- Slide 1 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 1</span>
+                <h2 class="slide-title">Conceito Híbrido</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                MCI + Elétrico + Bateria Alta Tensão. Origem no Prius (1997) e pressão das normas de emissões.
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                "Vamos ser honestos. Ninguém acordou um dia e pensou 'Sabes o que era giro? Meter DOIS motores num carro
+                e duplicar os problemas'. Não. Isto aconteceu porque uns burocratas em Bruxelas, que nunca sujaram as
+                mãos de óleo, decidiram que o CO2 é o diabo. O sistema híbrido é a nossa vingança brilhante: usamos o
+                motor térmico só quando ele é eficiente, e deixamos a parte chata do para-arranca para as pilhas. É
+                batota legalizada."
+            </div>
+        </article>
+
+        <!-- Slide 2 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 2</span>
+                <h2 class="slide-title">Arquiteturas</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                Série (MCI = gerador), Paralelo (ambos empurram), Misto (Toyota), PHEV (baterias maiores/tomada).
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                <div class="persona-tag">Sobre Load Shifting</div>
+                "Imaginem o 'Load Shifting' como empanturrar um ganso para fazer foie gras. O motor está lá, a trabalhar
+                nas calmas, e nós dizemos 'Não, não, tu aguentas mais'. Obrigamo-lo a trabalhar mais forte — o que,
+                ironicamente, o torna mais eficiente termodinamicamente — e guardamos essa energia extra na bateria para
+                mais tarde. É reciclar desperdício em velocidade puríssima."
+            </div>
+        </article>
+
+        <!-- Slide 3 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 3</span>
+                <h2 class="slide-title">Híbrido Série</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                MCI não liga às rodas = gerador de luz. Motor elétrico empurra. MCI opera em rotação ideal fixa.
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                "É basicamente uma locomotiva a diesel disfarçada de Nissan Qashqai. O motor de combustão torna-se um
+                funcionário público: faz sempre a mesma coisa, à mesma velocidade, sem se cansar, enquanto o elétrico
+                faz o trabalho pesado todo."
+            </div>
+        </article>
+
+        <!-- Slide 4 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 4</span>
+                <h2 class="slide-title">Híbrido Paralelo</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                Soma de potências: MCI + Elétrico. Permite motores mais pequenos (downsizing).
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                "Este é o verdadeiro espírito de equipa. O motor elétrico tapa os buracos de binário do motor a gasolina
+                como massa de betume numa parede velha. Permite-nos pegar num motorzinho ridículo de 1.0 litro e fazê-lo
+                parecer um V6... pelo menos até a bateria acabar."
+            </div>
+        </article>
+
+        <!-- Slide 5 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 5</span>
+                <h2 class="slide-title">Híbrido Misto</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                Toyota Power-Split. Engrenagem planetária. Sem embraiagem. Divisão infinita de força.
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                <div class="persona-tag">Comentário Mental</div>
+                "A caixa da Toyota é feitiçaria negra. Rodas dentadas a girar dentro de rodas dentadas... se tentarem
+                perceber isto depois de almoço, o cérebro derrete."
+            </div>
+        </article>
+
+        <!-- Slide 6 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 6</span>
+                <h2 class="slide-title">Ciclo Atkinson</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                Eficiência sobre potência. Admissão fecha tarde. Expansão > Compressão.
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                "O motor cospe metade do ar para fora antes de o queimar. Parece estúpido — 'ei, quero menos potência!'
+                — mas extrai cada gota de energia da gasolina. É o motor mais forreta do mundo."
+            </div>
+        </article>
+
+        <!-- Slide 7 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 7</span>
+                <h2 class="slide-title">Ciclo Miller</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                Atkinson + Sobrealimentação (Turbo/Compressor). Taxa compressão alta (14:1+).
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                "O Miller é o Atkinson que foi ao ginásio e tomou esteroides. Usamos um turbo para forçar o ar que o
+                ciclo Atkinson rejeitou. Conseguimos taxas de compressão que, há 20 anos, fariam um motor explodir e
+                enviar êmbolos para a estratosfera. É termodinâmica a contornar a lei da física com um taco de basebol."
+            </div>
+        </article>
+
+        <!-- Slide 8 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 8</span>
+                <h2 class="slide-title">Gestão Térmica</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                Motor para muito -> Arrefece demais. Solução: Bombas elétricas, persianas ativas.
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                "Basicamente, o motor tornou-se tão eficiente que já nem consegue aquecer-se a ele próprio. Tivemos de
+                inventar cobertores elétricos para o bloco do motor. Patético, mas genial."
+            </div>
+        </article>
+
+        <!-- Slide 9 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 9</span>
+                <h2 class="slide-title">Start/Stop</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                ISG (Integrated Starter Generator). 500k ciclos. Arranque suave e instantâneo.
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                "Aqueles arranques tremidos de 'nhe-nhe-nhe' dos anos 90 acabaram. O ISG mete o motor a girar antes de
+                injetar gasolina. É tão suave que a maioria das pessoas nem sabe se o carro está ligado ou morto."
+            </div>
+        </article>
+
+        <!-- Slide 10 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 10</span>
+                <h2 class="slide-title">Integração</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                Inversor converte DC para AC. Controla binário e amortece vibrações.
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                "Esqueçam o motor. O verdadeiro chefe aqui é o Inversor. É ele que diz ao motor elétrico para
+                contrabalançar as vibrações do motor a gasolina. É um cancelamento de ruído... mas para explosões de 100
+                cavalos."
+            </div>
+        </article>
+
+        <!-- Slide 11 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 11</span>
+                <h2 class="slide-title">Diagnóstico</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                Scanner HV, Multímetro CAT III/IV, Isolamento.
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                "Se usarem o multímetro barato dos chineses aqui, a única coisa que vão diagnosticar é a vossa própria
+                paragem cardíaca. Isto não é brincadeira."
+            </div>
+        </article>
+
+        <!-- Slide 12 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 12</span>
+                <h2 class="slide-title">Segurança</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                Alta Tensão (400V-800V). Luvas Laranja (Classe 0). Bloqueio/Tag-out.
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                "Laranja é a nova cor da morte. Se virem um cabo laranja e não tiverem as luvas, não toquem. Fritam mais
+                depressa que um pastel de bacalhau em óleo a ferver."
+            </div>
+        </article>
+
+        <!-- Slide 13 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 13</span>
+                <h2 class="slide-title">Futuro</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                E-fuels, Hidrogénio. O MCI sobrevive.
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                "Dizem que o motor de combustão está morto. Treta. Com combustíveis sintéticos, vamos continuar a
+                queimar coisas e a fazer barulho, mas com a consciência limpa. O híbrido é o bunker onde o motor de
+                combustão se escondeu para sobreviver ao apocalipse nuclear das emissões."
+            </div>
+        </article>
+
+        <!-- Slide 14 -->
+        <article class="summary-card">
+            <div class="card-header">
+                <span class="slide-badge">Slide 14</span>
+                <h2 class="slide-title">Conclusão</h2>
+            </div>
+            <div class="section-label"><i class="fas fa-microchip"></i> Resumo Técnico</div>
+            <div class="tech-content">
+                Simbiose perfeita. Eficiência máxima. Diagnóstico de elite.
+            </div>
+            <div class="section-label"><i class="fas fa-microphone-lines"></i> A tua deixa</div>
+            <div class="script-content">
+                "Em suma: a hibridização salvou o 'Vrum Vrum'. Obrigou o motor a ser mais esperto, mais limpo e
+                incrivelmente complexo. Para nós mecânicos, é ótimo... porque vai avariar, e ninguém mais vai saber
+                arranjar isto. Job security, meus amigos. Obrigado."
+            </div>
+        </article>
+
+    </div>
+</body>
+
+</html>
