@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalisador e Sonda Lambda - Diagnóstico e Avarias</title>
+    <meta name="description"
+        content="Apresentação técnica sobre Catalisador e Sonda Lambda: Funcionamento, Estrutura e Diagnóstico">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@latest/dist/reveal.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@latest/dist/theme/black.min.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Dynamic SVG Background (Heat Theme - Orange/Particles) -->
+    <svg id="dynamic-bg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+        <defs>
+            <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+                <path id="grid-path" d="M 60 0 L 0 0 0 60" fill="none" stroke="hsl(30, 70%, 30%)" stroke-width="0.5"
+                    class="grid-pattern" />
+            </pattern>
+            <linearGradient id="fadeGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop id="gradient-stop-1" offset="0%" style="stop-color:hsl(30, 70%, 40%);stop-opacity:0.15" />
+                <stop id="gradient-stop-2" offset="100%" style="stop-color:hsl(40, 60%, 30%);stop-opacity:0.08" />
+            </linearGradient>
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                </feMerge>
+            </filter>
+            <!-- Sparkles/Heat haze filter -->
+            <filter id="heat-blur">
+                <feGaussianBlur stdDeviation="4" />
+            </filter>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)" class="grid-pattern" />
+
+        <!-- Background Elements -->
+        <circle cx="200" cy="900" r="150" fill="url(#fadeGradient)" class="geo-element geo-1 heat-haze"
+            filter="url(#glow)" />
+        <circle cx="1700" cy="200" r="120" fill="url(#fadeGradient)" class="geo-element geo-2 heat-haze"
+            filter="url(#glow)" />
+
+        <!-- Floating "Sparks" -->
+        <circle cx="400" cy="800" r="5" fill="hsl(35, 90%, 60%)" opacity="0.6"
+            class="geo-element geo-3 spark-particle" />
+        <circle cx="450" cy="750" r="3" fill="hsl(25, 90%, 60%)" opacity="0.5" class="geo-element geo-4 spark-particle"
+            style="animation-delay: 1s" />
+        <circle cx="1600" cy="300" r="4" fill="hsl(40, 90%, 60%)" opacity="0.55"
+            class="geo-element geo-5 spark-particle" style="animation-delay: 2.5s" />
+
+        <!-- Flow lines -->
+        <path id="flow-path-1" d="M 0 1000 Q 400 600 800 800 T 1920 600" fill="none" stroke="hsl(30, 60%, 40%)"
+            stroke-width="1.5" opacity="0.15" class="geo-element geo-6" />
+        <path id="flow-path-2" d="M 0 200 Q 600 400 1200 100 T 1920 300" fill="none" stroke="hsl(20, 55%, 38%)"
+            stroke-width="1.5" opacity="0.15" class="geo-element geo-7" />
+    </svg>
+
+    <!-- GLOBAL Header -->
+    <header id="global-header" class="global-header">
+        <div class="header-left">
+            <span class="header-title">Catalisador & Sonda Lambda</span>
+            <span class="header-separator">|</span>
+            <span class="header-discipline"><i class="fas fa-fire"></i> Técnicas de Diagnóstico e Ensaio</span>
+        </div>
+        <div class="header-right">
+            <span class="header-professor"><i class="fas fa-user-tie"></i> Prof. Luís Lopes</span>
+        </div>
+    </header>
+
+    <!-- GLOBAL Footer -->
+    <footer id="global-footer" class="global-footer">
+        <div class="footer-left">
+            <span class="footer-year"><i class="fas fa-calendar"></i> 2025</span>
+        </div>
+        <div class="footer-center">
+            <span class="footer-course"><i class="fas fa-car"></i> Mecânica Automóvel</span>
+        </div>
+        <div class="footer-right">
+            <span class="footer-hint"><i class="fas fa-arrow-down"></i> Slide Seguinte</span>
+        </div>
+    </footer>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Slide 0: Capa -->
+            <section data-hide-header-footer data-background-image="./images/0_cover.png"
+                data-background-opacity="0.15">
+                <div class="slide-cover">
+                    <div class="cover-text">
+                        <h1>Sistemas Antipoluição</h1>
+                        <h3>Catalisador e Sonda Lambda</h3>
+                        <div class="meta-info">
+                            <span><i class="fas fa-fire"></i> Tratamento de Gases de Escape</span>
+                            <span><i class="fas fa-microchip"></i> Controlo Eletrónico (ECU)</span>
+                            <span><i class="fas fa-user-tie"></i> Prof. Luís Lopes</span>
+                        </div>
+                        <div class="student-list">
+                            <h4>Trabalho realizado por:</h4>
+                            <ul>
+                                <li>29458 José Santos</li>
+                                <li>32801 Pedro Silva</li>
+                                <li>32805 Rui Rodrigues</li>
+                                <li>32813 Jonathan Ramirez</li>
+                                <li>33695 Francisco Gonçalves</li>
+                                <li>33790 João Silva</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cover-image-wrapper">
+                        <figure class="cover-image">
+                            <!-- Image 0 already generated -->
+                            <img src="./images/0_cover.png" data-accent-hue="30" data-accent-saturation="90"
+                                data-accent-lightness="50" alt="Catalisador Incandescente">
+                        </figure>
+                    </div>
+                </div>
+                <aside class="notes">
+                    <h3>🎤 Todos</h3>
+                    <ul>
+                        <li><strong>Abertura:</strong> "Boa noite. Vamos apresentar o estudo técnico sobre o sistema de
+                            pós-tratamento de gases: Catalisador de 3 Vias e Sensor de Oxigénio."</li>
+                        <li><strong>Enquadramento:</strong> "Estes componentes são fundamentais para o controlo de
+                            emissões, garantindo conformidade com as normas Euro."</li>
+                        <li><strong>Objetivos:</strong> "Abordaremos os princípios de catálise heterogénea, a
+                            monitorização via malha fechada (Closed Loop) e procedimentos de diagnóstico."</li>
+                    </ul>
+                </aside>
+            </section>
+
+            <!-- Slide 1: O Catalisador (José Santos) -->
+            <section>
+                <section data-background-image="./images/1_catalyst_function.png" data-background-opacity="0.08">
+                    <div class="slide-content">
+                        <h2 class="slide-title">O Catalisador (Conversor Catalítico)</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <p class="slide-subtitle">Princípio de Funcionamento</p>
+                                <ul>
+                                    <li><i class="fas fa-atom"></i> <strong>Catálise Heterogénea:</strong> Aceleração de
+                                        reações químicas</li>
+                                    <li><i class="fas fa-arrow-right"></i> Conversão de HC, CO e NOx em H2O, CO2 e N2
+                                    </li>
+                                </ul>
+                                <p class="slide-subtitle" style="margin-top: 0.8em;">Processos Químicos</p>
+                                <ul>
+                                    <li><i class="fas fa-fire-flame-curved"></i> <strong>Oxidação:</strong> 2CO + O2
+                                        &rarr; 2CO2 | 4HC + 5O2 &rarr; 4CO2 + 2H2O</li>
+                                    <li><i class="fas fa-minus-circle"></i> <strong>Redução:</strong> 2NOx &rarr; xO2 +
+                                        N2</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/1_catalyst_function.png" data-accent-hue="25"
+                                        alt="Reações Químicas no Catalisador">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 José Santos</h3>
+                        <ul>
+                            <li><strong>Definição:</strong> "O Catalisador atua como um reator
+                                termoquímico passivo. Acelera reações químicas sem se consumir."</li>
+                            <li><strong>Reagentes:</strong> "Trata os três principais poluentes de combustão incompleta:
+                                CO (Monóxido de Carbono), HC (Hidrocarbonetos) e NOx (Óxidos de Azoto)."</li>
+                            <li><strong>Reações Redox:</strong> "Ocorrem oxidações (adicionar oxigénio a CO e HC) e
+                                reduções (remover oxigénio do NOx) simultaneamente."</li>
+                            <li><strong>Eficiência:</strong> "A taxa de conversão deve ser superior a 95% quando o motor
+                                atinge a temperatura operacional (acima de 300°C)."</li>
+                        </ul>
+                    </aside>
+                </section>
+                <section data-background-image="./images/1_catalyst_function.png" data-background-size="contain">
+                </section>
+            </section>
+
+            <!-- Slide 2: Estrutura Interna (Pedro Silva) -->
+            <section>
+                <section data-background-image="./images/2_structure.png" data-background-opacity="0.08">
+                    <div class="slide-content image-left">
+                        <h2 class="slide-title">Estrutura Interna</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <p class="slide-subtitle">Composição</p>
+                                <ul>
+                                    <li><i class="fas fa-border-all"></i> <strong>Substrato:</strong> Cordierite
+                                        (Cerâmica) ou Metálico</li>
+                                    <li><i class="fas fa-expand-arrows-alt"></i> Alta densidade de células (CPSI)</li>
+                                </ul>
+                                <p class="slide-subtitle" style="margin-top: 0.8em;">Revestimento Interno</p>
+                                <ul>
+                                    <li><i class="fas fa-gem"></i> <strong>Platina (Pt) / Paládio (Pd):</strong> Agentes
+                                        Oxidantes</li>
+                                    <li><i class="fas fa-gem"></i> <strong>Ródio (Rh):</strong> Agente Redutor</li>
+                                </ul>
+                                <div style="margin-top: 1em; font-size: 0.8em; color: var(--text-secondary);">
+                                    <i class="fas fa-info-circle"></i> Temperatura Light-off: ~300°C | Ideal:
+                                    400°C-800°C
+                                </div>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/2_structure.png" data-accent-hue="0" data-accent-saturation="0"
+                                        alt="Estrutura em Favo de Mel">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 Pedro Silva</h3>
+                        <ul>
+                            <li><strong>Substrato:</strong> "A estrutura de suporte é normalmente Cordierite, extrudida
+                                em canais favo-de-mel para maximizar a área superficial específica."</li>
+                            <li><strong>Revestimento:</strong> "É aplicada uma camada porosa (Alumina) que contém os
+                                metais
+                                preciosos (como Platina e Paládio)."</li>
+                            <li><strong>Função Térmica:</strong> "A cerâmica suporta choques térmicos, mas o
+                                funcionamento químico depende da temperatura. Abaixo de 300°C, a conversão é
+                                ineficiente."</li>
+                            <li><strong>Fragilidade:</strong> "Cuidado com impactos físicos que podem partir a cerâmica,
+                                e choques térmicos com poças de água."</li>
+                        </ul>
+                    </aside>
+                </section>
+                <section data-background-image="./images/2_structure.png" data-background-size="contain"></section>
+            </section>
+
+            <!-- Slide 3: Sonda Lambda (Rui Rodrigues) -->
+            <section>
+                <section data-background-image="./images/3_lambda_sensor.png" data-background-opacity="0.08">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Sonda Lambda (Sensor O2)</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <p class="slide-subtitle">Princípio (Célula de Nernst)</p>
+                                <ul>
+                                    <li><i class="fas fa-eye"></i> Gera tensão baseada na diferença de O2 (Ar ext. vs
+                                        Escape)</li>
+                                    <li><i class="fas fa-server"></i> Feedback para Controlo de Malha Fechada</li>
+                                </ul>
+                                <p class="slide-subtitle" style="margin-top: 0.8em;">Leitura (Sonda Banda Estreita)</p>
+                                <ul>
+                                    <li><i class="fas fa-gas-pump"></i> <strong>Mistura Rica (&lambda; < 1):</strong> >
+                                                0.45V (Excesso combustível)</li>
+                                    <li><i class="fas fa-wind"></i> <strong>Mistura Pobre (&lambda; > 1):</strong>
+                                        < 0.45V (Excesso ar)</li>
+                                    <li><i class="fas fa-check-circle"></i> <strong>Objetivo:</strong> Estequiometria
+                                        (14.7:1)</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/3_lambda_sensor.png" data-accent-hue="40"
+                                        alt="Corte Transversal Sonda Lambda">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 Rui Rodrigues</h3>
+                        <ul>
+                            <li><strong>Funcionamento:</strong> "A Sonda Lambda (Sensor de Oxigénio)
+                                utiliza Sais de Zircónio
+                                que se tornam condutores a >300°C."</li>
+                            <li><strong>Sinal Elétrico:</strong> "É um gerador de tensão. Compara os iões de oxigénio do
+                                escape com o ar atmosférico de referência."
+                                <ul>
+                                    <li><strong>Mistura Rica (mais de 0.8V):</strong> Ausência de O2 no escape.</li>
+                                    <li><strong>Mistura Pobre (menos de 0.2V):</strong> Excesso de O2.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Ajuste de Combustível:</strong> "A ECU usa este sinal para o controlo de Malha
+                                Fechada, ajustando o tempo de injeção para manter a mistura ideal (Lambda=1)."</li>
+                        </ul>
+                    </aside>
+                </section>
+                <section data-background-image="./images/3_lambda_sensor.png" data-background-size="contain"></section>
+            </section>
+
+            <!-- Slide 4: Avarias Catalisador (Jonathan Ramirez) -->
+            <section>
+                <section data-background-image="./images/4_catalyst_fail.png" data-background-opacity="0.08">
+                    <div class="slide-content image-left">
+                        <h2 class="slide-title">Avarias no Catalisador</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <p class="slide-subtitle">Modos de Falha</p>
+                                <ul>
+                                    <li><i class="fas fa-bans"></i> <strong>Obstrução Física:</strong> Aumento da
+                                        contrapressão</li>
+                                    <li><i class="fas fa-fire-alt"></i> <strong>Derretimento Interno:</strong> Excesso
+                                        de temperatura (>1000°C)</li>
+                                    <li><i class="fas fa-virus"></i> <strong>Contaminação Química:</strong> Fósforo,
+                                        Zinco, Silicone</li>
+                                </ul>
+                                <p class="slide-subtitle" style="margin-top: 0.8em;">Código de Avaria (DTC)</p>
+                                <ul>
+                                    <li><i class="fas fa-laptop-code"></i> <strong>P0420:</strong> Eficiência do Sistema
+                                        Catalítico < Limite (Bank 1)</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/4_catalyst_fail.png" data-accent-hue="10"
+                                        alt="Catalisador Derretido/Danificado">
+                                    <div class="fragment"
+                                        style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background:rgba(0,0,0,0.8); padding:20px; border:2px solid orange; border-radius:10px;">
+                                        <p style="color:orange; font-weight:bold; margin:0;"><i
+                                                class="fas fa-search-dollar"></i> Atenção aos Roubos!</p>
+                                        <p style="font-size:0.7em; margin:0;">Contêm metais muito valiosos.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 Jonathan Ramirez</h3>
+                        <ul>
+                            <li><strong>Degradação Térmica:</strong> "Falhas de ignição enviam combustível não
+                                queimado para o escape, elevando a temperatura e derretendo o interior do catalisador."
+                            </li>
+                            <li><strong>Contaminação:</strong> "Aditivos de óleo e líquido de refrigeração criam
+                                depósitos que
+                                bloqueiam a cerâmica, impedindo o contacto dos gases com os metais preciosos."</li>
+                            <li><strong>Diagnóstico P0420:</strong> "Eficiência abaixo do limite. A ECU compara a Sonda
+                                Pré-Catalisador com a Sonda Pós-Catalisador. Se os sinais forem iguais (oscilarem
+                                ambos), o catalisador perdeu capacidade."</li>
+                        </ul>
+                    </aside>
+                </section>
+                <section data-background-image="./images/4_catalyst_fail.png" data-background-size="contain"></section>
+            </section>
+
+            <!-- Slide 5: Avarias Sonda Lambda (Francisco Gonçalves) -->
+            <section>
+                <section data-background-image="./images/5_lambda_fail.png" data-background-opacity="0.08">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Avarias na Sonda Lambda</h2>
+                        <div class="main-row">
+                            <div class="content-area">
+                                <p class="slide-subtitle">Sintomas</p>
+                                <ul>
+                                    <li><i class="fas fa-tachometer-alt"></i> Consumo excessivo (Modo de Segurança)
+                                    </li>
+                                    <li><i class="fas fa-wave-square"></i> Ralenti instável</li>
+                                    <li><i class="fas fa-exclamation-triangle"></i> Luz do Motor Acesa (Check Engine)
+                                    </li>
+                                </ul>
+                                <p class="slide-subtitle" style="margin-top: 0.8em;">Falhas Técnicas</p>
+                                <ul>
+                                    <li><i class="fas fa-biohazard"></i> <strong>Contaminação:</strong> Bloqueio das
+                                        ranhuras da sonda</li>
+                                    <li><i class="fas fa-bolt"></i> <strong>Circuito do Aquecedor:</strong> Resistência
+                                        Aberta</li>
+                                    <li><i class="fas fa-hourglass-half"></i> <strong>Resposta Lenta:</strong>
+                                        Envelhecimento do sensor</li>
+                                </ul>
+                            </div>
+                            <div class="visual-area">
+                                <div class="image-wrapper">
+                                    <img src="./images/5_lambda_joke.png" data-accent-hue="200"
+                                        data-accent-saturation="20" alt="Solução Rápida (Piada)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        <h3>🎤 Francisco Gonçalves</h3>
+                        <ul>
+                            <li><strong>Sintomas:</strong> "Sonda avariada pode causar consumos elevados e ralenti
+                                instável, pois a ECU perde o feedback preciso."</li>
+                            <li><strong>Testes Elétricos:</strong>
+                                <ul>
+                                    <li><strong>Aquecimento:</strong> Resistência do aquecedor (2-14Ω). Se aberto, a
+                                        sonda
+                                        não aquece rápido (aumenta o consumo a frio).</li>
+                                    <li><strong>Tempo de Resposta:</strong> Deve variar entre Rico e Pobre em menos de
+                                        300ms.
+                                        Sondas lentas afetam as emissões.</li>
+                                    <li><strong>Frequência:</strong> >1Hz a 2000rpm. Sinal fixo indica sonda morta ou
+                                        circuito aberto."</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </aside>
+                </section>
+                <section data-background-image="./images/5_lambda_fail.png" data-background-size="contain"></section>
+            </section>
+
+            <!-- Slide 6: Conclusão (João Silva) -->
+            <section data-hide-header-footer data-background-image="./images/6_conclusion.png"
+                data-background-opacity="0.1">
+                <div class="slide-conclusion">
+                    <div class="conclusion-content">
+                        <h1>Conclusão</h1>
+                        <div class="conclusion-points">
+                            <div class="conclusion-point">
+                                <i class="fas fa-leaf"></i>
+                                <p>Essenciais para cumprir normas Euro 6</p>
+                            </div>
+                            <div class="conclusion-point">
+                                <i class="fas fa-stethoscope"></i>
+                                <p>Diagnóstico requer análise de gases e scanner</p>
+                            </div>
+                            <div class="conclusion-point">
+                                <i class="fas fa-coins"></i>
+                                <p>Peças dispendiosas: A prevenção é vital</p>
+                            </div>
+                            <div class="conclusion-point">
+                                <i class="fas fa-check-double"></i>
+                                <p>Obrigatórios na Inspeção Periódica (IPO)</p>
+                            </div>
+                        </div>
+                        <p class="thanks">Obrigado!</p>
+                    </div>
+                    <div class="conclusion-image-wrapper">
+                        <figure class="conclusion-image">
+                            <img src="./images/6_conclusion.png" data-accent-hue="140" alt="Aprovação na Inspeção">
+                        </figure>
+                    </div>
+                </div>
+                <aside class="notes">
+                    <h3>🎤 João Silva</h3>
+                    <ul>
+                        <li><strong>Conformidade:</strong> "A integridade destes sistemas é obrigatória para a
+                            inspeção e normas ambientais."</li>
+                        <li><strong>Manutenção:</strong> "O diagnóstico preventivo evita danos catastróficos. A análise
+                            de gases (4 gases) é a ferramenta final de validação."</li>
+                        <li><strong>Encerramento:</strong> "Em suma, o técnico deve saber analisar os valores de
+                            correção de combustível e os sinais de osciloscópio para um diagnóstico correto. O uso de
+                            peças de qualidade é
+                            essencial."</li>
+                    </ul>
+                    <h3>🎤 Todos</h3>
+                    <p><strong>Fim</strong> - Sessão de Perguntas e Respostas.</p>
+                </aside>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@latest/dist/reveal.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@latest/plugin/notes/notes.min.js"></script>
+
+    <script>
+        // Check for 'notes' URL parameter to enable speaker notes on mobile
+        const urlParams = new URLSearchParams(window.location.search);
+        const enableNotes = urlParams.has('notes');
+
+        Reveal.initialize({
+            plugins: [RevealNotes],
+            hash: true,
+            history: true,
+            transition: 'slide',
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade',
+            showNotes: enableNotes,
+            center: true,
+            width: 1920,
+            height: 1080
+        });
+
+        // Elements
+        const svg = document.getElementById('dynamic-bg');
+        const geoElements = svg.querySelectorAll('.geo-element');
+        const gridPattern = svg.querySelectorAll('.grid-pattern');
+        const globalHeader = document.getElementById('global-header');
+        const globalFooter = document.getElementById('global-footer');
+
+        const gridPath = document.getElementById('grid-path');
+        const gradientStop1 = document.getElementById('gradient-stop-1');
+        const gradientStop2 = document.getElementById('gradient-stop-2');
+
+        const defaultAccent = { hue: 30, saturation: 90, lightness: 50 };
+        let currentAccent = { ...defaultAccent };
+        let targetAccent = { ...defaultAccent };
+
+        function lerp(start, end, factor) {
+            return start + (end - start) * factor;
+        }
+
+        function updateSVGColors(accent) {
+            const { hue, saturation, lightness } = accent;
+            const primary = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+            const secondary = `hsl(${hue}, ${saturation}%, ${Math.min(lightness + 12, 60)}%)`;
+
+            if (gridPath) gridPath.setAttribute('stroke', primary);
+            if (gradientStop1) gradientStop1.style.stopColor = secondary;
+            if (gradientStop2) gradientStop2.style.stopColor = primary;
+
+            document.documentElement.style.setProperty('--accent-hue', hue);
+            document.documentElement.style.setProperty('--accent-saturation', `${saturation}%`);
+            document.documentElement.style.setProperty('--accent-lightness', `${lightness}%`);
+        }
+
+        function animateColorTransition() {
+            const factor = 0.06;
+            currentAccent.hue = lerp(currentAccent.hue, targetAccent.hue, factor);
+            currentAccent.saturation = lerp(currentAccent.saturation, targetAccent.saturation, factor);
+            currentAccent.lightness = lerp(currentAccent.lightness, targetAccent.lightness, factor);
+            updateSVGColors(currentAccent);
+
+            const hueDiff = Math.abs(currentAccent.hue - targetAccent.hue);
+            const satDiff = Math.abs(currentAccent.saturation - targetAccent.saturation);
+            const lightDiff = Math.abs(currentAccent.lightness - targetAccent.lightness);
+
+            if (hueDiff > 0.5 || satDiff > 0.5 || lightDiff > 0.5) {
+                requestAnimationFrame(animateColorTransition);
+            }
+        }
+
+        function getSlideAccentColor(slide) {
+            const img = slide.querySelector('img[data-accent-hue]');
+            if (img) {
+                return {
+                    hue: parseFloat(img.dataset.accentHue) || defaultAccent.hue,
+                    saturation: parseFloat(img.dataset.accentSaturation) || defaultAccent.saturation,
+                    lightness: parseFloat(img.dataset.accentLightness) || defaultAccent.lightness
+                };
+            }
+            return defaultAccent;
+        }
+
+        function isFullscreenSlide() {
+            return Reveal.getIndices().v > 0;
+        }
+
+        function updateHeaderFooterVisibility() {
+            const currentSlide = Reveal.getCurrentSlide();
+            const parentSection = currentSlide.parentElement;
+            const hideHeaderFooter = currentSlide.hasAttribute('data-hide-header-footer') ||
+                (parentSection && parentSection.hasAttribute('data-hide-header-footer')) ||
+                isFullscreenSlide();
+
+            if (hideHeaderFooter) {
+                globalHeader.classList.add('hidden');
+                globalFooter.classList.add('hidden');
+            } else {
+                globalHeader.classList.remove('hidden');
+                globalFooter.classList.remove('hidden');
+            }
+        }
+
+        Reveal.on('ready', () => {
+            updateHeaderFooterVisibility();
+            const initialAccent = getSlideAccentColor(Reveal.getCurrentSlide());
+            currentAccent = { ...initialAccent };
+            targetAccent = { ...initialAccent };
+            updateSVGColors(currentAccent);
+        });
+
+        Reveal.on('slidechanged', event => {
+            const slideIndex = event.indexh;
+            const currentSlide = event.currentSlide;
+
+            updateHeaderFooterVisibility();
+            targetAccent = getSlideAccentColor(currentSlide);
+            animateColorTransition();
+
+            const baseOpacity = 0.12 + (slideIndex % 5) * 0.02;
+            const rotation = slideIndex * 3;
+            const translateX = Math.sin(slideIndex * 0.5) * 20;
+            const translateY = Math.cos(slideIndex * 0.5) * 15;
+
+            geoElements.forEach((el, i) => {
+                const individualOffset = i * 0.02;
+                el.style.opacity = Math.min(0.6, baseOpacity + individualOffset + 0.2); // Slights brighter for spark effect
+                el.style.transform = `translate(${translateX + i * 5}px, ${translateY + i * 3}px) rotate(${rotation + i * 5}deg)`;
+            });
+
+            gridPattern.forEach(el => {
+                el.style.opacity = 0.25 + (slideIndex % 3) * 0.08;
+            });
+        });
+    </script>
+</body>
+
+</html>
